@@ -1,0 +1,31 @@
+name: 오류 보고
+description: 재현 가능한 오류를 보고합니다.
+title: "[오류] "
+body:
+  - type: textarea
+    id: steps
+    attributes:
+      label: 재현 절차
+      description: 오류를 다시 볼 수 있는 순서대로 적어 주세요.
+      placeholder: "1. 페이지 열기\n2. 버튼 클릭\n3. 오류 확인"
+    validations:
+      required: true
+  - type: textarea
+    id: expected
+    attributes:
+      label: 예상 결과
+    validations:
+      required: true
+  - type: textarea
+    id: actual
+    attributes:
+      label: 실제 결과
+    validations:
+      required: true
+  - type: input
+    id: environment
+    attributes:
+      label: 브라우저와 기기
+      placeholder: 예) Chrome, Windows 11
+    validations:
+      required: false
