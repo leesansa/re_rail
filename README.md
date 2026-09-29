@@ -1,7 +1,7 @@
 # re_rail
 
-branch 는 "project_main-1" 으로 사용할것!!!
-(main에 업로드 금지)
+branch 는 "main" 으로 사용할것
+(다른 branch에 업로드 금지)
 
 ## 파일 공유/업무일정
 
