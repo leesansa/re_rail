@@ -1,6 +1,7 @@
 # re_rail
 
-HTML, CSS, JavaScript로 만드는 4인 웹 개발 프로젝트입니다.
+branch 는 "project_main-1" 으로 사용할것!!!
+(main에 업로드 금지)
 
 ## 파일 공유/업무일정
 
