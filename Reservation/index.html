@@ -1,0 +1,206 @@
+<!doctype html>
+<html lang="ko">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="description" content="코레일_리디자인 Figma 원본을 구현한 승차권 예매 화면 시안입니다." />
+    <title>승차권 예매 | KORAIL</title>
+    <!-- 스타일은 HTML에 작성하지 않고 외부 CSS 파일로 연결합니다. -->
+    <link rel="stylesheet" href="styles.css" />
+  </head>
+  <body>
+    <!-- 01. 헤더: 원본 KORAIL 로고와 회원 메뉴 -->
+    <header class="site-header">
+      <!-- 로고: Figma 원본의 벡터 경로와 그라데이션을 그대로 내보낸 SVG -->
+      <img class="brand-logo" src="assets/korail-logo.svg" alt="KORAIL" width="152" height="37" />
+      <nav class="utility-nav" aria-label="회원 메뉴">
+        <!-- 로그인: Figma 파일에 포함된 원본 아이콘 -->
+        <button class="utility-item" type="button" disabled>
+          <img src="assets/login.png" alt="" width="27" height="27" />
+          <span>로그인</span>
+        </button>
+        <span class="utility-divider" aria-hidden="true">/</span>
+        <!-- 장바구니 -->
+        <button class="utility-item" type="button" disabled>
+          <img src="assets/cart.png" alt="" width="27" height="27" />
+          <span>장바구니</span>
+        </button>
+        <span class="utility-divider" aria-hidden="true">/</span>
+        <!-- 마이페이지 -->
+        <button class="utility-item" type="button" disabled>
+          <img src="assets/mypage.png" alt="" width="31" height="31" />
+          <span>마이페이지</span>
+        </button>
+        <span class="utility-divider" aria-hidden="true">/</span>
+        <!-- 언어 메뉴: 원본 레이어의 문구를 그대로 사용 -->
+        <button class="utility-item utility-language" type="button" disabled>
+          <img src="assets/language.png" alt="" width="37" height="37" />
+          <span>Langueage</span>
+        </button>
+      </nav>
+    </header>
+
+    <main>
+      <!-- 02. 페이지 제목: 원본 청록색 타이틀 영역 -->
+      <section class="page-heading" aria-labelledby="page-title">
+        <h1 id="page-title">승차권 예매</h1>
+      </section>
+
+      <div class="reservation-content">
+        <!-- 03. 날짜 및 시간: 정적 화면이므로 날짜 변경 버튼은 비활성화 -->
+        <section class="date-navigation" aria-label="선택한 출발 날짜와 시간">
+          <!-- 이전 날짜 화살표: SVG의 원본 크기를 유지하고 감싸는 영역에서 배율 적용 -->
+          <button class="date-button previous-date" type="button" aria-label="이전 날짜" disabled>
+            <span class="previous-icon"><img src="assets/아이콘_예매상새2.svg" alt="" /></span>
+          </button>
+          <time class="selected-date" datetime="2026-10-21T00:00:00+09:00">2026-10-21-(수) 00:00</time>
+          <!-- 달력 아이콘 -->
+          <button class="date-button calendar-button" type="button" aria-label="달력" disabled>
+            <span class="calendar-icon"><img src="assets/아이콘_코레일13.svg" alt="" /></span>
+          </button>
+          <!-- 다음 날짜 화살표 -->
+          <button class="date-button next-date" type="button" aria-label="다음 날짜" disabled>
+            <span class="next-icon"><img src="assets/아이콘_예매상새1.svg" alt="" /></span>
+          </button>
+        </section>
+
+        <!-- 04. 여정 선택: 출발역 → 역 교환 → 도착역 → 탑승 인원 -->
+        <section class="route-selection" aria-label="선택한 여정">
+          <!-- 출발역 -->
+          <button class="station-field departure-field" type="button" aria-label="출발역 서울" disabled>
+            <img class="departure-icon" src="assets/아이콘_코레일14.svg" alt="" />
+            <span>서울</span>
+          </button>
+          <!-- 출발역과 도착역 교환 -->
+          <button class="swap-button" type="button" aria-label="출발역과 도착역 교환" disabled>
+            <img src="assets/아이콘_코레일15.svg" alt="" />
+          </button>
+          <!-- 도착역 -->
+          <button class="station-field arrival-field" type="button" aria-label="도착역 부산" disabled>
+            <img class="arrival-icon" src="assets/아이콘_코레일16.svg" alt="" />
+            <span>부산</span>
+          </button>
+          <!-- 탑승 인원: Figma 원본의 검은색 사람 아이콘 -->
+          <button class="passenger-field" type="button" aria-label="탑승 인원 총 1명" disabled>
+            <img src="assets/passenger.png" alt="" width="18" height="22" />
+            <span>총 1명</span>
+          </button>
+        </section>
+
+        <!-- 05. 조회 조건: 좌석 등급, 직통 여부, 열차 종류 -->
+        <section class="filter-bar" aria-label="열차 조회 조건">
+          <!-- 좌석 등급 -->
+          <button class="filter-chip" type="button" aria-label="좌석 등급 일반석" disabled>
+            <span>일반석</span><img src="assets/filter-chevron.svg" alt="" />
+          </button>
+          <!-- 직통 여부 -->
+          <button class="filter-chip" type="button" aria-label="직통 여부 직통" disabled>
+            <span>직통</span><img src="assets/filter-chevron.svg" alt="" />
+          </button>
+          <!-- 열차 종류 -->
+          <button class="filter-chip filter-chip-short" type="button" aria-label="열차 종류 전체" disabled>
+            <span>전체</span><img src="assets/filter-chevron.svg" alt="" />
+          </button>
+        </section>
+
+        <!-- 06. 열차 목록: 시간, 소요 시간, 일반실 및 특실 요금 -->
+        <section class="train-results" aria-label="서울에서 부산으로 가는 열차 목록">
+          <ol class="train-list">
+            <!-- 열차 1: KTX 05:13 → 07:50 -->
+            <li class="train-card">
+              <!-- 카드 테두리와 왼쪽 파란 띠는 Figma에 포함된 원본 이미지 -->
+              <img class="train-card-background" src="assets/train-card.png" alt="" width="1055" height="130" />
+              <div class="train-journey">
+                <img class="train-logo" src="assets/ktx.png" alt="KTX" width="66" height="21" />
+                <!-- 출발 시각, 원본 화살표, 소요 시간, 도착 시각 -->
+                <div class="journey-timeline">
+                  <time datetime="2026-10-21T05:13:00+09:00">05:13</time>
+                  <div class="journey-track">
+                    <span class="journey-duration">2시간 37분 소요</span>
+                    <img src="assets/journey-arrow.svg" alt="도착" />
+                  </div>
+                  <time datetime="2026-10-21T07:50:00+09:00">07:50</time>
+                </div>
+              </div>
+              <!-- 일반실 요금과 할인 안내 -->
+              <div class="fare-column"><span class="fare-label">일반실</span><strong class="fare-price">40,400원</strong><span class="fare-discount">25%할인</span></div>
+              <!-- 특실 요금과 할인 안내 -->
+              <div class="fare-column"><span class="fare-label">특실</span><strong class="fare-price">64,900원</strong><span class="fare-discount">운임 25%할인</span></div>
+            </li>
+
+            <!-- 열차 2: KTX 05:27 → 08:16 -->
+            <li class="train-card">
+              <img class="train-card-background" src="assets/train-card.png" alt="" width="1055" height="130" />
+              <div class="train-journey">
+                <img class="train-logo" src="assets/ktx.png" alt="KTX" width="66" height="21" />
+                <div class="journey-timeline">
+                  <time datetime="2026-10-21T05:27:00+09:00">05:27</time>
+                  <div class="journey-track"><span class="journey-duration">2시간 49분 소요</span><img src="assets/journey-arrow.svg" alt="도착" /></div>
+                  <time datetime="2026-10-21T08:16:00+09:00">08:16</time>
+                </div>
+              </div>
+              <!-- 일반실 / 특실 요금 -->
+              <div class="fare-column"><span class="fare-label">일반실</span><strong class="fare-price">40,200원</strong><span class="fare-discount">25%할인</span></div>
+              <div class="fare-column"><span class="fare-label">특실</span><strong class="fare-price">64,700원</strong><span class="fare-discount">운임 25%할인</span></div>
+            </li>
+
+            <!-- 열차 3: ITX 새마을 05:54 → 11:09, 원본에는 할인과 특실이 표시되지 않음 -->
+            <li class="train-card">
+              <img class="train-card-background" src="assets/train-card.png" alt="" width="1055" height="130" />
+              <div class="train-journey">
+                <img class="train-logo train-logo-itx" src="assets/itx-saemaeul.png" alt="ITX 새마을" width="85" height="21" />
+                <div class="journey-timeline">
+                  <time datetime="2026-10-21T05:54:00+09:00">05:54</time>
+                  <div class="journey-track"><span class="journey-duration">5시간 15분 소요</span><img src="assets/journey-arrow.svg" alt="도착" /></div>
+                  <time datetime="2026-10-21T11:09:00+09:00">11:09</time>
+                </div>
+              </div>
+              <!-- 일반실 요금 -->
+              <div class="fare-column"><span class="fare-label">일반실</span><strong class="fare-price">42,600원</strong></div>
+              <!-- 특실 미운영 -->
+              <div class="fare-column fare-unavailable" aria-label="특실 없음"><strong class="fare-price">-</strong></div>
+            </li>
+
+            <!-- 열차 4: KTX 05:58 → 08:03, 서대구역 정차 표시 -->
+            <li class="train-card">
+              <img class="train-card-background" src="assets/train-card.png" alt="" width="1055" height="130" />
+              <div class="train-journey">
+                <img class="train-logo" src="assets/ktx.png" alt="KTX" width="66" height="21" />
+                <div class="journey-timeline">
+                  <time datetime="2026-10-21T05:58:00+09:00">05:58</time>
+                  <div class="journey-track">
+                    <span class="journey-duration">2시간 45분 소요</span>
+                    <img src="assets/journey-arrow.svg" alt="도착" />
+                    <!-- 중간 정차역을 나타내는 원본의 점과 안내 문구 -->
+                    <span class="stop-marker" aria-hidden="true"></span>
+                    <span class="journey-stop">서대구역 정차</span>
+                  </div>
+                  <time datetime="2026-10-21T08:03:00+09:00">08:03</time>
+                </div>
+              </div>
+              <!-- 일반실 / 특실 요금 -->
+              <div class="fare-column"><span class="fare-label">일반실</span><strong class="fare-price">40,000원</strong><span class="fare-discount">25%할인</span></div>
+              <div class="fare-column"><span class="fare-label">특실</span><strong class="fare-price">64,300원</strong><span class="fare-discount">운임 25%할인</span></div>
+            </li>
+
+            <!-- 열차 5: KTX 산천 06:03 → 08:51, 화면 아래 잘린 부분도 원본 레이어 값으로 구현 -->
+            <li class="train-card">
+              <img class="train-card-background" src="assets/train-card.png" alt="" width="1055" height="130" />
+              <div class="train-journey">
+                <img class="train-logo" src="assets/ktx-sancheon.png" alt="KTX 산천" width="92" height="21" />
+                <div class="journey-timeline">
+                  <time datetime="2026-10-21T06:03:00+09:00">06:03</time>
+                  <div class="journey-track"><span class="journey-duration">2시간 37분 소요</span><img src="assets/journey-arrow.svg" alt="도착" /></div>
+                  <time datetime="2026-10-21T08:51:00+09:00">08:51</time>
+                </div>
+              </div>
+              <!-- 일반실 / 특실 요금: Figma 원본 그대로 -->
+              <div class="fare-column"><span class="fare-label">일반실</span><strong class="fare-price">53,600원</strong><span class="fare-discount">25%할인</span></div>
+              <div class="fare-column"><span class="fare-label">특실</span><strong class="fare-price">78,100원</strong><span class="fare-discount">운임 25%할인</span></div>
+            </li>
+          </ol>
+        </section>
+      </div>
+    </main>
+  </body>
+</html>
