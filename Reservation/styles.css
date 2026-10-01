@@ -33,7 +33,9 @@
   --discount-color: #007e04;
 }
 
-* { box-sizing: border-box; }
+* {
+  box-sizing: border-box;
+}
 
 body {
   width: 100%;
@@ -46,9 +48,17 @@ body {
   font-weight: 300;
 }
 
-button { font: inherit; color: inherit; }
-button:disabled { opacity: 1; cursor: default; }
-img { display: block; }
+button {
+  font: inherit;
+  color: inherit;
+}
+button:disabled {
+  opacity: 1;
+  cursor: default;
+}
+img {
+  display: block;
+}
 
 /* 01. 헤더: 로고 → 로그인 → 장바구니 → 마이페이지 → 언어 메뉴 */
 .site-header {
@@ -61,7 +71,9 @@ img { display: block; }
 }
 
 /* KORAIL 로고는 원본 SVG의 비율을 유지합니다. */
-.brand-logo { object-fit: contain; }
+.brand-logo {
+  object-fit: contain;
+}
 
 .utility-nav {
   display: flex;
@@ -81,11 +93,74 @@ img { display: block; }
   background: transparent;
   white-space: nowrap;
 }
+/* 임시 회원 메뉴 링크: 페이지가 생기면 링크 차단 코드만 제거 */
+.utility-placeholder-link {
+  color: inherit;
+  text-decoration: none;
+  cursor: pointer;
+}
+.utility-placeholder-link:hover {
+  opacity: 0.75;
+  text-decoration: underline;
+}
+.utility-placeholder-link:focus-visible {
+  outline: 3px solid #164d3b;
+  outline-offset: 3px;
+}
 
 /* 헤더 아이콘은 Figma에 포함된 원본 이미지입니다. */
-.utility-item img { object-fit: contain; flex-shrink: 0; }
-.utility-language { gap: 0; }
-.utility-divider { font-size: 20px; font-weight: 300; }
+.utility-item img {
+  object-fit: contain;
+  flex-shrink: 0;
+}
+.utility-language {
+  gap: 0;
+  cursor: pointer;
+}
+/* 언어 메뉴: 버튼 아래로 펼쳐지고 항목은 메뉴 안에서 스크롤 */
+.utility-language-control {
+  position: relative;
+  z-index: 3;
+}
+.utility-language-menu {
+  position: absolute;
+  top: calc(100% + 4px);
+  right: 0;
+  width: 132px;
+  max-height: 120px;
+  overflow-y: auto;
+  display: flex;
+  flex-direction: column;
+  border: 1px solid var(--field-border);
+  border-radius: 10px;
+  background: #fff;
+  box-shadow: 0 8px 20px rgb(0 0 0 / 12%);
+}
+.utility-language-menu[hidden] {
+  display: none;
+}
+.utility-language-menu button {
+  flex: 0 0 38px;
+  padding: 0 12px;
+  border: 0;
+  background: #fff;
+  text-align: left;
+  font: inherit;
+  cursor: pointer;
+}
+.utility-language-menu button:hover,
+.utility-language-menu button[aria-pressed="true"] {
+  background: #f0f0f0;
+}
+.utility-language:focus-visible,
+.utility-language-menu button:focus-visible {
+  outline: 3px solid #164d3b;
+  outline-offset: 2px;
+}
+.utility-divider {
+  font-size: 20px;
+  font-weight: 300;
+}
 
 /* 02. 페이지 제목: 청록색 배경과 원본 제목 그림자 */
 .page-heading {
@@ -131,7 +206,9 @@ img { display: block; }
   background: transparent;
 }
 
-.previous-date { grid-column: 1; }
+.previous-date {
+  grid-column: 1;
+}
 .selected-date {
   grid-column: 3;
   font-size: 33px;
@@ -139,20 +216,44 @@ img { display: block; }
   line-height: 39px;
   white-space: nowrap;
 }
-.calendar-button { grid-column: 5; }
-.next-date { grid-column: 7; }
+.calendar-button {
+  grid-column: 5;
+}
+.next-date {
+  grid-column: 7;
+}
 
 /* SVG의 width/height는 수정하지 않고 감싸는 영역에서 원본의 표시 배율을 적용합니다. */
-.previous-icon, .next-icon, .calendar-icon {
+.previous-icon,
+.next-icon,
+.calendar-icon {
   position: relative;
   display: block;
 }
-.previous-icon { width: 68px; height: 68px; }
-.next-icon { width: 62px; height: 62px; }
-.calendar-icon { width: 50px; height: 50px; }
-.previous-icon img { transform: scale(calc(68 / 96)); transform-origin: top left; }
-.next-icon img { transform: scale(calc(62 / 96)); transform-origin: top left; }
-.calendar-icon img { transform: scale(calc(50 / 24)); transform-origin: top left; }
+.previous-icon {
+  width: 68px;
+  height: 68px;
+}
+.next-icon {
+  width: 62px;
+  height: 62px;
+}
+.calendar-icon {
+  width: 50px;
+  height: 50px;
+}
+.previous-icon img {
+  transform: scale(calc(68 / 96));
+  transform-origin: top left;
+}
+.next-icon img {
+  transform: scale(calc(62 / 96));
+  transform-origin: top left;
+}
+.calendar-icon img {
+  transform: scale(calc(50 / 24));
+  transform-origin: top left;
+}
 
 /* 04. 여정 선택: 회색 바 안의 출발역·역 교환·도착역·인원 */
 .route-selection {
@@ -165,7 +266,8 @@ img { display: block; }
   background: var(--route-background);
 }
 
-.station-field, .passenger-field {
+.station-field,
+.passenger-field {
   position: relative;
   height: 53px;
   padding: 0;
@@ -180,8 +282,14 @@ img { display: block; }
 }
 
 /* 출발역 아이콘과 역 이름 */
-.departure-field { grid-column: 1; }
-.departure-icon { position: absolute; left: 11px; top: 13px; }
+.departure-field {
+  grid-column: 1;
+}
+.departure-icon {
+  position: absolute;
+  left: 11px;
+  top: 13px;
+}
 
 /* 원본의 44px 원형 역 교환 버튼 */
 .swap-button {
@@ -198,15 +306,32 @@ img { display: block; }
 }
 
 /* 도착역 아이콘과 역 이름 */
-.arrival-field { grid-column: 3; }
-.arrival-icon { position: absolute; left: 15px; top: 13px; }
+.arrival-field {
+  grid-column: 3;
+}
+.arrival-icon {
+  position: absolute;
+  left: 15px;
+  top: 13px;
+}
 
 /* 탑승 인원과 검은색 사람 아이콘 */
-.passenger-field { grid-column: 5; }
-.passenger-field img { position: absolute; left: 11px; top: 12px; object-fit: contain; }
+.passenger-field {
+  grid-column: 5;
+}
+.passenger-field img {
+  position: absolute;
+  left: 11px;
+  top: 12px;
+  object-fit: contain;
+}
 
 /* 05. 조회 조건: 일반석 → 직통 → 전체 */
-.filter-bar { display: flex; gap: 19px; margin-top: 18px; }
+.filter-bar {
+  display: flex;
+  gap: 19px;
+  margin-top: 18px;
+}
 .filter-chip {
   width: 155px;
   height: 36px;
@@ -221,13 +346,99 @@ img { display: block; }
   font-weight: 700;
   line-height: 20px;
 }
-.filter-chip + .filter-chip { padding-left: 11px; }
-.filter-chip-short { width: 104px; }
+.filter-control:nth-child(2) .filter-chip {
+  padding-left: 11px;
+}
+.filter-chip-short {
+  width: 104px;
+}
 /* 드롭다운 화살표: 원본 레이어의 색상·벡터 경로를 내보낸 SVG */
-.filter-chip img { flex-shrink: 0; transform: rotate(-90deg); }
+.filter-chip .filter-chevron {
+  flex-shrink: 0;
+  transform: rotate(-90deg);
+}
+/* 좌석 등급·직통 여부 선택 메뉴: 아래로 펼쳐지고 항목이 많아지면 스크롤 */
+.filter-control {
+  position: relative;
+  flex: 0 0 155px;
+  z-index: 2;
+}
+.filter-control .filter-chip {
+  width: 100%;
+  cursor: pointer;
+}
+.filter-control .filter-chip[aria-expanded="true"] .filter-chevron {
+  transform: rotate(90deg);
+}
+/* 열차 종류: 선택 로고는 버튼에 표시하고, 전체를 제외한 메뉴 항목은 이미지 사용 */
+.filter-control-train {
+  flex-basis: 124px;
+}
+.filter-control-train .filter-chip {
+  padding-left: 10px;
+}
+.filter-control-train .filter-chevron {
+  width: 18px;
+  height: 18px;
+}
+.filter-selected-icon {
+  max-width: 78px;
+  max-height: 21px;
+  object-fit: contain;
+}
+.filter-selected-icon[hidden] {
+  display: none;
+}
+.filter-menu {
+  position: absolute;
+  top: calc(100% + 5px);
+  left: 0;
+  width: 100%;
+  max-height: 116px;
+  overflow-y: auto;
+  display: flex;
+  flex-direction: column;
+  border: 1px solid var(--field-border);
+  border-radius: 12px;
+  background: #fff;
+  box-shadow: 0 8px 20px rgb(0 0 0 / 12%);
+}
+.filter-menu[hidden] {
+  display: none;
+}
+.filter-menu button {
+  min-height: 40px;
+  flex: 0 0 40px;
+  padding: 0 14px;
+  border: 0;
+  background: #fff;
+  text-align: left;
+  font-size: 16px;
+  cursor: pointer;
+}
+.filter-menu button:hover,
+.filter-menu button[aria-pressed="true"] {
+  background: #f0f0f0;
+}
+.filter-menu-train {
+  width: 142px;
+  max-height: 160px;
+}
+.filter-menu-train button img {
+  max-width: 100%;
+  max-height: 21px;
+  object-fit: contain;
+}
+.filter-control button:focus-visible {
+  outline: 3px solid #164d3b;
+  outline-offset: 2px;
+}
 
 /* 06. 열차 목록: 원본 카드의 1055px 너비와 행별 간격 */
-.train-results { margin-top: 19px; overflow-x: auto; }
+.train-results {
+  margin-top: 19px;
+  overflow-x: auto;
+}
 .train-list {
   width: 1055px;
   padding: 0;
@@ -244,16 +455,55 @@ img { display: block; }
   grid-template-columns: 613px 222px 220px;
   isolation: isolate;
 }
-.train-card:nth-child(4) { margin-top: 4px; }
-.train-card:nth-child(5) { margin-top: 2px; }
+/* 기존 4·5번째 카드의 간격은 배열 렌더링 후에도 해당 열차에 적용 */
+.train-card[data-train-id="ktx-0558"] {
+  margin-top: 4px;
+}
+.train-card[data-train-id="ktx-sancheon-0603"] {
+  margin-top: 2px;
+}
+.train-loading {
+  margin: 24px 0;
+  text-align: center;
+  font-size: 17px;
+}
+.train-empty {
+  margin: 28px 0;
+  text-align: center;
+  font-size: 18px;
+}
+.train-loading[hidden],
+.train-empty[hidden] {
+  display: none;
+}
+.train-load-trigger {
+  height: 1px;
+}
+.train-load-trigger[hidden] {
+  display: none;
+}
 
 /* 원본 카드 배경 이미지: 테두리와 파란 띠를 다시 그리지 않습니다. */
-.train-card-background { position: absolute; inset: 0; z-index: -1; }
+.train-card-background {
+  position: absolute;
+  inset: 0;
+  z-index: -1;
+}
 
 /* 카드 왼쪽: 열차 로고와 출발·도착 시간 */
-.train-journey { position: relative; }
-.train-logo { position: absolute; left: 20px; top: 7px; object-fit: contain; }
-.train-logo-itx { left: 21px; top: 6px; }
+.train-journey {
+  position: relative;
+}
+.train-logo {
+  position: absolute;
+  left: 20px;
+  top: 7px;
+  object-fit: contain;
+}
+.train-logo-itx {
+  left: 21px;
+  top: 6px;
+}
 .journey-timeline {
   position: relative;
   display: grid;
@@ -261,10 +511,17 @@ img { display: block; }
   column-gap: 16px;
   margin: 48px 0 0 115px;
 }
-.journey-timeline time { font-size: 35px; font-weight: 300; line-height: 41px; }
+.journey-timeline time {
+  font-size: 35px;
+  font-weight: 300;
+  line-height: 41px;
+}
 
 /* 소요 시간과 원본 방향 화살표 */
-.journey-track { position: relative; height: 41px; }
+.journey-track {
+  position: relative;
+  height: 41px;
+}
 .journey-duration {
   position: absolute;
   top: -3px;
@@ -274,7 +531,11 @@ img { display: block; }
   line-height: 16px;
   white-space: nowrap;
 }
-.journey-track > img { position: absolute; left: 0; top: 11px; }
+.journey-track > img {
+  position: absolute;
+  left: 0;
+  top: 11px;
+}
 
 /* 서대구역 정차를 표시하는 점과 문구 */
 .stop-marker {
@@ -303,46 +564,144 @@ img { display: block; }
   align-items: center;
   border-left: 1px solid var(--fare-divider);
 }
-.fare-label { font-size: 19px; font-weight: 300; line-height: 22px; }
-.fare-price { margin-top: 21px; font-size: 25px; font-weight: 700; line-height: 29px; }
-.fare-discount { margin-top: 7px; color: var(--discount-color); font-size: 19px; line-height: 22px; }
+/* 예약 버튼: 요금 칸 전체를 선택할 수 있고 hover 시 배경을 살짝 어둡게 표시 */
+.fare-button {
+  width: 100%;
+  border-top: 0;
+  border-right: 0;
+  border-bottom: 0;
+  background: transparent;
+  cursor: pointer;
+  transition: background-color 160ms ease;
+}
+.fare-button:hover {
+  background: rgb(0 0 0 / 7%);
+}
+.fare-button:focus-visible {
+  outline: 3px solid #164d3b;
+  outline-offset: -3px;
+  background: rgb(0 0 0 / 7%);
+}
+.fare-label {
+  font-size: 19px;
+  font-weight: 300;
+  line-height: 22px;
+}
+.fare-price {
+  margin-top: 21px;
+  font-size: 25px;
+  font-weight: 700;
+  line-height: 29px;
+}
+.fare-discount {
+  margin-top: 7px;
+  color: var(--discount-color);
+  font-size: 19px;
+  line-height: 22px;
+}
 /* 특실 미운영 행도 다른 행의 가격과 같은 높이에 정렬합니다. */
-.fare-unavailable .fare-price { margin-top: 43px; }
+.fare-unavailable .fare-price {
+  margin-top: 43px;
+}
 
 /* 07. 좁은 화면: 헤더부터 본문 순서대로 배치를 조정합니다.
    열차 표는 원본 이미지와 글자 비율을 보존하며 가로 스크롤로 확인합니다. */
 @media (max-width: 1111px) {
-  .site-header { padding-right: 20px; padding-left: 20px; }
+  .site-header {
+    padding-right: 20px;
+    padding-left: 20px;
+  }
   .date-navigation {
     width: 100%;
     margin-left: 0;
     grid-template-columns: 68px 1fr 50px 62px;
     column-gap: 8px;
   }
-  .selected-date { grid-column: 2; text-align: center; }
-  .calendar-button { grid-column: 3; }
-  .next-date { grid-column: 4; }
-  .route-selection { grid-template-columns: minmax(0, 1fr) 58px minmax(0, 1fr) 14px 170px; }
-  .train-results { padding-bottom: 10px; }
+  .selected-date {
+    grid-column: 2;
+    text-align: center;
+  }
+  .calendar-button {
+    grid-column: 3;
+  }
+  .next-date {
+    grid-column: 4;
+  }
+  .route-selection {
+    grid-template-columns: minmax(0, 1fr) 58px minmax(0, 1fr) 14px 170px;
+  }
+  .train-results {
+    padding-bottom: 10px;
+  }
 }
 
 @media (max-width: 640px) {
-  .site-header { height: auto; min-height: 58px; padding: 10px 16px; flex-wrap: wrap; gap: 8px; }
-  .brand-logo { width: 124px; height: 30px; }
-  .utility-nav { width: 100%; justify-content: space-between; flex-wrap: wrap; gap: 4px; font-size: 12px; }
-  .utility-item { gap: 2px; }
-  .utility-item img { width: 22px; height: 22px; }
-  .utility-language img { width: 28px; height: 28px; }
-  .utility-divider { font-size: 16px; }
-  .page-heading { height: 64px; }
-  .page-heading h1 { font-size: 29px; }
-  .reservation-content { margin-top: 18px; }
-  .date-navigation { height: 62px; grid-template-columns: 32px minmax(0, 1fr) 30px 32px; column-gap: 2px; }
-  .selected-date { font-size: clamp(15px, 4.5vw, 19px); line-height: 28px; }
-  .previous-icon, .next-icon { width: 32px; height: 32px; }
-  .previous-icon img, .next-icon img { transform: scale(calc(32 / 96)); }
-  .calendar-icon { width: 30px; height: 30px; }
-  .calendar-icon img { transform: scale(calc(30 / 24)); }
+  .site-header {
+    height: auto;
+    min-height: 58px;
+    padding: 10px 16px;
+    flex-wrap: wrap;
+    gap: 8px;
+  }
+  .brand-logo {
+    width: 124px;
+    height: 30px;
+  }
+  .utility-nav {
+    width: 100%;
+    justify-content: space-between;
+    flex-wrap: wrap;
+    gap: 4px;
+    font-size: 12px;
+  }
+  .utility-item {
+    gap: 2px;
+  }
+  .utility-item img {
+    width: 22px;
+    height: 22px;
+  }
+  .utility-language img {
+    width: 28px;
+    height: 28px;
+  }
+  .utility-divider {
+    font-size: 16px;
+  }
+  .page-heading {
+    height: 64px;
+  }
+  .page-heading h1 {
+    font-size: 29px;
+  }
+  .reservation-content {
+    margin-top: 18px;
+  }
+  .date-navigation {
+    height: 62px;
+    grid-template-columns: 32px minmax(0, 1fr) 30px 32px;
+    column-gap: 2px;
+  }
+  .selected-date {
+    font-size: clamp(15px, 4.5vw, 19px);
+    line-height: 28px;
+  }
+  .previous-icon,
+  .next-icon {
+    width: 32px;
+    height: 32px;
+  }
+  .previous-icon img,
+  .next-icon img {
+    transform: scale(calc(32 / 96));
+  }
+  .calendar-icon {
+    width: 30px;
+    height: 30px;
+  }
+  .calendar-icon img {
+    transform: scale(calc(30 / 24));
+  }
   .route-selection {
     height: auto;
     padding: 8px;
@@ -350,12 +709,145 @@ img { display: block; }
     row-gap: 8px;
     border-radius: 28px;
   }
-  .station-field, .passenger-field { height: 46px; font-size: 21px; }
-  .departure-icon { left: 7px; top: 9px; }
-  .arrival-icon { left: 9px; top: 9px; }
-  .passenger-field { grid-column: 1 / -1; }
-  .passenger-field img { top: 10px; }
-  .filter-bar { gap: 10px; }
-  .filter-chip { width: 116px; min-width: 0; padding-left: 12px; }
-  .filter-chip-short { width: 84px; }
+  .station-field,
+  .passenger-field {
+    height: 46px;
+    font-size: 21px;
+  }
+  .departure-icon {
+    left: 7px;
+    top: 9px;
+  }
+  .arrival-icon {
+    left: 9px;
+    top: 9px;
+  }
+  .passenger-field {
+    grid-column: 1 / -1;
+  }
+  .passenger-field img {
+    top: 10px;
+  }
+  .filter-bar {
+    gap: 10px;
+    flex-wrap: wrap;
+  }
+  .filter-chip {
+    width: 116px;
+    min-width: 0;
+    padding-left: 12px;
+  }
+  .filter-control {
+    flex-basis: 116px;
+  }
+  .filter-control-train {
+    flex-basis: 124px;
+  }
+  .filter-chip-short {
+    width: 84px;
+  }
+}
+
+/* 03. 날짜 이동 버튼과 임시 달력 팝업 */
+.date-navigation .date-button {
+  cursor: pointer;
+}
+
+.date-navigation .date-button:focus-visible,
+.calendar-dialog-close:focus-visible {
+  outline: 3px solid #164d3b;
+  outline-offset: 3px;
+}
+
+.calendar-dialog {
+  width: min(420px, calc(100% - 32px));
+  padding: 24px;
+  border: 0;
+  border-radius: 16px;
+  box-shadow: 0 16px 48px rgb(0 0 0 / 20%);
+}
+
+.calendar-dialog::backdrop {
+  background: rgb(0 0 0 / 45%);
+}
+
+.calendar-dialog-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 16px;
+}
+
+.calendar-dialog-header h2 {
+  margin: 0;
+  font-size: 24px;
+}
+
+.calendar-dialog-close {
+  border: 0;
+  background: transparent;
+  font-size: 30px;
+  line-height: 1;
+  cursor: pointer;
+}
+
+.calendar-dialog p {
+  margin: 24px 0 0;
+}
+
+/* 04. 여정 선택 버튼: 임시 팝업을 여는 동안 사용 */
+.route-selection button {
+  cursor: pointer;
+}
+
+.route-selection button:focus-visible {
+  outline: 3px solid #164d3b;
+  outline-offset: 3px;
+}
+
+/* 탑승 인원 입력 팝업: 숫자 직접 입력과 적용 버튼 */
+.passenger-form {
+  display: grid;
+  gap: 12px;
+  margin-top: 24px;
+  font-size: 18px;
+}
+.passenger-form input {
+  width: 100%;
+  padding: 10px 12px;
+  border: 1px solid var(--field-border);
+  border-radius: 8px;
+  font: inherit;
+}
+.passenger-form button {
+  padding: 10px 16px;
+  border: 0;
+  border-radius: 8px;
+  background: var(--heading-color);
+  color: #fff;
+  font: inherit;
+  cursor: pointer;
+}
+.passenger-form input:focus-visible,
+.passenger-form button:focus-visible {
+  outline: 3px solid #164d3b;
+  outline-offset: 3px;
+}
+
+/* 실제 예약 페이지가 완성되면 삭제할 임시 페이지 안내 */
+.booking-placeholder-content {
+  max-width: 600px;
+  margin: 72px auto;
+  padding: 0 24px;
+  text-align: center;
+  font-size: 20px;
+}
+.booking-placeholder-content a {
+  display: inline-block;
+  margin-top: 24px;
+  color: #075c77;
+}
+.booking-placeholder-content a:focus-visible {
+  outline: 3px solid #164d3b;
+  outline-offset: 3px;
 }
