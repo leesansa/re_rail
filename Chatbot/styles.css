@@ -1,0 +1,524 @@
+@charset "UTF-8";
+
+/* 00. 공통 설정: Reservation 페이지의 Korail 서체를 그대로 사용 */
+@font-face {
+  font-family: "Korail";
+  src: url("../Reservation/assets/Korail-L.ttf") format("truetype");
+  font-weight: 300;
+  font-display: swap;
+}
+@font-face {
+  font-family: "Korail";
+  src: url("../Reservation/assets/Korail-M.ttf") format("truetype");
+  font-weight: 500;
+  font-display: swap;
+}
+@font-face {
+  font-family: "Korail";
+  src: url("../Reservation/assets/Korail-B.ttf") format("truetype");
+  font-weight: 700;
+  font-display: swap;
+}
+
+:root {
+  --header-bg: #133b8b;
+  --side-bg: #1088ac;
+  --accent: #1088ac;
+  --quick-bg: #85c6da;
+  --footer-bg: #04475b;
+  --placeholder: #d9d9d9;
+  --header-h: 95px;
+  --side-w: 240px;
+}
+
+* { box-sizing: border-box; }
+
+html, body { height: 100%; }
+
+body {
+  margin: 0;
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  background: #fff;
+  color: #000;
+  font-family: "Korail", "Malgun Gothic", sans-serif;
+  font-weight: 300;
+}
+
+button { font: inherit; color: inherit; cursor: pointer; }
+ul { margin: 0; padding: 0; list-style: none; }
+a { color: inherit; text-decoration: none; }
+
+.visually-hidden {
+  position: absolute;
+  width: 1px; height: 1px;
+  overflow: hidden;
+  clip: rect(0 0 0 0);
+  white-space: nowrap;
+}
+
+/* 01. 헤더 */
+.site-header {
+  height: var(--header-h);
+  flex-shrink: 0;
+  padding: 0 72px 0 28px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  background: var(--header-bg);
+  color: #fff;
+}
+
+.menu-toggle {
+  display: flex;
+  align-items: center;
+  gap: 32px;
+  padding: 0;
+  border: 0;
+  background: none;
+  color: #fff;
+  font-size: 24px;
+}
+
+.hamburger {
+  display: flex;
+  flex-direction: column;
+  gap: 7px;
+  width: 53px;
+}
+.hamburger span {
+  height: 7px;
+  border-radius: 4px;
+  background: #fff;
+}
+
+.header-nav {
+  display: flex;
+  align-items: center;
+  gap: 92px;
+  font-size: 24px;
+}
+
+.header-link {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.home-icon {
+  width: 26px;
+  height: 26px;
+  fill: none;
+  stroke: #fff;
+  stroke-width: 1.8;
+  stroke-linejoin: round;
+}
+
+/* 02. 좌측 메뉴 + 본문 레이아웃 */
+.layout {
+  flex: 1;
+  display: flex;
+  min-height: 829px;
+}
+
+.side-menu {
+  width: var(--side-w);
+  flex-shrink: 0;
+  padding-top: 64px;
+  background: var(--side-bg);
+  color: #fff;
+  transition: margin-left 0.3s ease;
+}
+
+/* 전체메뉴 버튼으로 접기 */
+body.menu-closed .side-menu { margin-left: calc(var(--side-w) * -1); }
+
+.side-menu li + li { margin-top: 32px; }
+
+.side-menu button {
+  width: 100%;
+  padding: 0 0 0 33px;
+  border: 0;
+  background: none;
+  color: #fff;
+  font-size: 20px;
+  line-height: 32px;
+  text-align: left;
+  white-space: nowrap;
+}
+.side-menu button:hover,
+.side-menu button:focus-visible { text-decoration: underline; outline: none; }
+
+/* 03. 챗봇 본문 */
+.chat-main {
+  flex: 1;
+  display: flex;
+  justify-content: center;
+  padding: 112px 40px 60px 20px;
+}
+
+.chat-container { width: 100%; max-width: 897px; }
+
+.chat-title {
+  height: 80px;
+  margin: 0 0 38px;
+  line-height: 1;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 32px;
+  font-size: 40px;
+  font-weight: 300;
+}
+
+.bot-icon {
+  width: 84px;
+  height: 80px;
+  fill: none;
+  stroke: #000;
+  stroke-width: 5;
+  stroke-linecap: round;
+  stroke-linejoin: round;
+}
+.bot-icon .eye { fill: #000; stroke: none; }
+
+/* 입력창 */
+.chat-form {
+  height: 87px;
+  padding: 0 40px 0 70px;
+  display: flex;
+  align-items: center;
+  border-radius: 20px;
+  background: var(--accent);
+}
+
+.chat-form input {
+  flex: 1;
+  min-width: 0;
+  border: 0;
+  background: none;
+  color: #fff;
+  font: inherit;
+  font-size: 40px;
+  outline: none;
+}
+.chat-form input::placeholder { color: var(--placeholder); }
+
+.send-button {
+  width: 40px;
+  height: 40px;
+  padding: 0;
+  border: 0;
+  background: none;
+  flex-shrink: 0;
+}
+.send-button svg { width: 100%; height: 100%; fill: var(--placeholder); transition: fill 0.2s; }
+.send-button:hover svg { fill: #fff; }
+
+/* 추천 질문 */
+.quick-list {
+  margin-top: 62px;
+  padding-left: 31px;
+}
+.quick-list li + li { margin-top: 45px; }
+
+.quick-list button {
+  width: 506px;
+  max-width: 100%;
+  height: 30px;
+  padding: 0 34px;
+  border: 0;
+  border-radius: 4px;
+  background: var(--quick-bg);
+  font-size: 15px;
+  font-weight: 500;
+  text-align: left;
+  transition: filter 0.2s;
+}
+.quick-list button:hover { filter: brightness(0.93); }
+
+/* 대화 내역 */
+.chat-log {
+  max-height: 360px;
+  margin-bottom: 24px;
+  padding: 8px 4px;
+  display: flex;
+  flex-direction: column;
+  gap: 14px;
+  overflow-y: auto;
+}
+
+.message {
+  max-width: 75%;
+  padding: 12px 18px;
+  border-radius: 16px;
+  font-size: 17px;
+  line-height: 1.5;
+  white-space: pre-line;
+}
+.message.user {
+  align-self: flex-end;
+  background: var(--accent);
+  color: #fff;
+  border-bottom-right-radius: 4px;
+}
+.message.bot {
+  align-self: flex-start;
+  background: #e8f4f8;
+  border-bottom-left-radius: 4px;
+}
+.message.typing { color: #6b8a95; }
+
+/* 대화 중에는 추천 질문 간격 축소 */
+body.chatting .chat-main { padding-top: 48px; }
+body.chatting .quick-list { margin-top: 28px; }
+body.chatting .quick-list li + li { margin-top: 14px; }
+
+/* 04. 푸터 */
+.site-footer {
+  height: 100px;
+  flex-shrink: 0;
+  padding: 0 61px 0 60px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  background: var(--footer-bg);
+  color: #fff;
+}
+
+.company-info {
+  font-size: 13px;
+  font-style: normal;
+  line-height: 20px;
+}
+
+.related-sites { position: relative; }
+
+.related-toggle {
+  width: 120px;
+  height: 34px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  border: 1px solid #fff;
+  border-radius: 10px;
+  background: none;
+  color: #fff;
+  font-size: 14px;
+}
+.related-toggle svg {
+  width: 16px;
+  fill: none;
+  stroke: #fff;
+  stroke-width: 2;
+  transition: transform 0.2s;
+}
+.related-toggle[aria-expanded="true"] svg { transform: rotate(180deg); }
+
+.related-list {
+  position: absolute;
+  right: 0;
+  bottom: calc(100% + 6px);
+  width: 160px;
+  padding: 6px 0;
+  border-radius: 8px;
+  background: #fff;
+  color: #000;
+  box-shadow: 0 4px 12px rgb(0 0 0 / 20%);
+  font-size: 14px;
+}
+.related-list a { display: block; padding: 8px 14px; }
+.related-list a:hover { background: #eef6f9; }
+
+/* 05. 반응형 */
+@media (max-width: 1024px) {
+  .header-nav { gap: 32px; }
+  .site-header { padding-right: 28px; }
+  .chat-title { font-size: 30px; gap: 18px; }
+  .chat-form { padding-left: 28px; padding-right: 24px; }
+  .chat-form input { font-size: 26px; }
+}
+
+@media (max-width: 768px) {
+  .side-menu {
+    position: fixed;
+    top: var(--header-h);
+    bottom: 0;
+    z-index: 10;
+  }
+  .chat-main { padding: 48px 16px; }
+  .quick-list { padding-left: 0; }
+  .site-footer { height: auto; padding: 20px 16px; flex-direction: column; align-items: flex-start; gap: 14px; }
+  .menu-toggle span:last-child,
+  .header-nav { font-size: 18px; }
+}
+
+/* =====================================================================
+ * [추가] 하단바 메뉴 (이용약관 ~ 지원 브라우저 안내) - 시안 기준
+ * - 메뉴 6개를 하단바 맨 위 한 줄에 같은 간격으로 배치
+ * - 기존 .site-footer 규칙은 그대로 두고 높이·줄바꿈만 덮어씁니다.
+ * ===================================================================== */
+body { height: auto; } /* 하단바가 본문을 덮지 않도록 */
+
+.site-footer {
+  height: auto;
+  min-height: 127px;
+  padding-top: 6px;
+  padding-bottom: 22px;
+  flex-wrap: wrap;
+  row-gap: 20px;
+}
+
+.footer-links {
+  flex-basis: 100%;
+}
+
+.footer-links ul {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-around;
+  gap: 6px 24px;
+}
+
+.footer-links a {
+  font-size: 15px;
+  color: #fff;
+}
+
+.footer-links a:hover { text-decoration: underline; }
+
+/* 관련 사이트 목록: 버튼 위쪽으로 회색 상자가 펼쳐짐 */
+.related-list {
+  top: auto;
+  bottom: calc(100% + 8px);
+  width: 130px;
+  padding: 4px 0;
+  border-radius: 6px;
+  background: #e6e6e6;
+  box-shadow: none;
+}
+
+.related-list a { padding: 8px 14px; font-size: 14px; }
+.related-list a:hover { background: #d4d4d4; }
+/* ===== [추가] 끝 ===== */
+
+
+/* =====================================================================
+ * [추가] 질문 답변 박스 (시안: 하늘색 둥근 박스 + 로봇 아이콘 + 돌아가기)
+ * - 크기는 입력창과 같은 너비(최대 897px), 최소 높이 278px
+ * ===================================================================== */
+.answer-box {
+  position: relative;
+  width: 100%;
+  min-height: 278px;
+  margin-top: 62px;
+  padding: 26px 32px 64px 132px;
+  border-radius: 16px;
+  background: var(--quick-bg);
+}
+
+.answer-box[hidden],
+.quick-list[hidden] { display: none; }
+
+/* 왼쪽 위 로봇 아이콘 */
+.answer-box-icon {
+  position: absolute;
+  top: 22px;
+  left: 26px;
+}
+
+.answer-box-icon .bot-icon {
+  width: 84px;
+  height: 80px;
+}
+
+/* 답변 본문 */
+.answer-box-cat {
+  display: inline-block;
+  margin-bottom: 8px;
+  padding: 2px 10px;
+  border-radius: 4px;
+  background: rgb(255 255 255 / 60%);
+  font-size: 13px;
+  font-weight: 500;
+}
+
+.answer-box-q {
+  margin: 0 0 10px;
+  font-size: 19px;
+  font-weight: 700;
+}
+
+.answer-box-a {
+  margin: 0;
+  font-size: 16px;
+  line-height: 1.7;
+  white-space: pre-line;
+}
+
+/* 관련 질문 */
+.answer-box-related {
+  margin-top: 16px;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+}
+
+.answer-box-related span {
+  width: 100%;
+  font-size: 14px;
+  color: #1f4e5c;
+}
+
+.answer-box-related button {
+  padding: 5px 12px;
+  border: 0;
+  border-radius: 4px;
+  background: #fff;
+  font-size: 14px;
+  text-align: left;
+}
+
+.answer-box-related button:hover { background: #eef6f9; }
+
+/* 전체메뉴에서 연 질문 목록: 질문 버튼을 한 줄에 하나씩 */
+.answer-box-menu { flex-direction: column; align-items: flex-start; }
+.answer-box-menu button { font-size: 15px; }
+
+/* 오른쪽 아래 돌아가기 버튼 */
+.answer-back {
+  position: absolute;
+  right: 16px;
+  bottom: 15px;
+  height: 27px;
+  padding: 0 4px 0 6px;
+  display: flex;
+  align-items: center;
+  gap: 4px;
+  border: 1px solid var(--header-bg);
+  border-radius: 10px;
+  background: #d9d9d9;
+  color: var(--footer-bg);
+  font-size: 15px;
+}
+
+.answer-back-icon {
+  width: 20px;
+  height: 20px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 50%;
+  background: var(--quick-bg);
+}
+
+.answer-back-icon svg {
+  width: 10px;
+  height: 10px;
+  fill: var(--footer-bg);
+}
+
+.answer-back:hover { background: #cfcfcf; }
+/* ===== [추가] 끝 ===== */
