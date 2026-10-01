@@ -1,0 +1,254 @@
+/* 폰트 파일 적용 */
+@font-face {
+  font-family: "Korail";
+  src: url("../Reservation/assets/Korail-M.ttf") format("truetype");
+  font-weight: 500;
+}
+
+/* 챗봇을 제외한 영역에 적용 */
+.header,
+main {
+  font-family: "Korail", sans-serif;
+  font-weight: 500;
+}
+
+/* 공간 배치용 스타일입니다. 색상과 세부 디자인은 나중에 조정하세요. */
+body {
+  background-color: white;
+  color: #555;
+  font-family: Arial, "Malgun Gothic", sans-serif;
+  font-size: 14px;
+}
+
+/* 임시 공간 표시: 실제 내용을 넣은 뒤 placeholder 클래스를 제거하세요. */
+.placeholder {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border: 1px dashed #aaa;
+  background-color: #f3f3f3;
+  text-align: center;
+}
+
+/* 헤더: 로고와 오른쪽 메뉴 */
+.header {
+  min-height: 58px;
+  padding: 10px 34px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 20px;
+}
+.logo {
+  width: 152px;
+  height: 37px;
+  flex-shrink: 0;
+}
+.header-menu {
+  display: flex;
+  gap: 12px;
+}
+.header-menu span {
+  width: 100px;
+  min-height: 32px;
+}
+
+/* 예매 영역 */
+.booking-section {
+  padding: 50px 24px 25px;
+  background-color: #e6eef5;
+}
+.booking-box {
+  max-width: 1052px;
+  min-height: 260px;
+  margin: 0 auto;
+  padding: 6px 25px 15px;
+  background-color: white;
+}
+.booking-menu {
+  display: flex;
+  justify-content: space-between;
+  gap: 24px;
+}
+.booking-menu span {
+  width: 30%;
+  min-height: 65px;
+}
+.booking-content {
+  display: flex;
+  align-items: stretch;
+  gap: 16px;
+  margin-top: 10px;
+}
+.station {
+  flex: 1;
+  min-height: 160px;
+}
+.direction {
+  width: 60px;
+  align-self: center;
+  min-height: 40px;
+}
+.booking-options {
+  width: 32%;
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+.trip-menu,
+.travel-info {
+  display: flex;
+  justify-content: center;
+  gap: 12px;
+}
+.trip-menu span {
+  width: 70px;
+  min-height: 36px;
+}
+.date {
+  flex: 1;
+  min-height: 36px;
+}
+.passengers {
+  width: 70px;
+}
+.search {
+  width: 75%;
+  min-height: 65px;
+  align-self: flex-end;
+}
+
+/* 본문: 바로가기 6개, 큰 배너, 작은 배너 2개 */
+.main-content {
+  width: calc(100% - 48px);
+  max-width: 1166px;
+  margin: 0 auto;
+}
+.quick-menu {
+  max-width: 840px;
+  margin: 13px auto 16px;
+  display: flex;
+  gap: 20px;
+}
+.quick-item {
+  flex: 1;
+  min-width: 0;
+  text-align: center;
+}
+.quick-icon {
+  width: 90px;
+  height: 93px;
+  margin: 0 auto 8px;
+  border-radius: 50%;
+}
+.main-banner {
+  width: 1166px;
+  height: auto;
+}
+.sub-banners {
+  display: flex;
+  gap: 46px;
+  margin-top: 21px;
+}
+.sub-banner {
+  flex: 1;
+  min-width: 0px;
+  height: 280px;
+  object-fit: cover;
+}
+
+/* 오른쪽 아래 챗봇 공간 */
+.chatbot {
+  text-decoration: none;
+  z-index: 10;
+  position: fixed;
+  right: 24px;
+  bottom: 56px;
+  width: 100px;
+  height: 100px;
+  border-radius: 50%;
+  background-color: #0066b3;
+  border: 2px solid #133c88;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+}
+.chatbot img {
+  width: 70px;
+  height: 70px;
+  object-fit: contain;
+}
+.chatbot span {
+  color: white;
+  font-size: 14px;
+  font-weight: bold;
+  line-height: 18px;
+}
+
+/* 좁은 화면에서 공간이 겹치지 않도록 기본 줄바꿈만 적용
+ → prettier 저장 오류 나서 .chatbot 밖에 있는 중괄호에 있던 white; 지워서 저장. */
+@media (max-width: 768px) {
+  .header {
+    flex-wrap: wrap;
+    padding: 12px 16px;
+  }
+  .header-menu {
+    flex-wrap: wrap;
+  }
+  .booking-section {
+    padding: 24px 16px;
+  }
+  .booking-box {
+    padding: 12px;
+  }
+  .booking-menu {
+    gap: 8px;
+  }
+  .booking-content {
+    flex-wrap: wrap;
+    gap: 8px;
+  }
+  .direction {
+    width: 40px;
+  }
+  .booking-options {
+    width: 100%;
+  }
+  .quick-menu {
+    flex-wrap: wrap;
+    gap: 16px 0;
+  }
+  .quick-item {
+    flex: none;
+    width: 33.333%;
+  }
+  .quick-icon {
+    width: 70px;
+    height: 70px;
+  }
+  .sub-banners {
+    flex-direction: column;
+    gap: 16px;
+  }
+  /* 작은 화면에서는 원, 아이콘, 글자를 함께 줄입니다. */
+  .chatbot {
+    width: 72px;
+    height: 72px;
+    right: 12px;
+    bottom: 16px;
+  }
+  .chatbot img {
+    width: 48px;
+    height: 48px;
+  }
+  .chatbot span {
+    font-size: 12px;
+    line-height: 16px;
+  }
+}
+
+.chatbot:focus-visible {
+  outline: 3px solid #133c88;
+  outline-offset: 4px;
+}
