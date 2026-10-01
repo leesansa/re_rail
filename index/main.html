@@ -8,19 +8,47 @@
         + 건영 님이 헤더 부분 필요하셔서 만들어 두셨습니다! header.html / css / js 파일 참고해주세요! -->
     <link rel="stylesheet" href="./reset.css" />
     <link rel="stylesheet" href="./main.css" />
+    <script src="../header-export/header.js" defer></script>
     <link rel="icon" type="image/png" href="../assets/아이콘/코레일_파비콘.png" />
   </head>
   <body>
     <!-- 공간 확인용 글자는 나중에 이미지나 버튼으로 바꾸세요. -->
-    <div class="header">
-      <span class="logo placeholder">코레일 로고 자리</span>
-      <div class="header-menu">
-        <span class="login placeholder">로그인 자리</span>
-        <span class="cart placeholder">장바구니 자리</span>
-        <span class="mypage placeholder">마이페이지 자리</span>
-        <span class="language placeholder">언어 선택 자리</span>
-      </div>
-    </div>
+    <header class="site-header">
+      <img class="brand-logo" src="../header-export/assets/korail-logo.svg" alt="KORAIL" width="152" height="37" />
+      <nav class="utility-nav" aria-label="회원 메뉴">
+        <!-- 실제 페이지가 준비되면 href를 연결하고 header.js의 임시 차단을 제거 -->
+        <a class="utility-item utility-placeholder-link" href="login.html">
+          <img src="../header-export/assets/login.png" alt="" width="27" height="27" />
+          <span>로그인</span>
+        </a>
+        <span class="utility-divider" aria-hidden="true">/</span>
+        <a class="utility-item utility-placeholder-link" href="cart.html">
+          <img src="../header-export/assets/cart.png" alt="" width="27" height="27" />
+          <span>장바구니</span>
+        </a>
+        <span class="utility-divider" aria-hidden="true">/</span>
+        <a class="utility-item utility-placeholder-link" href="mypage.html">
+          <img src="../header-export/assets/mypage.png" alt="" width="31" height="31" />
+          <span>마이페이지</span>
+        </a>
+        <span class="utility-divider" aria-hidden="true">/</span>
+        <div class="utility-language-control">
+          <button class="utility-item utility-language" type="button"
+            aria-label="언어 선택, 현재 한국어" aria-haspopup="true"
+            aria-expanded="false" aria-controls="language-menu">
+            <img src="../header-export/assets/language.png" alt="" width="37" height="37" />
+            <span>Langueage</span>
+          </button>
+          <!-- 번역 기능이 연결되기 전까지 선택한 언어만 헤더에 표시 -->
+          <div id="language-menu" class="utility-language-menu" role="group" aria-label="언어 목록" hidden>
+            <button type="button" aria-pressed="true">한국어</button>
+            <button type="button" aria-pressed="false">English</button>
+            <button type="button" aria-pressed="false">中文</button>
+            <button type="button" aria-pressed="false">日本語</button>
+          </div>
+        </div>
+      </nav>
+    </header>
 
     <main>
       <!-- 예매 영역: 위에는 메뉴, 아래에는 역 선택과 조회 조건 -->
@@ -95,5 +123,6 @@
     <script src="./main.js"></script>
   </body>
 </html>
+
 
 
