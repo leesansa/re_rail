@@ -52,7 +52,13 @@
             <img src="assets/language.png" alt="" width="37" height="37" />
             <span>Langueage</span>
           </button>
-          <div id="language-menu" class="utility-language-menu" role="group" aria-label="언어 목록" hidden>
+          <div
+            id="language-menu"
+            class="utility-language-menu"
+            role="group"
+            aria-label="언어 목록"
+            hidden
+          >
             <button type="button" aria-pressed="true">한국어</button>
             <button type="button" aria-pressed="false">English</button>
             <button type="button" aria-pressed="false">中文</button>
@@ -294,7 +300,9 @@
         >
           <!-- 열차 카드는 train-data.js 배열에서 생성 -->
           <ol class="train-list"></ol>
-          <p class="train-empty" role="status" hidden>조건에 맞는 열차가 없습니다.</p>
+          <p class="train-empty" role="status" hidden>
+            조건에 맞는 열차가 없습니다.
+          </p>
           <p class="train-loading" role="status" aria-live="polite" hidden>
             열차 정보를 불러오는 중...
           </p>
