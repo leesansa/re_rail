@@ -21,7 +21,8 @@
           </svg>
           <span>홈</span>
         </a>
-        <a class="header-link" href="#">마이페이지</a>
+        <!-- [추가] 마이페이지 시안으로 이동 (원래 href="#") -->
+        <a class="header-link" href="mypage/index.html">마이페이지</a>
       </nav>
     </header>
 
@@ -58,8 +59,6 @@
             <span>코레일 챗봇입니다.</span>
           </h1>
 
-          <!-- 대화 내역: 질문 전에는 숨김 -->
-          <section class="chat-log" id="chat-log" aria-live="polite" hidden></section>
 
           <!-- 질문 입력창 -->
           <form class="chat-form" id="chat-form" autocomplete="off">
@@ -115,11 +114,11 @@
           <svg viewBox="0 0 20 12" aria-hidden="true"><path d="M2 2l8 8 8-8" /></svg>
         </button>
         <ul class="related-list" id="related-list" hidden>
-          <!-- [추가] 시안의 관련 사이트 첫 항목 -->
-          <li><a href="https://www.korail.com" target="_blank" rel="noopener">코레일 홈페이지</a></li>
-          <li><a href="https://www.letskorail.com" target="_blank" rel="noopener">레츠코레일</a></li>
-          <li><a href="https://info.korail.com" target="_blank" rel="noopener">한국철도공사</a></li>
-          <li><a href="https://www.korailtravel.com" target="_blank" rel="noopener">코레일관광개발</a></li>
+          <!-- [추가] 관련 사이트: related-sites 폴더의 시안 페이지로 연결 -->
+          <li><a href="related-sites/korail.html">코레일 홈페이지</a></li>
+          <li><a href="related-sites/letskorail.html">레츠코레일</a></li>
+          <li><a href="related-sites/korea-railroad.html">한국철도공사</a></li>
+          <li><a href="related-sites/korail-travel.html">코레일관광개발</a></li>
         </ul>
       </div>
     </footer>

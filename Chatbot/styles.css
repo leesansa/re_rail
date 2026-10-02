@@ -33,7 +33,7 @@
 
 * { box-sizing: border-box; }
 
-html, body { height: 100%; }
+html { height: 100%; }
 
 body {
   margin: 0;
@@ -162,7 +162,7 @@ body.menu-closed .side-menu { margin-left: calc(var(--side-w) * -1); }
 
 .chat-title {
   height: 80px;
-  margin: 0 0 38px;
+  margin: 0 0 78px; /* 제목과 입력창 사이 간격 (기존 빈 대화 영역 40px 포함) */
   line-height: 1;
   display: flex;
   align-items: center;
@@ -238,49 +238,14 @@ body.menu-closed .side-menu { margin-left: calc(var(--side-w) * -1); }
 }
 .quick-list button:hover { filter: brightness(0.93); }
 
-/* 대화 내역 */
-.chat-log {
-  max-height: 360px;
-  margin-bottom: 24px;
-  padding: 8px 4px;
-  display: flex;
-  flex-direction: column;
-  gap: 14px;
-  overflow-y: auto;
-}
-
-.message {
-  max-width: 75%;
-  padding: 12px 18px;
-  border-radius: 16px;
-  font-size: 17px;
-  line-height: 1.5;
-  white-space: pre-line;
-}
-.message.user {
-  align-self: flex-end;
-  background: var(--accent);
-  color: #fff;
-  border-bottom-right-radius: 4px;
-}
-.message.bot {
-  align-self: flex-start;
-  background: #e8f4f8;
-  border-bottom-left-radius: 4px;
-}
-.message.typing { color: #6b8a95; }
-
-/* 대화 중에는 추천 질문 간격 축소 */
-body.chatting .chat-main { padding-top: 48px; }
-body.chatting .quick-list { margin-top: 28px; }
-body.chatting .quick-list li + li { margin-top: 14px; }
-
 /* 04. 푸터 */
 .site-footer {
-  height: 100px;
+  min-height: 127px;
   flex-shrink: 0;
-  padding: 0 61px 0 60px;
+  padding: 6px 61px 22px 60px;
   display: flex;
+  flex-wrap: wrap;
+  row-gap: 20px;
   align-items: center;
   justify-content: space-between;
   background: var(--footer-bg);
@@ -317,20 +282,20 @@ body.chatting .quick-list li + li { margin-top: 14px; }
 }
 .related-toggle[aria-expanded="true"] svg { transform: rotate(180deg); }
 
+/* 관련 사이트 목록: 버튼 위쪽으로 회색 상자가 펼쳐짐 */
 .related-list {
   position: absolute;
   right: 0;
-  bottom: calc(100% + 6px);
-  width: 160px;
-  padding: 6px 0;
-  border-radius: 8px;
-  background: #fff;
+  bottom: calc(100% + 8px);
+  width: 130px;
+  padding: 4px 0;
+  border-radius: 6px;
+  background: #e6e6e6;
   color: #000;
-  box-shadow: 0 4px 12px rgb(0 0 0 / 20%);
   font-size: 14px;
 }
 .related-list a { display: block; padding: 8px 14px; }
-.related-list a:hover { background: #eef6f9; }
+.related-list a:hover { background: #d4d4d4; }
 
 /* 05. 반응형 */
 @media (max-width: 1024px) {
@@ -350,7 +315,7 @@ body.chatting .quick-list li + li { margin-top: 14px; }
   }
   .chat-main { padding: 48px 16px; }
   .quick-list { padding-left: 0; }
-  .site-footer { height: auto; padding: 20px 16px; flex-direction: column; align-items: flex-start; gap: 14px; }
+  .site-footer { padding: 6px 16px 22px; flex-direction: column; align-items: flex-start; gap: 20px 14px; }
   .menu-toggle span:last-child,
   .header-nav { font-size: 18px; }
 }
@@ -358,19 +323,7 @@ body.chatting .quick-list li + li { margin-top: 14px; }
 /* =====================================================================
  * [추가] 하단바 메뉴 (이용약관 ~ 지원 브라우저 안내) - 시안 기준
  * - 메뉴 6개를 하단바 맨 위 한 줄에 같은 간격으로 배치
- * - 기존 .site-footer 규칙은 그대로 두고 높이·줄바꿈만 덮어씁니다.
  * ===================================================================== */
-body { height: auto; } /* 하단바가 본문을 덮지 않도록 */
-
-.site-footer {
-  height: auto;
-  min-height: 127px;
-  padding-top: 6px;
-  padding-bottom: 22px;
-  flex-wrap: wrap;
-  row-gap: 20px;
-}
-
 .footer-links {
   flex-basis: 100%;
 }
@@ -388,22 +341,7 @@ body { height: auto; } /* 하단바가 본문을 덮지 않도록 */
 }
 
 .footer-links a:hover { text-decoration: underline; }
-
-/* 관련 사이트 목록: 버튼 위쪽으로 회색 상자가 펼쳐짐 */
-.related-list {
-  top: auto;
-  bottom: calc(100% + 8px);
-  width: 130px;
-  padding: 4px 0;
-  border-radius: 6px;
-  background: #e6e6e6;
-  box-shadow: none;
-}
-
-.related-list a { padding: 8px 14px; font-size: 14px; }
-.related-list a:hover { background: #d4d4d4; }
 /* ===== [추가] 끝 ===== */
-
 
 /* =====================================================================
  * [추가] 질문 답변 박스 (시안: 하늘색 둥근 박스 + 로봇 아이콘 + 돌아가기)

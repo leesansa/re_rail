@@ -1,0 +1,234 @@
+@charset "UTF-8";
+
+/* =====================================================================
+ * 관련 사이트 시안 페이지 공통 스타일 (4개 페이지가 함께 사용)
+ * - 챗봇 화면과 같은 색상·서체를 사용합니다.
+ * ===================================================================== */
+
+/* 00. 서체: Reservation 폴더의 Korail 서체 사용 */
+@font-face {
+  font-family: "Korail";
+  src: url("../../Reservation/assets/Korail-L.ttf") format("truetype");
+  font-weight: 300;
+  font-display: swap;
+}
+@font-face {
+  font-family: "Korail";
+  src: url("../../Reservation/assets/Korail-M.ttf") format("truetype");
+  font-weight: 500;
+  font-display: swap;
+}
+@font-face {
+  font-family: "Korail";
+  src: url("../../Reservation/assets/Korail-B.ttf") format("truetype");
+  font-weight: 700;
+  font-display: swap;
+}
+
+:root {
+  --header-bg: #133b8b;
+  --accent: #1088ac;
+  --light: #85c6da;
+  --footer-bg: #04475b;
+  --gray: #f2f5f7;
+}
+
+* { box-sizing: border-box; }
+
+body {
+  margin: 0;
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  background: #fff;
+  color: #000;
+  font-family: "Korail", "Malgun Gothic", sans-serif;
+  font-weight: 300;
+}
+
+a { color: inherit; text-decoration: none; }
+button { font: inherit; cursor: pointer; }
+
+/* 01. 헤더 */
+.site-header {
+  height: 95px;
+  padding: 0 60px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  background: var(--header-bg);
+  color: #fff;
+}
+
+/* 로고: 남색 헤더 위에서 잘 보이도록 흰색 바탕 위에 표시 */
+.brand {
+  display: flex;
+  align-items: center;
+  gap: 18px;
+}
+
+.brand-logo {
+  display: block;
+  height: 38px;
+  width: auto;
+  padding: 8px 14px;
+  border-radius: 10px;
+  background: #fff;
+}
+
+.site-name {
+  margin: 0;
+  font-size: 26px;
+  font-weight: 700;
+}
+
+.site-name small {
+  margin-left: 10px;
+  font-size: 13px;
+  font-weight: 300;
+  opacity: 0.8;
+}
+
+.back-link {
+  height: 36px;
+  padding: 0 8px 0 14px;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  border: 1px solid #fff;
+  border-radius: 10px;
+  font-size: 15px;
+}
+
+.back-link:hover { background: rgb(255 255 255 / 12%); }
+
+.back-icon {
+  width: 22px;
+  height: 22px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 50%;
+  background: var(--light);
+}
+
+.back-icon svg { width: 10px; height: 10px; fill: var(--footer-bg); }
+
+/* 02. 대표 영역 */
+.hero {
+  padding: 70px 60px;
+  background: var(--accent);
+  color: #fff;
+  text-align: center;
+}
+
+.hero h2 {
+  margin: 0 0 14px;
+  font-size: 38px;
+  font-weight: 700;
+}
+
+.hero p {
+  margin: 0 auto;
+  max-width: 720px;
+  font-size: 18px;
+  line-height: 1.7;
+}
+
+/* 03. 주요 메뉴 카드 */
+.content {
+  flex: 1;
+  width: 100%;
+  max-width: 1080px;
+  margin: 0 auto;
+  padding: 56px 24px 70px;
+}
+
+.content h3 {
+  margin: 0 0 24px;
+  font-size: 24px;
+  font-weight: 700;
+}
+
+.card-grid {
+  margin: 0;
+  padding: 0;
+  list-style: none;
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(230px, 1fr));
+  gap: 18px;
+}
+
+.card {
+  width: 100%;
+  height: 100%;
+  padding: 24px 22px;
+  border: 0;
+  border-radius: 16px;
+  background: var(--light);
+  text-align: left;
+  transition: transform 0.15s, box-shadow 0.15s;
+}
+
+.card:hover {
+  transform: translateY(-3px);
+  box-shadow: 0 6px 16px rgb(16 136 172 / 25%);
+}
+
+.card strong {
+  display: block;
+  margin-bottom: 8px;
+  font-size: 19px;
+  font-weight: 700;
+}
+
+.card span {
+  font-size: 15px;
+  line-height: 1.6;
+}
+
+/* 카드 상세 안내 */
+.detail {
+  margin-top: 28px;
+  padding: 24px 26px;
+  border-radius: 16px;
+  background: var(--gray);
+  font-size: 16px;
+  line-height: 1.7;
+  white-space: pre-line;
+}
+
+.detail[hidden] { display: none; }
+
+.detail strong {
+  display: block;
+  margin-bottom: 6px;
+  font-size: 18px;
+}
+
+/* 04. 푸터 */
+.site-footer {
+  padding: 22px 60px;
+  background: var(--footer-bg);
+  color: #fff;
+  font-size: 13px;
+  line-height: 20px;
+}
+
+.site-footer p { margin: 0; }
+
+.site-footer .notice { margin-bottom: 6px; color: #ffd85c; }
+
+/* 05. 반응형 */
+@media (max-width: 768px) {
+  .site-header { padding: 0 16px; }
+  .site-name { font-size: 16px; }
+  .back-link { height: 32px; padding: 0 6px 0 10px; font-size: 13px; white-space: nowrap; }
+  .brand { gap: 10px; }
+  .brand-logo { height: 26px; padding: 6px 10px; }
+  .site-name small { display: none; }
+  .hero { padding: 48px 16px; }
+  .hero h2 { font-size: 28px; }
+  .content { padding: 40px 16px 56px; }
+  .site-footer { padding: 20px 16px; }
+}
