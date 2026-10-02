@@ -1,0 +1,73 @@
+<!doctype html>
+<html lang="ko">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="description" content="코레일 리디자인 과제용 마이페이지 시안입니다." />
+    <title>마이페이지 | KORAIL</title>
+    <link rel="stylesheet" href="mypage.css" />
+  </head>
+  <body>
+    <!-- 01. 헤더: 챗봇 화면과 같은 남색 헤더 -->
+    <header class="site-header">
+      <h1 class="page-title">마이페이지</h1>
+      <!-- 오른쪽: 뒤로가기 아이콘 (누르면 홈페이지 index/main.html로) -->
+      <a class="back-btn" href="../../index/main.html" aria-label="홈페이지로 돌아가기" title="홈페이지로 돌아가기">
+        <svg viewBox="0 0 48 48" aria-hidden="true">
+          <circle cx="24" cy="24" r="20" />
+          <path d="M34 24H14M22 15l-9 9 9 9" />
+        </svg>
+      </a>
+    </header>
+
+    <main class="mypage">
+      <!-- 02. 회원 요약 카드 (예시 회원 정보) -->
+      <section class="profile-card" aria-label="회원 정보 요약">
+        <div class="profile-main">
+          <span class="grade-badge" id="member-grade">VIP</span>
+          <p class="member-name"><strong id="member-name">홍길동</strong> 님, 안녕하세요.</p>
+          <p class="member-no">회원번호 <span id="member-no">1234567890</span></p>
+        </div>
+        <ul class="summary-list">
+          <li>
+            <span>KTX 마일리지</span>
+            <strong id="sum-mileage">0</strong>
+          </li>
+          <li>
+            <span>할인쿠폰</span>
+            <strong id="sum-coupon">0</strong>
+          </li>
+          <li>
+            <span>예약 승차권</span>
+            <strong id="sum-ticket">0</strong>
+          </li>
+        </ul>
+      </section>
+
+      <!-- 03. 탭 메뉴 -->
+      <div class="tabs" role="tablist" aria-label="마이페이지 메뉴">
+        <button class="tab" type="button" role="tab" data-tab="tickets" aria-selected="true">예약 승차권</button>
+        <button class="tab" type="button" role="tab" data-tab="history" aria-selected="false">구입 이력</button>
+        <button class="tab" type="button" role="tab" data-tab="mileage" aria-selected="false">마일리지·쿠폰</button>
+        <button class="tab" type="button" role="tab" data-tab="info" aria-selected="false">회원정보</button>
+      </div>
+
+      <!-- 04. 탭 내용: mypage.js가 채웁니다 -->
+      <section class="panel" id="panel" role="tabpanel" aria-live="polite"></section>
+
+      <p class="notice">※ 리디자인 과제용 시안 화면이며, 표시된 회원 정보와 승차권은 모두 예시 데이터입니다.</p>
+    </main>
+
+    <!-- 05. 푸터 -->
+    <footer class="site-footer">
+      <address class="company-info">
+        상호 : 한국철도공사사업자등록 : 314-82-10024통신판매업신고 : 대전 동구 - 0233호<br />
+        34618 대전광역시 동구 중앙로 240대표전화 : 1588-7788팩스번호 02-361-8385<br />
+        COPYRIGHT(C) KOREA RAILROAD. ALL RIGHTS RESERVED.
+      </address>
+      <a class="back-chatbot" href="../index.html">챗봇으로 돌아가기</a>
+    </footer>
+
+    <script src="mypage.js"></script>
+  </body>
+</html>

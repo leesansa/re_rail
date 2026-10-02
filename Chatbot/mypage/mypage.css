@@ -1,0 +1,387 @@
+@charset "UTF-8";
+
+/* =====================================================================
+ * 마이페이지 시안 스타일 - 챗봇 화면과 같은 색상·서체 사용
+ * ===================================================================== */
+
+/* 00. 서체: Reservation 폴더의 Korail 서체 */
+@font-face {
+  font-family: "Korail";
+  src: url("../../Reservation/assets/Korail-L.ttf") format("truetype");
+  font-weight: 300;
+  font-display: swap;
+}
+@font-face {
+  font-family: "Korail";
+  src: url("../../Reservation/assets/Korail-M.ttf") format("truetype");
+  font-weight: 500;
+  font-display: swap;
+}
+@font-face {
+  font-family: "Korail";
+  src: url("../../Reservation/assets/Korail-B.ttf") format("truetype");
+  font-weight: 700;
+  font-display: swap;
+}
+
+:root {
+  --header-bg: #133b8b;
+  --accent: #1088ac;
+  --light: #85c6da;
+  --footer-bg: #04475b;
+  --line: #dadada;
+  --gray: #f2f5f7;
+}
+
+* { box-sizing: border-box; }
+
+body {
+  margin: 0;
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  background: #fff;
+  color: #000;
+  font-family: "Korail", "Malgun Gothic", sans-serif;
+  font-weight: 300;
+}
+
+a { color: inherit; text-decoration: none; }
+button { font: inherit; cursor: pointer; }
+ul { margin: 0; padding: 0; list-style: none; }
+
+/* 01. 헤더 */
+.site-header {
+  height: 95px;
+  padding: 0 72px 0 40px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  background: var(--header-bg);
+  color: #fff;
+}
+
+.page-title {
+  margin: 0;
+  font-size: 26px;
+  font-weight: 700;
+}
+
+/* 뒤로가기 아이콘: 원 안의 왼쪽 화살표 (흰색 선) */
+.back-btn {
+  width: 52px;
+  height: 52px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 50%;
+  transition: background 0.2s;
+}
+
+.back-btn:hover { background: rgb(255 255 255 / 12%); }
+
+.back-btn svg {
+  width: 44px;
+  height: 44px;
+  fill: none;
+  stroke: #fff;
+  stroke-width: 3.6;
+  stroke-linecap: round;
+  stroke-linejoin: round;
+}
+
+/* 02. 본문 */
+.mypage {
+  flex: 1;
+  width: 100%;
+  max-width: 1000px;
+  margin: 0 auto;
+  padding: 48px 24px 64px;
+}
+
+/* 회원 요약 카드 */
+.profile-card {
+  padding: 28px 32px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 24px;
+  border-radius: 16px;
+  background: var(--light);
+}
+
+.grade-badge {
+  display: inline-block;
+  padding: 3px 12px;
+  border-radius: 20px;
+  background: var(--header-bg);
+  color: #fff;
+  font-size: 14px;
+  font-weight: 700;
+}
+
+.member-name {
+  margin: 10px 0 4px;
+  font-size: 24px;
+}
+
+.member-name strong { font-weight: 700; }
+
+.member-no {
+  margin: 0;
+  font-size: 14px;
+  color: #1f4e5c;
+}
+
+.summary-list {
+  display: flex;
+  gap: 12px;
+}
+
+.summary-list li {
+  min-width: 120px;
+  padding: 14px 18px;
+  border-radius: 12px;
+  background: #fff;
+  text-align: center;
+}
+
+.summary-list span {
+  display: block;
+  font-size: 14px;
+  color: #4b6f7b;
+}
+
+.summary-list strong {
+  display: block;
+  margin-top: 4px;
+  font-size: 22px;
+  font-weight: 700;
+  color: var(--accent);
+}
+
+/* 탭 */
+.tabs {
+  margin-top: 36px;
+  display: flex;
+  border-bottom: 2px solid var(--accent);
+}
+
+.tab {
+  flex: 1;
+  padding: 14px 0;
+  border: 0;
+  border-radius: 10px 10px 0 0;
+  background: var(--gray);
+  font-size: 17px;
+}
+
+.tab + .tab { margin-left: 4px; }
+
+.tab[aria-selected="true"] {
+  background: var(--accent);
+  color: #fff;
+  font-weight: 700;
+}
+
+/* 탭 내용 */
+.panel { padding-top: 24px; min-height: 260px; }
+
+.panel h2 {
+  margin: 0 0 16px;
+  font-size: 20px;
+  font-weight: 700;
+}
+
+.panel h2.section-gap { margin-top: 32px; }
+
+.empty {
+  padding: 40px 0;
+  text-align: center;
+  color: #666;
+}
+
+/* 승차권 카드 */
+.ticket {
+  margin-bottom: 14px;
+  padding: 20px 24px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 16px;
+  border: 1px solid var(--line);
+  border-left: 6px solid var(--accent);
+  border-radius: 10px;
+}
+
+.ticket.is-cancelled { opacity: 0.55; border-left-color: #999; }
+
+.ticket-train {
+  font-size: 14px;
+  color: var(--accent);
+  font-weight: 700;
+}
+
+.ticket-route {
+  margin: 4px 0;
+  font-size: 22px;
+  font-weight: 700;
+}
+
+.ticket-route .arrow { margin: 0 10px; color: #999; }
+
+.ticket-meta { font-size: 15px; color: #444; }
+
+.ticket-side { text-align: right; }
+
+.ticket-price {
+  display: block;
+  margin-bottom: 8px;
+  font-size: 18px;
+  font-weight: 700;
+}
+
+.btn {
+  padding: 7px 14px;
+  border: 1px solid var(--accent);
+  border-radius: 8px;
+  background: #fff;
+  color: var(--accent);
+  font-size: 14px;
+}
+
+.btn:hover { background: var(--accent); color: #fff; }
+
+.btn-danger { border-color: #c0392b; color: #c0392b; }
+.btn-danger:hover { background: #c0392b; color: #fff; }
+
+.confirm-row { display: flex; gap: 6px; justify-content: flex-end; }
+
+.status {
+  display: inline-block;
+  padding: 3px 10px;
+  border-radius: 6px;
+  background: var(--gray);
+  font-size: 13px;
+}
+
+/* 표 (구입 이력·마일리지) */
+.table {
+  width: 100%;
+  border-collapse: collapse;
+  font-size: 15px;
+}
+
+.table th,
+.table td {
+  padding: 12px 10px;
+  border-bottom: 1px solid var(--line);
+  text-align: center;
+}
+
+.table th {
+  background: var(--gray);
+  font-weight: 500;
+}
+
+.plus { color: var(--accent); font-weight: 700; }
+.minus { color: #c0392b; font-weight: 700; }
+
+/* 쿠폰 */
+.coupon-list {
+  margin-top: 28px;
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(260px, 1fr));
+  gap: 14px;
+}
+
+.coupon {
+  padding: 18px 20px;
+  border: 2px dashed var(--accent);
+  border-radius: 12px;
+}
+
+.coupon strong { display: block; font-size: 22px; color: var(--accent); }
+.coupon span { font-size: 14px; color: #555; }
+
+/* 회원정보 */
+.info-list {
+  border-top: 2px solid var(--accent);
+}
+
+.info-list li {
+  padding: 14px 10px;
+  display: flex;
+  border-bottom: 1px solid var(--line);
+  font-size: 16px;
+}
+
+.info-list .label {
+  width: 160px;
+  flex-shrink: 0;
+  color: #4b6f7b;
+}
+
+.info-actions { margin-top: 20px; display: flex; gap: 8px; }
+
+.toast {
+  margin-top: 14px;
+  padding: 12px 16px;
+  border-radius: 8px;
+  background: var(--gray);
+  font-size: 15px;
+}
+
+.notice {
+  margin: 32px 0 0;
+  font-size: 13px;
+  color: #777;
+}
+
+/* 03. 푸터 */
+.site-footer {
+  padding: 22px 60px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 16px;
+  background: var(--footer-bg);
+  color: #fff;
+}
+
+.company-info {
+  font-size: 13px;
+  font-style: normal;
+  line-height: 20px;
+}
+
+.back-chatbot {
+  padding: 8px 14px;
+  border: 1px solid #fff;
+  border-radius: 10px;
+  font-size: 14px;
+  white-space: nowrap;
+}
+
+.back-chatbot:hover { background: rgb(255 255 255 / 12%); }
+
+/* 04. 반응형 */
+@media (max-width: 768px) {
+  .site-header { padding: 0 16px; }
+  .page-title { font-size: 20px; }
+  .back-btn { width: 44px; height: 44px; }
+  .back-btn svg { width: 36px; height: 36px; }
+  .mypage { padding: 28px 16px 48px; }
+  .profile-card { flex-direction: column; align-items: flex-start; padding: 22px 18px; }
+  .summary-list { width: 100%; }
+  .summary-list li { flex: 1; min-width: 0; padding: 10px 6px; }
+  .summary-list span { font-size: 12px; }
+  .summary-list strong { font-size: 17px; }
+  .tab { padding: 12px 0; }
+  .tab { font-size: 14px; }
+  .ticket { flex-direction: column; align-items: flex-start; }
+  .ticket-side { text-align: left; }
+  .table { font-size: 13px; }
+  .info-list .label { width: 110px; }
+  .site-footer { flex-direction: column; align-items: flex-start; padding: 20px 16px; }
+}
