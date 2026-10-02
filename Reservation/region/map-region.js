@@ -1,10 +1,14 @@
-// 추가 01. 헤더: 원본 시안의 닫기 버튼은 비활성 상태를 유지합니다.
-
-// 추가 02. 검색창: 검색 기능이 연결되기 전까지 원본 안내 문구를 유지합니다.
-
-// 추가 03. 조회 방식: 현재 화면의 '지도로 찾기' 선택 상태를 유지합니다.
-
-// 추가 04. 지도: 투명 PNG의 실제 지역 부분만 hover 및 클릭 대상으로 취급합니다.
+// 지도 선택 화면이 예약 팝업에 포함되면 부모 페이지에 지도 상태를 알립니다.
+if (window.parent && window.parent !== window) {
+  document.documentElement.classList.add("is-embedded");
+  window.parent.postMessage({type: "korail:station-view", view: "map"}, "*");
+  document.addEventListener("keydown", event => {
+    if (event.key !== "Escape") return;
+    event.preventDefault();
+    window.parent.postMessage({type: "korail:station-close"}, "*");
+  });
+}
+// 투명 PNG의 실제 지역 부분만 hover 및 클릭 대상으로 취급합니다.
 const regionMap = document.querySelector(".region-map");
 const zoomLayer = regionMap.querySelector(".map-zoom-layer");
 const regionImages = [...regionMap.querySelectorAll(".map-region")];
@@ -202,7 +206,7 @@ function resetMap() {
   resetButton.hidden = true;
 }
 
-// 추가: 헤더에서 아래로 내려온 마지막 영역인 지도에서만 이벤트를 연결합니다.
+// 지도 지역에 포인터 및 키보드 이벤트를 연결합니다.
 for (const image of regionImages) {
   image.setAttribute("role", "button");
   image.setAttribute("tabindex", "0");

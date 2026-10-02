@@ -1,0 +1,235 @@
+@charset "UTF-8";
+/* 00. 공통: main에서 사용하는 원본 글꼴과 팝업 기본 설정 */
+@font-face {
+  font-family: "Korail";
+  src: url("../assets/Korail-L.ttf") format("truetype");
+  font-weight: 300;
+  font-style: normal;
+  font-display: swap;
+}
+@font-face {
+  font-family: "Korail";
+  src: url("../assets/Korail-M.ttf") format("truetype");
+  font-weight: 500;
+  font-style: normal;
+  font-display: swap;
+}
+@font-face {
+  font-family: "Korail";
+  src: url("../assets/Korail-B.ttf") format("truetype");
+  font-weight: 700;
+  font-style: normal;
+  font-display: swap;
+}
+
+
+/* 추가: 독립 패키지의 공통 규칙을 역 선택 모달 안으로 제한합니다. */
+#station-dialog { color: #222; font: 14px/1.5 "Korail", "Malgun Gothic", sans-serif; }
+#station-dialog button,
+#station-dialog input { font-family: inherit; }
+#station-dialog button { cursor: pointer; }
+#station-dialog p { margin: 0; }
+#station-dialog button:focus-visible { outline: 2px solid var(--korail-teal); outline-offset: 2px; }
+#station-dialog [hidden] { display: none !important; }
+.custom-dialog {
+  border: none;
+  border-radius: 16px;
+  padding: 0;
+  width: 90%;
+  max-width: 480px;
+  box-shadow: 0 16px 40px rgba(0, 0, 0, 0.2);
+  background-color: #ffffff;
+}
+
+/* 수정: 지도 탭에서는 원본 지도를 읽기 쉽도록 팝업 너비를 넓힙니다. */
+.custom-dialog.is-map-view { max-width: 900px; }
+
+.custom-dialog::backdrop {
+  background: rgba(0, 0, 0, 0.45);
+  backdrop-filter: blur(2px);
+}
+
+/* 01. 팝업 헤더: 제목과 닫기 버튼 */
+.dialog-header {
+  padding: 18px 24px;
+  border-bottom: 1px solid #eeeeee;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.dialog-header h2 {
+  font-size: 18px;
+  font-weight: 700;
+  color: #111;
+  margin: 0;
+}
+
+.dialog-close-btn {
+  background: transparent;
+  border: none;
+  font-size: 26px;
+  line-height: 1;
+  color: #888;
+  cursor: pointer;
+  padding: 4px;
+}
+
+.dialog-close-btn:hover {
+  color: #000;
+}
+
+.popup-close-icon {
+  position: relative;
+  display: block;
+  width: 24px;
+  height: 24px;
+  pointer-events: none;
+}
+.popup-close-icon::before,
+.popup-close-icon::after {
+  content: "";
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  width: 28px;
+  height: 2px;
+  border-radius: 1px;
+  background-color: currentColor;
+}
+.popup-close-icon::before { transform: translate(-50%, -50%) rotate(45deg); }
+.popup-close-icon::after { transform: translate(-50%, -50%) rotate(-45deg); }
+
+
+/* 02. 본문과 역 이름·초성 검색창 */
+.dialog-body {
+  padding: 20px 24px;
+}
+
+.station-search-box {
+  display: flex;
+  gap: 8px;
+  margin-bottom: 18px;
+}
+
+.station-search-input {
+  flex: 1;
+  padding: 10px 14px;
+  border: 1px solid #cccccc;
+  border-radius: 8px;
+  font-size: 14px;
+}
+
+.station-search-input:focus {
+  outline: none;
+  border-color: var(--korail-teal);
+  box-shadow: 0 0 0 2px rgba(11, 131, 165, 0.2);
+}
+
+.dialog-action-btn {
+  background-color: var(--korail-teal);
+  color: #ffffff;
+  border: none;
+  border-radius: 8px;
+  padding: 0 16px;
+  font-weight: 700;
+  cursor: pointer;
+}
+
+.dialog-subhead {
+  font-size: 13px;
+  font-weight: 700;
+  color: #666;
+  margin-bottom: 10px;
+}
+
+/* 03. 수정: 주요역·지역별·지도로 확인 탭을 1:1:1 비율로 배치합니다. */
+.station-tabs {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  margin-bottom: 16px;
+  border-bottom: 1px solid #e1e4e8;
+}
+
+.station-tab {
+  padding: 10px 0;
+  border: none;
+  border-bottom: 2px solid transparent;
+  background: none;
+  font-size: 14px;
+  font-weight: 600;
+  color: #666;
+  cursor: pointer;
+}
+
+.station-tab.is-active {
+  border-bottom-color: var(--korail-teal);
+  color: var(--korail-teal);
+}
+
+/* 04. 지역 선택 버튼 */
+.region-chips {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 6px;
+  margin-bottom: 16px;
+}
+
+.region-chip {
+  padding: 7px 4px;
+  border: 1px solid #e1e4e8;
+  border-radius: 999px;
+  background: #fff;
+  font-size: 13px;
+  cursor: pointer;
+}
+
+.region-chip.is-active {
+  border-color: var(--korail-teal);
+  background: var(--korail-teal);
+  color: #fff;
+  font-weight: 700;
+}
+
+/* 05. 역 목록과 긴 목록 스크롤 */
+.popular-stations-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 8px;
+}
+
+.station-chip {
+  padding: 10px 8px;
+  background-color: #f4f6f8;
+  border: 1px solid #e1e4e8;
+  border-radius: 8px;
+  font-size: 14px;
+  font-weight: 500;
+  cursor: pointer;
+  transition: all 0.2s ease;
+}
+
+.station-chip:hover {
+  background-color: #e6f3f8;
+  border-color: var(--korail-teal);
+  color: var(--korail-teal);
+}
+
+
+.station-scroll {
+  max-height: 300px;
+  overflow-y: auto;
+  padding-right: 4px;
+}
+
+
+/* 작은 화면: 검색 버튼과 입력란이 겹치지 않도록 합니다. */
+.station-search-input { min-width: 0; }
+#station-dialog { max-height: calc(100dvh - 32px); overflow-y: auto; }
+@media (max-width: 400px) {
+  .dialog-header { padding: 18px 16px; }
+  .dialog-body { padding: 20px 16px; }
+  .station-search-input { padding: 10px 8px; font-size: 12px; }
+  .dialog-action-btn { padding: 0 12px; }
+}
+@media (prefers-reduced-motion: reduce) { .station-chip { transition: none; } }

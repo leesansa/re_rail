@@ -115,6 +115,7 @@ document.addEventListener("DOMContentLoaded", () => {
     });
   }
 
+  /* 기존 역 선택 팝업 코드 (새 패키지로 교체)
   // ----------------------------------------------------
   // 05. 역 선택 모달 다이얼로그
   // ----------------------------------------------------
@@ -299,6 +300,8 @@ document.addEventListener("DOMContentLoaded", () => {
   if (stationSearchApply) {
     stationSearchApply.addEventListener("click", applyCustomStation);
   }
+
+  */
 
   // ----------------------------------------------------
   // 06. 날짜 및 인원 설정 모달 다이얼로그
@@ -739,6 +742,10 @@ document.addEventListener("DOMContentLoaded", () => {
     });
   }
 
+  const simpleDepInput = document.getElementById("simple-dep");
+  const simpleArrInput = document.getElementById("simple-arr");
+
+  /* 기존 간편예매 역 선택 팝업 연결 코드 (새 패키지로 교체)
   // 간편예매 출발역/도착역 클릭 시 역 선택 다이얼로그 연동
   const simpleDepInput = document.getElementById("simple-dep");
   const simpleArrInput = document.getElementById("simple-arr");
@@ -774,6 +781,8 @@ document.addEventListener("DOMContentLoaded", () => {
       }
     });
   }
+
+  */
 
   // 간편예매 저장/조회 버튼
   const simpleSubmitBtn = document.getElementById("simple-submit-btn");

@@ -886,6 +886,7 @@ button {
   padding: 20px 24px;
 }
 
+/* 기존 역 선택 팝업 전용 스타일 (새 패키지로 교체)
 .station-search-box {
   display: flex;
   gap: 8px;
@@ -946,7 +947,7 @@ button {
   color: var(--korail-teal);
 }
 
-/* 역 선택: 주요역 / 지역별 탭, 지역 버튼, 긴 목록 스크롤 (코레일 역 선택 모달 구조) */
+ 역 선택: 주요역 / 지역별 탭, 지역 버튼, 긴 목록 스크롤 (코레일 역 선택 모달 구조)
 .station-tabs {
   display: grid;
   grid-template-columns: 1fr 1fr;
@@ -998,6 +999,7 @@ button {
   overflow-y: auto;
   padding-right: 4px;
 }
+*/
 
 /* 날짜/인원 폼 필드 */
 .form-group {

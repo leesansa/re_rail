@@ -1,54 +1,14 @@
 @charset "UTF-8";
-
-/* 00. 공통 설정: 원본 화면의 Korail M 글꼴과 색상 */
-@font-face {
-  font-family: "Korail";
-  src: url("../assets/region/map/Korail-M.ttf") format("truetype");
-  font-weight: 500;
-  font-style: normal;
-  font-display: swap;
-}
-:root {
-  --frame-border: #b4b3b3;
-  --selected-blue: #133c88;
-}
-* {
-  box-sizing: border-box;
-}
-body {
-  width: 100%;
-  min-height: 100vh;
-  margin: 0;
-  color: #000;
-  background: #fff;
-  font-family: "Korail", "Malgun Gothic", sans-serif;
-  font-weight: 500;
-}
-button {
-  color: inherit;
-  font: inherit;
-}
-img {
-  display: block;
-}
-
-/* 지도 영역을 화면 중앙에 배치합니다. */
-.station-content {
-  width: min(1280px, 100%);
-  margin: 0 auto;
-}
-
-/* 예약 팝업 안에서도 지도만 표시합니다. */
-.is-embedded body {min-height: 0;}
-.is-embedded .region-map {
-  width: min(100%, calc(100dvh * 1265 / 731));
-}
+/* 수정: 원본 지도의 좌표·이미지 비율·레이어 순서를 유지하고 팝업 안에 배치합니다. */
+.region-map { --frame-border: #b4b3b3; --selected-blue: #133c88; color: #000; }
+.region-map img { display: block; }
 /* 지도 프레임과 원본 이미지 비율 */
 .region-map {
   position: relative;
-  width: 100%;
+  /* 수정: 짧은 화면에서도 팝업 헤더·검색·탭과 함께 지도 전체를 표시합니다. */
+  width: min(100%, calc(max(120px, 100dvh - 280px) * 1265 / 731));
   aspect-ratio: 1265 / 731;
-  margin: 0;
+  margin: 0 auto;
   box-shadow: inset 0 0 0 2px var(--frame-border);
   overflow: hidden;
 }

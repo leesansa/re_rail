@@ -9,6 +9,9 @@
     />
     <title>승차권 예매 | KORAIL</title>
     <link rel="stylesheet" href="Reservation.css" />
+    <!-- 추가: 새 역 선택 팝업 스타일 -->
+    <link rel="stylesheet" href="station-picker/css/station-dialog.css" />
+    <link rel="stylesheet" href="station-picker/css/map-region.css" />
     <!-- 추가: 달력 모달 스타일 -->
     <link rel="stylesheet" href="calendar/calendar.css" />
   </head>
@@ -726,31 +729,10 @@
         </div>
       </div>
     </dialog>
-    <!-- 추가: 출발역·도착역 선택 시 지도 화면을 띄우는 팝업 -->
-    <dialog
-      id="route-dialog"
-      class="calendar-dialog route-dialog"
-      aria-labelledby="route-dialog-title"
-    >
-      <div class="calendar-dialog-header">
-        <h2 id="route-dialog-title">선택 화면</h2>
-        <form method="dialog">
-          <button
-            type="submit"
-            class="calendar-dialog-close"
-            aria-label="팝업 닫기"
-          >
-            ×
-          </button>
-        </form>
-      </div>
-      <!-- 추가: 지도와 역명 목록 탭을 같은 팝업 안에서 사용할 수 있습니다. -->
-      <iframe
-        id="station-picker-frame"
-        class="station-picker-frame"
-        title="기차역 조회"
-      ></iframe>
-    </dialog>
+    <!-- 수정: 기존 iframe 역 선택 팝업을 새 station-picker 팝업으로 교체했습니다. -->
+<!-- 수정: KorailStationPicker를 출발역·도착역 공통 팝업으로 연결합니다. -->
+    <!-- 수정: 별도 팝업 마크업 파일이 이 위치에 dialog를 생성합니다. -->
+    <div id="station-picker-mount"></div>
     <!-- 탑승 인원 입력 팝업: 적용 버튼으로 입력한 숫자를 여정에 반영 -->
     <dialog
       id="passenger-dialog"
@@ -786,6 +768,13 @@
     <!-- 열차 데이터 배열을 먼저 로드한 뒤 카드 렌더링·필터 스크립트를 실행 -->
     <script src="train-data.js" defer></script>
     <script src="train-results.js" defer></script>
+    <!-- 추가: 새 역 선택 팝업 데이터와 기능 -->
+    <!-- 수정: 마크업 생성 → 역 데이터 → 지도 → 출발역·도착역 연결 순으로 초기화합니다. -->
+    <script src="station-picker/js/station-dialog-template.js" defer></script>
+    <script src="station-picker/js/stations-data.js" defer></script>
+    <script src="station-picker/js/map-region-mask-data.js" defer></script>
+    <script src="station-picker/js/map-region.js" defer></script>
+    <script src="station-picker/js/station-dialog.js" defer></script>
     <!-- 추가: 달력 모달 동작 -->
     <script src="calendar/calendar.js" defer></script>
   </body>
