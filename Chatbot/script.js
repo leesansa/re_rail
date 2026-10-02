@@ -1,8 +1,7 @@
 // 코레일 챗봇 화면 동작
-// 01. 기본 동작: 전체메뉴 토글 / 홈 / 관련 사이트 드롭다운
+// 01. 기본 동작: 전체메뉴 토글 / 관련 사이트 드롭다운
 (() => {
   const body = document.body;
-  const input = document.getElementById("chat-input");
 
   // 01-1. 전체메뉴 토글
   // - 페이지를 열면 왼쪽 메뉴가 접힌 상태로 시작하고, [전체메뉴]를 누를 때마다 펼치기/접기
@@ -24,13 +23,7 @@
     menuToggle.setAttribute("aria-expanded", String(!closed));
   });
 
-  // 01-2. 홈: 페이지 이동 없이 입력창 비우기
-  document
-    .querySelector('[data-action="home"]')
-    .addEventListener("click", (e) => {
-      e.preventDefault();
-      input.value = "";
-    });
+  // 01-2. 홈: index.html의 링크(../index/main.html)로 바로 이동 (JS 처리 없음)
 
   // 01-3. 관련 사이트 드롭다운 (링크는 index.html에서 related-sites 폴더 페이지로 연결)
   const relatedToggle = document.querySelector(".related-toggle");
