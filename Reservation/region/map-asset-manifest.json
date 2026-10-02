@@ -1,0 +1,197 @@
+[
+  {
+    "file": "../assets/region/map/경기도.png",
+    "node": "27:29",
+    "order": "!",
+    "sourceFile": "../../assets/코레일_리디자인.fig",
+    "sourceMember": "images/853baf8efdc6dcdd2a98bdb87bc0fee3db7c52f4",
+    "sha256": "8fd39c57cf1f0c585cd0c83ed695dbd0568acd97b544dea5f973a3fbbe0b615e",
+    "originalSize": [1463, 1704],
+    "displaySize": [151, 176],
+    "position": [446, 115]
+  },
+  {
+    "file": "../assets/region/map/강원특별자치도.png",
+    "node": "27:30",
+    "order": "\"",
+    "sourceFile": "../../assets/코레일_리디자인.fig",
+    "sourceMember": "images/3c041cefd05f3fa774e54f8df61a224493c3d12d",
+    "sha256": "3ff50c7b9fc5405bd850b18e13f24c98ef2a98cdda798f4900a47638c8ef251f",
+    "originalSize": [2242, 1940],
+    "displaySize": [234, 202],
+    "position": [517, 73]
+  },
+  {
+    "file": "../assets/region/map/충청북도.png",
+    "node": "27:31",
+    "order": "#",
+    "sourceFile": "../../assets/코레일_리디자인.fig",
+    "sourceMember": "images/d291f7cbf01b24c17124f3ed8f788f81f98a41f6",
+    "sha256": "2c910969283bfa05ac414a9f68d7d86ab5ea405d108ca41786161eae092555b3",
+    "originalSize": [1374, 1533],
+    "displaySize": [142, 159],
+    "position": [536, 242]
+  },
+  {
+    "file": "../assets/region/map/충청남도.png",
+    "node": "27:32",
+    "order": "$",
+    "sourceFile": "../../assets/코레일_리디자인.fig",
+    "sourceMember": "images/50be028077e0b0c98668d1afb66c29575d779de5",
+    "sha256": "144890b9ce04e1177ec91b3932565e15681724294a96e63fe4ed9fc5a1562cf4",
+    "originalSize": [2075, 1341],
+    "displaySize": [215, 139],
+    "position": [361, 266]
+  },
+  {
+    "file": "../assets/region/map/경상북도.png",
+    "node": "27:33",
+    "order": "%",
+    "sourceFile": "../../assets/코레일_리디자인.fig",
+    "sourceMember": "images/21180a667f9c80b1302e2177f9fd7363aa1bf94a",
+    "sha256": "cd52967aa163bca5896db1667d731f4bd6d893aefd5ac270321a3b878ec03b87",
+    "originalSize": [3995, 2417],
+    "displaySize": [415, 251],
+    "position": [588, 206]
+  },
+  {
+    "file": "../assets/region/map/전북특별자치도.png",
+    "node": "27:35",
+    "order": "&",
+    "sourceFile": "../../assets/코레일_리디자인.fig",
+    "sourceMember": "images/e8d4c10c2e9d6b8cd26513aa20630b02020497d8",
+    "sha256": "44e31a3082e2af0d2fe2bc1eedccdb0c39741c41cdaa9715cad5210e3c8b5cbc",
+    "originalSize": [1925, 1066],
+    "displaySize": [202, 112],
+    "position": [402, 379]
+  },
+  {
+    "file": "../assets/region/map/대구광역시.png",
+    "node": "27:36",
+    "order": "'",
+    "sourceFile": "../../assets/코레일_리디자인.fig",
+    "sourceMember": "images/27d34952fb43eaee32f295e843e3543fdfac5bc9",
+    "sha256": "447ac948d51a91289a52597f1f89c58a41d65e2895cf84490f81437047d15576",
+    "originalSize": [570, 902],
+    "displaySize": [59, 94],
+    "position": [644, 358]
+  },
+  {
+    "file": "../assets/region/map/울산광역시.png",
+    "node": "27:37",
+    "order": "(",
+    "sourceFile": "../../assets/코레일_리디자인.fig",
+    "sourceMember": "images/d476becdadce147cc696866b08610e265e3b84fd",
+    "sha256": "7b325f2adac075fd877835a9f89a6df30a97ea91bb335155a8a86335d8f4d7fc",
+    "originalSize": [516, 512],
+    "displaySize": [54, 54],
+    "position": [706, 433]
+  },
+  {
+    "file": "../assets/region/map/경상남도.png",
+    "node": "27:38",
+    "order": ")",
+    "sourceFile": "../../assets/코레일_리디자인.fig",
+    "sourceMember": "images/3bb3eb47261df0b5a2717038913ab2b9d5b3db32",
+    "sha256": "52520472fc93b0ed75b9644a5c40638452c63c77f4b8b09e85f111f7d3e67446",
+    "originalSize": [1632, 1727],
+    "displaySize": [169, 179],
+    "position": [566, 411]
+  },
+  {
+    "file": "../assets/region/map/전라남도.png",
+    "node": "27:39",
+    "order": "*",
+    "sourceFile": "../../assets/코레일_리디자인.fig",
+    "sourceMember": "images/ea78bb99f34eddc14fa731774d133f3e6d347c7f",
+    "sha256": "28f98af8f18dbc6728a1b33700b4d5745b1e99f9236eedb61f5f032b84653f64",
+    "originalSize": [2783, 1860],
+    "displaySize": [293, 196],
+    "position": [311, 463]
+  },
+  {
+    "file": "../assets/region/map/광주광역시.png",
+    "node": "27:40",
+    "order": "+",
+    "sourceFile": "../../assets/코레일_리디자인.fig",
+    "sourceMember": "images/4e2ef427e0ce3b37c2e1cf01e6b44d3400a28865",
+    "sha256": "ede9cb7c53b043aa36eb0cd6f7cc37adccfa983cd95b871edad539621767a2a8",
+    "originalSize": [404, 287],
+    "displaySize": [43, 30],
+    "position": [471, 492]
+  },
+  {
+    "file": "../assets/region/map/서울특별시.png",
+    "node": "27:41",
+    "order": "*O",
+    "sourceFile": "../../assets/코레일_리디자인.fig",
+    "sourceMember": "images/7e8d678c5a7281dd4d2b5cdd077873c00a02504d",
+    "sha256": "ef6aa39ae63a259631d846f92847a18b866e8510be7bffb21c3a70b197495d71",
+    "originalSize": [444, 365],
+    "displaySize": [45, 38],
+    "position": [485, 187]
+  },
+  {
+    "file": "../assets/region/map/인천광역시.png",
+    "node": "27:42",
+    "order": "*f",
+    "sourceFile": "../../assets/코레일_리디자인.fig",
+    "sourceMember": "images/b1659740a69723e411fae5634666bb934f7c1375",
+    "sha256": "c418edd461b915b2205b1e432cb29d06ab2d4e96446ef63cf578a2e9aff00c87",
+    "originalSize": [2158, 1315],
+    "displaySize": [229, 140],
+    "position": [262, 150]
+  },
+  {
+    "file": "../assets/region/map/대전광역시.png",
+    "node": "27:82",
+    "order": ",",
+    "sourceFile": "../../assets/코레일_리디자인.fig",
+    "sourceMember": "images/be374c9572dab7bbee281f425457a7492e4628a6",
+    "sha256": "3590a367c877822f84384c6ebde8d8e82c16002a2a9b74a37b2e58bf1d0250f8",
+    "originalSize": [341, 418],
+    "displaySize": [35, 44],
+    "position": [533, 336]
+  },
+  {
+    "file": "../assets/region/map/세종특별자치시.png",
+    "node": "27:83",
+    "order": "-",
+    "sourceFile": "../../assets/코레일_리디자인.fig",
+    "sourceMember": "images/90baed9401f3a491ee8d9ba0c8b3304bb4f02c69",
+    "sha256": "1580654fece6a27273731993ab53dce5bf884409f31abf41edad33a6b9289240",
+    "originalSize": [312, 430],
+    "displaySize": [32, 45],
+    "position": [521, 307]
+  },
+  {
+    "file": "../assets/region/map/부산광역시.png",
+    "node": "33:4",
+    "order": ".",
+    "sourceFile": "../../assets/코레일_리디자인.fig",
+    "sourceMember": "images/baa65bbd50d391768d251efeb5efa5b598a4317c",
+    "sha256": "0e823f2258e9e34188b69077c3490656533d0f3abfdb53acdb2b341e71b1043a",
+    "originalSize": [565, 643],
+    "displaySize": [59, 67],
+    "position": [685, 476]
+  },
+  {
+    "file": "../assets/region/map/search.svg",
+    "sourceFile": "../../assets/아이콘/아이콘_예매상새3.svg",
+    "sha256": "63ad32ce697ac18e9b6cdfbc5fcf068c36e52b64d837d8150ec23e9831e2e68d",
+    "node": "27:13"
+  },
+  {
+    "file": "../assets/region/map/Korail-M.ttf",
+    "sourceFile": "../assets/Korail-M.ttf",
+    "sha256": "65e8172af2e5312087e8c2b1aa72c55e4f9b4343ed3f532d5344060b43fc0b7b",
+    "node": null
+  },
+  {
+    "file": "../assets/region/map/close.svg",
+    "sourceFile": "../../assets/코레일_리디자인.fig",
+    "sourceNodes": ["27:6", "27:7"],
+    "export": "Unchanged original vector geometry; translated into a local viewBox",
+    "sha256": "e04f6c6c5563d8edbe6cabc33f2289265ef839701d324a349ea226fbcb4c7ffd"
+  }
+]

@@ -1,0 +1,75 @@
+<!doctype html>
+<html lang="ko">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta
+      name="description"
+      content="코레일_리디자인의 지도_지역선택_2 화면을 구현한 역명 조회 정적 시안입니다."
+    />
+    <title>역명으로 찾기 | KORAIL</title>
+    <!-- 스타일은 인라인으로 작성하지 않고 외부 CSS만 연결합니다. -->
+    <link rel="stylesheet" href="map-region-2.css" />
+  </head>
+  <body>
+    <!-- 01. 헤더: 기차역 조회 제목과 원본 닫기 아이콘 -->
+    <header class="station-header">
+      <h1>기차역 조회</h1>
+      <!-- 닫기: 원본 벡터와 동일한 SVG, 표시용 시안이므로 비활성화 -->
+      <button
+        class="close-button"
+        type="button"
+        aria-label="기차역 조회 닫기"
+        disabled
+      ></button>
+    </header>
+
+    <main class="station-content">
+      <!-- 02. 검색창: 안내 문구를 입력란의 placeholder로 사용하고 실시간으로 역을 필터링 -->
+      <section class="station-search" aria-label="역 이름 또는 초성 검색">
+        <!-- 추가: 역 이름과 초성을 입력할 수 있는 검색창 -->
+        <input
+          class="station-search-input"
+          type="search"
+          aria-label="역 이름 또는 초성 검색"
+          placeholder="역 이름 또는 초성 검색(서울 : ㅅㅇ)"
+          autocomplete="off"
+        />
+        <!-- 원본 SVG 크기를 유지하고 감싸는 영역에서 48px 표시 배율 적용 -->
+        <button class="search-button" type="button" aria-label="역 검색">
+          <span class="search-icon"
+            ><img src="../assets/region/list/search.svg" alt=""
+          /></span>
+        </button>
+      </section>
+
+      <!-- 03. 조회 방식: 원본에서 역명으로 찾기가 선택된 상태 -->
+      <nav class="search-methods" aria-label="기차역 조회 방식">
+        <!-- 추가: 지도 조회 탭을 누르면 지도 화면으로 이동 -->
+        <a class="method-button" href="map-region.html">지도로 찾기</a>
+        <!-- 선택된 역명 조회 탭: 파란색 문구와 강조선 -->
+        <button
+          class="method-button is-selected"
+          type="button"
+          aria-current="page"
+          disabled
+        >
+          역명으로 찾기
+        </button>
+      </nav>
+      <!-- 탭 아래의 원본 가로 구분선 -->
+      <div class="station-divider" aria-hidden="true"></div>
+
+      <!-- 04. 역명 목록: Figma 원본 순서의 36개 역을 데이터에서 생성 -->
+      <section class="station-results" aria-label="기차역 목록">
+        <!-- 추가: 역 버튼은 map-region-2-data.js의 목록에서 생성합니다. -->
+        <ol class="station-list"></ol>
+        <!-- 추가: 검색 결과가 없을 때만 보이는 안내 -->
+        <p class="station-empty" role="status" hidden>검색 결과가 없습니다.</p>
+      </section>
+    </main>
+    <!-- 추가: 역 데이터 파일을 먼저 불러온 다음 검색·선택 동작을 연결합니다. -->
+    <script src="map-region-2-data.js"></script>
+    <script src="map-region-2.js"></script>
+  </body>
+</html>

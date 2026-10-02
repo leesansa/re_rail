@@ -1,0 +1,303 @@
+@charset "UTF-8";
+
+/* 00. 공통 설정: 원본 화면의 Korail M 글꼴과 색상 */
+@font-face {
+  font-family: "Korail";
+  src: url("../assets/region/list/Korail-M.ttf") format("truetype");
+  font-weight: 500;
+  font-style: normal;
+  font-display: swap;
+}
+:root {
+  --frame-border: #b4b3b3;
+  --header-border: #9e9e9e;
+  --selected-blue: #133c88;
+  --search-background: #e3eefb;
+  --search-placeholder: #949494;
+}
+* {
+  box-sizing: border-box;
+}
+body {
+  width: 100%;
+  max-width: 1440px;
+  min-height: 1024px;
+  margin: 0 auto;
+  color: #000;
+  background: #fff;
+  font-family: "Korail", "Malgun Gothic", sans-serif;
+  font-weight: 500;
+}
+button {
+  color: inherit;
+  font: inherit;
+}
+button:disabled {
+  opacity: 1;
+  cursor: default;
+}
+img {
+  display: block;
+}
+
+/* 01. 헤더: 제목은 왼쪽, 원본 닫기 아이콘은 오른쪽 */
+.station-header {
+  position: relative;
+  height: 77px;
+  display: flex;
+  align-items: center;
+  padding: 0 32px;
+  box-shadow: 0 2px 0 var(--header-border);
+}
+.station-header h1 {
+  margin: 0;
+  font-size: 30px;
+  font-weight: 500;
+  line-height: 35px;
+}
+/* 닫기 SVG의 원본 40px 크기를 유지합니다. */
+.close-button {
+  position: absolute;
+  right: 24px;
+  top: 18px;
+  width: 40px;
+  height: 40px;
+  padding: 0;
+  border: 0;
+  background: transparent;
+}
+
+/* 본문: 원본의 좌우 여백과 1280px 기준 너비 */
+.station-content {
+  width: min(1280px, calc(100% - 32px));
+  margin: 24px auto 0;
+  padding-bottom: 30px;
+}
+
+/* 02. 검색창: 배경 → 가운데 안내 문구 → 오른쪽 검색 아이콘 */
+.station-search {
+  position: relative;
+  width: calc(100% - 9px);
+  height: 62px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: var(--search-background);
+  box-shadow: 0 2px 0 #b5b5b5;
+}
+/* 추가: 원본 안내 문구의 위치와 크기를 유지하는 실제 검색 입력란 */
+.station-search-input {
+  width: 100%;
+  height: 100%;
+  padding: 0 64px 0 24px;
+  border: 0;
+  background: transparent;
+  color: #000;
+  font: inherit;
+  font-size: 30px;
+  line-height: 35px;
+  text-align: center;
+  outline: 0;
+}
+.station-search-input::placeholder {
+  color: var(--search-placeholder);
+  opacity: 1;
+}
+.station-search:focus-within {
+  outline: 2px solid var(--selected-blue);
+  outline-offset: 2px;
+}
+.search-button {
+  position: absolute;
+  right: 4px;
+  top: 7px;
+  width: 48px;
+  height: 48px;
+  padding: 0;
+  border: 0;
+  background: transparent;
+}
+.search-icon {
+  display: block;
+  width: 48px;
+  height: 48px;
+}
+.search-icon img {
+  transform: scale(0.5);
+  transform-origin: top left;
+}
+
+/* 03. 조회 방식: 지도로 찾기 → 역명으로 찾기 */
+.search-methods {
+  position: relative;
+  z-index: 1;
+  width: 560px;
+  height: 72px;
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  margin: 49px 0 0 5px;
+}
+.method-button {
+  position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 0 0 1px;
+  border: 2px solid var(--frame-border);
+  background: #fff;
+  color: inherit;
+  font-size: 30px;
+  line-height: 35px;
+  text-decoration: none;
+}
+/* 추가: 지도 조회 링크도 기존 탭 모양을 유지하고 키보드 초점을 표시합니다. */
+.method-button[href] {
+  cursor: pointer;
+}
+.method-button[href]:focus-visible {
+  outline: 2px solid var(--selected-blue);
+  outline-offset: 3px;
+}
+/* 선택된 탭의 글자색과 원본 6px 강조선 */
+.method-button.is-selected {
+  color: var(--selected-blue);
+}
+.method-button.is-selected::after {
+  content: "";
+  position: absolute;
+  left: 0;
+  right: 0;
+  bottom: -2px;
+  height: 6px;
+  background: var(--selected-blue);
+}
+
+/* 04. 역명 목록: 구분선 → 행 간격 → 각 역명 버튼 순서 */
+.station-divider {
+  width: calc(100% - 16px);
+  height: 2px;
+  margin: -1px 0 0 6px;
+  background: var(--frame-border);
+}
+.station-list {
+  width: calc(100% - 18px);
+  padding: 0;
+  margin: 23px 0 0 5px;
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+  list-style: none;
+}
+/* 원본 284px 기준 4열과 42px 간격. 화면 너비에 맞춰 같은 비율로 조정합니다. */
+.station-row {
+  display: grid;
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+  column-gap: 3.3280507132%;
+}
+/* 안동/여수EXPO 행과 용산/울산 행의 원본 1px 이동 유지 */
+.station-row.is-offset {
+  transform: translateX(1px);
+}
+/* 역명 버튼: 원본 62px 높이, 30px 모서리, 2.5px 안쪽 테두리 */
+.station-button {
+  display: grid;
+  place-items: center;
+  width: 100%;
+  height: 62px;
+  padding: 0;
+  border: 0;
+  border-radius: 30px;
+  background: transparent;
+  box-shadow: inset 0 0 0 2.5px var(--frame-border);
+  font-size: 33px;
+  font-weight: 500;
+  line-height: 39px;
+  white-space: nowrap;
+  cursor: pointer;
+}
+/* 추가: 마우스를 올리거나 역을 선택하면 파란색으로 강조합니다. */
+.station-button:hover,
+.station-button:focus-visible,
+.station-button.is-selected {
+  background: var(--selected-blue);
+  color: #fff;
+  box-shadow: inset 0 0 0 2.5px var(--selected-blue);
+}
+.station-button:focus-visible {
+  outline: 2px solid var(--selected-blue);
+  outline-offset: 3px;
+}
+/* 추가: 검색 결과가 없을 때 목록 아래에 안내를 표시합니다. */
+.station-empty {
+  margin: 28px 5px 0;
+  color: #555;
+  font-size: 24px;
+}
+.station-empty[hidden] {
+  display: none;
+}
+/* 일부 원본 버튼의 285px/287px 너비 차이도 보존합니다. */
+.station-width-285 {
+  width: calc(100% + 1px);
+}
+.station-width-287 {
+  width: calc(100% + 3px);
+}
+
+/* 05. 작은 화면: 헤더 → 검색창 → 조회 탭 → 역명 목록 순서로 조정 */
+@media (max-width: 900px) {
+  .station-row {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 16px;
+  }
+  .station-row.is-offset {
+    transform: none;
+  }
+  .station-button {
+    width: 100%;
+  }
+}
+@media (max-width: 700px) {
+  body {
+    min-height: 100vh;
+  }
+  .station-header {
+    padding-left: 20px;
+  }
+  .station-header h1 {
+    font-size: 25px;
+  }
+  .close-button {
+    right: 12px;
+  }
+  .station-search {
+    justify-content: flex-start;
+    padding-left: 14px;
+  }
+  .station-search-input {
+    font-size: clamp(15px, 3.3vw, 23px);
+    line-height: 28px;
+    text-align: left;
+  }
+  .search-methods {
+    width: calc(100% - 15px);
+  }
+  .method-button {
+    font-size: 22px;
+  }
+}
+@media (max-width: 480px) {
+  .station-list,
+  .station-row {
+    gap: 12px;
+  }
+  .station-button {
+    font-size: 25px;
+  }
+}
+/* 320px 화면에서는 세로 스크롤바 공간까지 고려해 검색 문구의 겹침을 방지합니다. */
+@media (max-width: 360px) {
+  .station-search-input {
+    font-size: 13px;
+  }
+}

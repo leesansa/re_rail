@@ -26,7 +26,10 @@ if (languageControl) {
   languageMenu.querySelectorAll("button").forEach((option) => {
     option.addEventListener("click", () => {
       languageLabel.textContent = option.textContent;
-      languageButton.setAttribute("aria-label", `언어 선택, 현재 ${option.textContent}`);
+      languageButton.setAttribute(
+        "aria-label",
+        `언어 선택, 현재 ${option.textContent}`,
+      );
       languageMenu.querySelectorAll("button").forEach((item) => {
         item.setAttribute("aria-pressed", String(item === option));
       });
@@ -112,12 +115,23 @@ const renderTrains = () => {
 };
 
 // 기존 스크롤 추가 동작도 현재 필터 결과의 배열을 기준으로 유지한다.
-if (trainList && loadingStatus && loadTrigger && typeof IntersectionObserver !== "undefined") {
+if (
+  trainList &&
+  loadingStatus &&
+  loadTrigger &&
+  typeof IntersectionObserver !== "undefined"
+) {
   let isLoading = false;
 
   const observer = new IntersectionObserver(
     (entries) => {
-      if (!entries[0].isIntersecting || isLoading || !visibleTrains.length || !isDefaultFilter()) return;
+      if (
+        !entries[0].isIntersecting ||
+        isLoading ||
+        !visibleTrains.length ||
+        !isDefaultFilter()
+      )
+        return;
 
       isLoading = true;
       observer.unobserve(loadTrigger);
@@ -131,7 +145,10 @@ if (trainList && loadingStatus && loadTrigger && typeof IntersectionObserver !==
           if (!loadTrigger.hidden) observer.observe(loadTrigger);
           return;
         }
-        trainList.insertAdjacentHTML("beforeend", visibleTrains.map(renderTrainCard).join(""));
+        trainList.insertAdjacentHTML(
+          "beforeend",
+          visibleTrains.map(renderTrainCard).join(""),
+        );
         loadingStatus.hidden = true;
         isLoading = false;
         observer.observe(loadTrigger);
@@ -144,28 +161,34 @@ if (trainList && loadingStatus && loadTrigger && typeof IntersectionObserver !==
   observer.observe(loadTrigger);
 }
 
-// 03. 날짜 이동 및 임시 달력 팝업
-// 화면에 표시된 날짜를 기준으로 하루씩 이동하고,
-// 실제 달력 페이지가 완성되기 전까지만 유지.
+// 03. 날짜 이동 및 달력에서 선택한 출발 날짜 반영
 const previousDateButton = document.querySelector(".previous-date");
 const nextDateButton = document.querySelector(".next-date");
-const calendarButton = document.querySelector(".calendar-button");
 const selectedDateTime = document.querySelector(".selected-date");
-const calendarDialog = document.querySelector("#calendar-dialog");
 
 if (previousDateButton && nextDateButton && selectedDateTime) {
   const weekdays = ["일", "월", "화", "수", "목", "금", "토"];
   const initialDate = selectedDateTime.dateTime.slice(0, 10);
   const [year, month, day] = initialDate.split("-").map(Number);
   const selectedDate = new Date(Date.UTC(year, month - 1, day));
+  let selectedHour = Number(selectedDateTime.dateTime.slice(11, 13)) || 0;
 
   const updateSelectedDate = () => {
     const date = selectedDate.toISOString().slice(0, 10);
-    selectedDateTime.dateTime = date + "T00:00:00+09:00";
+    const time = `${String(selectedHour).padStart(2, "0")}:00`;
+    selectedDateTime.dateTime = `${date}T${time}:00+09:00`;
     selectedDateTime.textContent =
-      date + "-(" + weekdays[selectedDate.getUTCDay()] + ") 00:00";
+      date + "-(" + weekdays[selectedDate.getUTCDay()] + ") " + time;
     renderTrains();
   };
+
+  // 추가: 달력에서 출발 날짜를 누르면 표시와 열차 카드 날짜를 즉시 갱신합니다.
+  selectedDateTime.addEventListener("korail:date-selected", (event) => {
+    const { year, month, day, hour } = event.detail;
+    selectedDate.setTime(Date.UTC(year, month - 1, day));
+    selectedHour = hour;
+    updateSelectedDate();
+  });
 
   previousDateButton.addEventListener("click", () => {
     selectedDate.setUTCDate(selectedDate.getUTCDate() - 1);
@@ -178,34 +201,65 @@ if (previousDateButton && nextDateButton && selectedDateTime) {
   });
 }
 
-if (calendarButton && calendarDialog) {
-  calendarButton.addEventListener("click", () => calendarDialog.showModal());
-}
-
-// 04. 여정 선택: 실제 역 선택 화면이 완성되면 임시 팝업 내용을 교체.
+// 04. 여정 선택: 지도 팝업에서 고른 역을 출발역 또는 도착역에 반영합니다.
 const departureButton = document.querySelector(".departure-field");
 const arrivalButton = document.querySelector(".arrival-field");
 const swapButton = document.querySelector(".swap-button");
 const passengerButton = document.querySelector(".passenger-field");
 const routeDialog = document.querySelector("#route-dialog");
 const routeDialogTitle = document.querySelector("#route-dialog-title");
-const routeDialogMessage = document.querySelector("#route-dialog-message");
+const stationPickerFrame = document.querySelector("#station-picker-frame");
 const passengerDialog = document.querySelector("#passenger-dialog");
 const passengerForm = document.querySelector("#passenger-form");
 const passengerCountInput = document.querySelector("#passenger-count");
 
-if (departureButton && arrivalButton && swapButton && routeDialog) {
-  const openRouteDialog = (title) => {
+if (
+  departureButton &&
+  arrivalButton &&
+  swapButton &&
+  routeDialog &&
+  stationPickerFrame
+) {
+  let pendingStationButton = null;
+
+  const openRouteDialog = (button, title) => {
+    pendingStationButton = button;
     routeDialogTitle.textContent = title;
-    routeDialogMessage.textContent = `${title} 화면을 준비 중입니다.`;
+    stationPickerFrame.src = "region/map-region.html";
     routeDialog.showModal();
   };
 
   departureButton.addEventListener("click", () =>
-    openRouteDialog("출발역 선택"),
+    openRouteDialog(departureButton, "출발역 선택"),
   );
 
-  arrivalButton.addEventListener("click", () => openRouteDialog("도착역 선택"));
+  arrivalButton.addEventListener("click", () =>
+    openRouteDialog(arrivalButton, "도착역 선택"),
+  );
+
+  // 추가: 팝업 안의 지도 또는 역명 목록에서 보낸 선택만 수신합니다.
+  window.addEventListener("message", (event) => {
+    if (
+      !routeDialog.open ||
+      !pendingStationButton ||
+      event.source !== stationPickerFrame.contentWindow ||
+      event.data?.type !== "korail:station-selected"
+    )
+      return;
+
+    const station = event.data.station;
+    if (typeof station !== "string" || !station.trim() || station.length > 30)
+      return;
+    const targetButton = pendingStationButton;
+    const fieldName = targetButton === departureButton ? "출발역" : "도착역";
+    targetButton.querySelector("span").textContent = station;
+    targetButton.setAttribute("aria-label", `${fieldName} ${station}`);
+    routeDialog.close();
+    targetButton.focus();
+  });
+  routeDialog.addEventListener("close", () => {
+    pendingStationButton = null;
+  });
 
   swapButton.addEventListener("click", () => {
     const departureName = departureButton.querySelector("span");

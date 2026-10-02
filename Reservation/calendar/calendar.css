@@ -1,0 +1,434 @@
+/* 추가: 예약 페이지의 기존 Korail 글꼴과 기본 설정을 사용합니다. */
+.korail-calendar-modal { font-weight: 400; color: #222; }
+.korail-calendar-modal button,
+.korail-calendar-modal input { font-family: inherit; }
+.korail-calendar-modal .sr-only { position: absolute; width: 1px; height: 1px; padding: 0; margin: -1px; overflow: hidden; clip: rect(0, 0, 0, 0); white-space: nowrap; border: 0; }
+
+/* index/main.css에서 복제한 달력 스타일 */
+.korail-calendar-modal {
+  border: none;
+  border-radius: 16px;
+  padding: 0;
+  width: 90%;
+  max-width: 780px;
+  background-color: #ffffff;
+  box-shadow: 0 16px 40px rgba(0, 0, 0, 0.25);
+}
+
+.korail-calendar-modal::backdrop {
+  background: rgba(0, 0, 0, 0.45);
+  backdrop-filter: blur(2px);
+}
+
+.cal-modal-content {
+  padding: 24px 32px 28px;
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+}
+
+/* 상단 헤더: 편도/왕복 탭 + 닫기 버튼 */
+.cal-modal-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.cal-trip-tabs {
+  display: flex;
+  gap: 4px;
+}
+
+.cal-trip-tab {
+  border: none;
+  padding: 8px 24px;
+  font-size: 16px;
+  font-weight: 700;
+  border-radius: 4px;
+  cursor: pointer;
+  transition: all 0.2s ease;
+}
+
+.cal-trip-tab.active {
+  background-color: #18468b;
+  color: #ffffff;
+}
+
+.cal-trip-tab:not(.active) {
+  background-color: #c2c4c8;
+  color: #ffffff;
+}
+
+.cal-trip-tab:not(.active):hover {
+  background-color: #b0b3b8;
+}
+
+.cal-close-btn {
+  background: transparent;
+  border: none;
+  cursor: pointer;
+  padding: 4px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: transform 0.2s ease;
+}
+
+.cal-close-btn:hover {
+  transform: scale(1.1);
+}
+
+
+
+/* 선택 날짜 및 시간 카드 (2컬럼) */
+.cal-time-row {
+  display: flex;
+  gap: 20px;
+  width: 100%;
+}
+
+.cal-time-card {
+  flex: 1;
+  border: 1px solid #d4d4d4;
+  border-radius: 8px;
+  padding: 10px 18px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  background-color: #ffffff;
+  transition: border-color 0.2s ease;
+}
+
+.cal-time-card.disabled {
+  opacity: 0.32;
+  background-color: #fafafa;
+  pointer-events: none;
+}
+
+.cal-date-text-group {
+  display: flex;
+  flex-direction: column;
+  gap: 1px;
+}
+
+.cal-card-year {
+  font-size: 13.5px;
+  font-weight: 700;
+  color: #0077c8;
+  line-height: 1.2;
+}
+
+.cal-card-date {
+  font-size: 19px;
+  font-weight: 700;
+  color: #0077c8;
+  line-height: 1.2;
+}
+
+.cal-hour-group {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+}
+
+.cal-hour-spin {
+  width: 54px;
+  height: 38px;
+  border: 1px solid #c0c0c0;
+  border-radius: 4px;
+  font-size: 17px;
+  font-weight: 700;
+  color: #0077c8;
+  text-align: center;
+  padding: 0 4px;
+}
+
+.cal-hour-spin:focus {
+  outline: none;
+  border-color: #0077c8;
+}
+
+.cal-hour-label {
+  font-size: 15px;
+  font-weight: 700;
+  color: #333333;
+  white-space: nowrap;
+}
+
+/* 2개 월 달력 뷰 */
+.cal-dual-months {
+  display: flex;
+  gap: 20px;
+  width: 100%;
+}
+
+.cal-month-box {
+  flex: 1;
+  min-width: 0;
+}
+
+.cal-month-nav {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 12px;
+  margin-bottom: 10px;
+}
+
+.cal-month-nav button {
+  background: transparent;
+  border: none;
+  font-size: 17px;
+  font-weight: 700;
+  color: #111;
+  cursor: pointer;
+  padding: 2px 8px;
+  border-radius: 4px;
+}
+
+.cal-month-nav button:hover {
+  background-color: #f0f0f0;
+}
+
+.cal-month-heading {
+  font-size: 17px;
+  font-weight: 700;
+  color: #111;
+  margin: 0;
+  letter-spacing: -0.3px;
+}
+
+.cal-table-wrap {
+  border: 1px solid #c2c4c8;
+  border-radius: 4px;
+  overflow: hidden;
+}
+
+.cal-weekdays {
+  display: grid;
+  grid-template-columns: repeat(7, 1fr);
+  background-color: #ffffff;
+  border-bottom: 1px solid #c2c4c8;
+  text-align: center;
+  padding: 6px 0;
+  font-size: 13.5px;
+  font-weight: 700;
+  color: #111111;
+}
+
+.cal-weekday-sun {
+  color: #e52528;
+}
+
+.cal-weekday-sat {
+  color: #0070c0;
+}
+
+.cal-days-grid {
+  display: grid;
+  grid-template-columns: repeat(7, 1fr);
+  background-color: #ffffff;
+}
+
+.cal-day-cell {
+  padding: 0;
+  font-family: inherit;
+  height: 42px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  font-size: 14.5px;
+  font-weight: 700;
+  color: #111111;
+  cursor: pointer;
+  transition: background 0.15s ease;
+  border-right: 1px solid #f0f0f0;
+  border-bottom: 1px solid #f0f0f0;
+  user-select: none;
+  position: relative;
+  background-color: #ffffff;
+}
+
+.cal-day-cell:nth-child(7n) {
+  border-right: none;
+}
+
+.cal-day-cell.empty {
+  cursor: default;
+  pointer-events: none;
+  background: #ffffff;
+}
+
+.cal-day-cell.sun,
+.cal-day-cell.holiday {
+  color: #e52528;
+}
+
+.cal-day-cell.sat {
+  color: #0070c0;
+}
+
+.cal-day-cell:hover:not(.empty):not(.selected) {
+  background-color: #edf5fc;
+}
+
+/* 선택된 출발일 (파란 네모 박스) */
+.cal-day-cell.selected {
+  background-color: #0c4da2 !important;
+  color: #ffffff !important;
+  border-radius: 3px;
+}
+
+.cal-day-cell.selected .cell-num {
+  font-size: 15px;
+  font-weight: 700;
+  line-height: 1.1;
+  color: #ffffff !important;
+}
+
+.cal-day-cell.selected .cell-badge {
+  font-size: 9px;
+  font-weight: 400;
+  line-height: 1;
+  margin-top: 1px;
+  color: #ffffff !important;
+}
+
+.cal-day-cell.selected-arr {
+  background-color: #0077c8 !important;
+  color: #ffffff !important;
+  border-radius: 3px;
+}
+
+.cal-day-cell.selected-arr .cell-num {
+  font-size: 15px;
+  font-weight: 700;
+  line-height: 1.1;
+  color: #ffffff !important;
+}
+
+.cal-day-cell.selected-arr .cell-badge {
+  font-size: 9px;
+  font-weight: 400;
+  line-height: 1;
+  margin-top: 1px;
+  color: #ffffff !important;
+}
+
+/* 하단 검색하기 버튼 */
+.cal-modal-footer {
+  display: flex;
+  justify-content: center;
+  margin-top: 6px;
+}
+
+.cal-search-confirm-btn {
+  background-color: #18468b;
+  color: #ffffff;
+  border: none;
+  border-radius: 24px;
+  padding: 10px 52px;
+  font-size: 18px;
+  font-weight: 700;
+  cursor: pointer;
+  box-shadow: 0 4px 12px rgba(24, 70, 139, 0.25);
+  transition: background-color 0.2s ease, transform 0.1s ease;
+}
+
+.cal-search-confirm-btn:hover {
+  background-color: #113469;
+}
+
+.cal-search-confirm-btn:active {
+  transform: scale(0.98);
+}
+
+
+/* Calendar passenger selection */
+.korail-calendar-modal { max-width: 1120px; max-height: 92vh; overflow-y: auto; }
+.cal-selection-layout { display: grid; grid-template-columns: minmax(0, 1fr) 286px; gap: 22px; }
+.cal-date-panel { min-width: 0; display: flex; flex-direction: column; gap: 16px; }
+.people-panel { border-left: 1px solid #e0e3e7; padding-left: 20px; min-width: 0; }
+.people-panel h3 { font-size: 18px; font-weight: 700; margin: 0 0 12px; }
+.people-row { display: grid; grid-template-columns: minmax(0,1fr) auto; align-items: center; gap: 8px; padding: 7px 0; }
+.people-label { display: flex; align-items: center; gap: 5px; font-size: 14px; white-space: nowrap; }
+.people-controls { display: flex; align-items: center; gap: 7px; }
+.people-controls button { width: 29px; height: 29px; border: 1px solid #dedfe2; border-radius: 50%; background: #fff; color: #555; font-size: 22px; line-height: 1; cursor: pointer; }
+.people-controls button:disabled { color: #d3d6da; background: #f1f2f3; cursor: default; }
+.people-controls output { min-width: 14px; text-align: center; font-size: 15px; font-weight: 700; }
+.people-info { border: 0; border-radius: 50%; width: 19px; height: 19px; padding: 0; color: #fff; background: #c6c8ca; font: bold 13px Georgia,serif; cursor: pointer; }
+.people-info[aria-expanded="true"] { background: #18468b; }
+.people-note { grid-column: 1 / -1; border: 1px solid #c5c5c5; padding: 18px; position: relative; background: #fff; }
+.people-note[hidden] { display: none; }
+.people-note h4 { font-size: 15px; font-weight: 700; margin: 0 24px 12px 0; }
+.people-note p { color: #788797; font-size: 13px; line-height: 1.6; margin: 0; word-break: keep-all; }
+.people-note-close { position: absolute; top: 10px; right: 10px; border: 0; background: none; color: #444; font-size: 25px; cursor: pointer; }
+.people-total { border-top: 1px solid #e0e3e7; margin-top: 12px; padding-top: 12px; font-size: 14px; text-align: right; }
+.people-limit { font-size: 12px; color: #788797; margin-top: 6px; text-align: right; }
+.people-panel button:focus-visible { outline: 2px solid #18468b; outline-offset: 3px; }
+@media (max-width: 1000px) { .cal-selection-layout { grid-template-columns: 1fr; } .people-panel { border-left: 0; border-top: 1px solid #e0e3e7; padding: 16px 0 0; } }
+
+/* 역 선택과 날짜/인원 팝업에 공통으로 사용하는 닫기 버튼 */
+.cal-close-btn {
+  position: relative;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 36px;
+  height: 36px;
+  padding: 0;
+  flex-shrink: 0;
+  border: 0;
+  border-radius: 4px;
+  background: transparent;
+  color: #333;
+  cursor: pointer;
+  line-height: 1;
+  transition: background-color 0.15s ease;
+}
+.cal-close-btn:hover {
+  color: #111;
+  background-color: #f2f4f6;
+  transform: none;
+}
+.cal-close-btn:focus-visible {
+  outline: 2px solid #18468b;
+  outline-offset: 2px;
+}
+.popup-close-icon {
+  position: relative;
+  display: block;
+  width: 24px;
+  height: 24px;
+  pointer-events: none;
+}
+.popup-close-icon::before,
+.popup-close-icon::after {
+  content: "";
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  width: 28px;
+  height: 2px;
+  border-radius: 1px;
+  background-color: currentColor;
+}
+.popup-close-icon::before { transform: translate(-50%, -50%) rotate(45deg); }
+.popup-close-icon::after { transform: translate(-50%, -50%) rotate(-45deg); }
+
+/* 도착일 선택 시 출발일 이전 날짜는 선택할 수 없습니다. */
+.cal-day-cell.unavailable-return,
+.cal-day-cell.unavailable-return:hover {
+  color: #b8bdc5;
+  background-color: #f7f8fa;
+  cursor: not-allowed;
+}
+
+/* 원본 달력의 좁은 화면 배치 */
+@media (max-width: 900px) {
+  .korail-calendar-modal { width: 95%; max-height: 90vh; overflow-y: auto; }
+  .cal-modal-content { padding: 16px; }
+  .cal-dual-months { flex-direction: column; gap: 16px; }
+  .cal-time-row { flex-direction: column; gap: 10px; }
+}
