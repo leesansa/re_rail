@@ -3,97 +3,676 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>코레일 예매사이트</title>
-    <!-- reset css 적용 후 코드 작성해야 할 것 같아서, reset.css 파일 꼭 같이 가져가셔서 코딩 시작해주세요!
-        + 건영 님이 헤더 부분 필요하셔서 만들어 두셨습니다! header.html / css / js 파일 참고해주세요! -->
+    <title>코레일 예매사이트 - 할인상품</title>
     <link rel="stylesheet" href="./reset.css" />
     <link rel="stylesheet" href="./main.css" />
+    <script src="../header-export/header.js" defer></script>
     <link rel="icon" type="image/png" href="../assets/아이콘/코레일_파비콘.png" />
+    <style>
+      /* 할인상품 탭 전용 추가 스타일 */
+      .discount-booking-panel {
+        padding: 0;
+        background: #fff;
+      }
+
+      .discount-grid {
+        width: 100%;
+        border-collapse: collapse;
+        border: 1px solid #d9d9d9;
+        font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+      }
+
+      .discount-grid td {
+        width: 16.666%;
+        height: 52px;
+        border: 1px solid #e0e0e0;
+        text-align: center;
+        vertical-align: middle;
+        padding: 0 4px;
+        background-color: #ffffff;
+      }
+
+      .discount-link {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        width: 100%;
+        height: 100%;
+        text-decoration: none;
+        color: #222222;
+        font-size: 14px;
+        font-weight: 600;
+        letter-spacing: -0.5px;
+        transition: all 0.15s ease-in-out;
+      }
+
+      .discount-link:hover {
+        background-color: #f4f8fb;
+        color: #0b83a5;
+      }
+
+      .discount-link.active {
+        color: #0b83a5;
+        font-weight: 700;
+        position: relative;
+      }
+
+      .discount-link.active::after {
+        content: '';
+        position: absolute;
+        bottom: 0;
+        left: 0;
+        width: 100%;
+        height: 3px;
+        background-color: #0b83a5;
+      }
+
+      @media (max-width: 992px) {
+        .discount-grid td {
+          width: 33.333%;
+        }
+      }
+    </style>
   </head>
   <body>
-    <!-- 공간 확인용 글자는 나중에 이미지나 버튼으로 바꾸세요. -->
-    <div class="header">
-      <span class="logo placeholder">코레일 로고 자리</span>
-      <div class="header-menu">
-        <span class="login placeholder">로그인 자리</span>
-        <span class="cart placeholder">장바구니 자리</span>
-        <span class="mypage placeholder">마이페이지 자리</span>
-        <span class="language placeholder">언어 선택 자리</span>
-      </div>
-    </div>
+    <!-- 상단 헤더 -->
+    <header class="site-header">
+      <img class="brand-logo" src="../header-export/assets/korail-logo.svg" alt="KORAIL" width="152" height="37" />
+      <nav class="utility-nav" aria-label="회원 메뉴">
+        <a class="utility-item utility-placeholder-link" href="login.html">
+          <img src="../header-export/assets/login.png" alt="" width="27" height="27" />
+          <span>로그인</span>
+        </a>
+        <span class="utility-divider" aria-hidden="true">/</span>
+        <a class="utility-item utility-placeholder-link" href="cart.html">
+          <img src="../header-export/assets/cart.png" alt="" width="27" height="27" />
+          <span>장바구니</span>
+        </a>
+        <span class="utility-divider" aria-hidden="true">/</span>
+        <a class="utility-item utility-placeholder-link" href="mypage.html">
+          <img src="../header-export/assets/mypage.png" alt="" width="31" height="31" />
+          <span>마이페이지</span>
+        </a>
+        <span class="utility-divider" aria-hidden="true">/</span>
+        <div class="utility-language-control">
+          <button class="utility-item utility-language" type="button"
+            aria-label="언어 선택, 현재 한국어" aria-haspopup="true"
+            aria-expanded="false" aria-controls="language-menu">
+            <img src="../header-export/assets/language.png" alt="" width="37" height="37" />
+            <span>Langueage</span>
+          </button>
+          <div id="language-menu" class="utility-language-menu" role="group" aria-label="언어 목록" hidden>
+            <button type="button" aria-pressed="true">한국어</button>
+            <button type="button" aria-pressed="false">English</button>
+            <button type="button" aria-pressed="false">中文</button>
+            <button type="button" aria-pressed="false">日本語</button>
+          </div>
+        </div>
+      </nav>
+    </header>
 
     <main>
-      <!-- 예매 영역: 위에는 메뉴, 아래에는 역 선택과 조회 조건 -->
-      <div class="booking-section">
+      <section class="booking-section" aria-label="승차권 간편 조회 및 예매">
         <div class="booking-box">
-          <div class="booking-menu">
-            <span class="placeholder">기차예매 자리</span>
-            <span class="placeholder">간편예매 자리</span>
-            <span class="placeholder">할인상품 자리</span>
+          <div class="booking-menu" role="tablist" aria-label="예매 메뉴">
+            <button type="button" class="booking-tab active" role="tab" aria-selected="true" data-tab="train" id="tab-train">
+              기차예매
+            </button>
+            <button type="button" class="booking-tab" role="tab" aria-selected="false" data-tab="simple" id="tab-simple">
+              간편예매
+            </button>
+            <button type="button" class="booking-tab" role="tab" aria-selected="false" data-tab="discount" id="tab-discount">
+              할인상품
+            </button>
           </div>
-          <div class="booking-content">
-            <div class="station placeholder">출발역 자리</div>
-            <span class="direction placeholder">방향 표시</span>
-            <div class="station placeholder">도착역 자리</div>
+
+          <!-- 01. 기차예매 내용 카드 -->
+          <div class="booking-content tab-panel active" id="panel-train" role="tabpanel" aria-labelledby="tab-train">
+            <div class="station departure-station">
+              <span class="station-label">출발역</span>
+              <button type="button" class="station-btn" id="departure-btn" aria-label="출발역 선택, 현재 서울">
+                <span class="station-name" id="departure-name">서울</span>
+              </button>
+            </div>
+
+            <div class="direction-container">
+              <button type="button" class="direction-btn" id="swap-btn" aria-label="출발역과 도착역 변경" title="출발역과 도착역 맞바꾸기">
+                <svg class="direction-arrow" width="34" height="16" viewBox="0 0 34 16" fill="none" xmlns="http://www.w3.org/2000/svg">
+                  <path d="M1 8H31M31 8L23 1.5M31 8L23 14.5" stroke="#0B83A5" stroke-width="2.8" stroke-linecap="round" stroke-linejoin="round"/>
+                </svg>
+              </button>
+            </div>
+
+            <div class="station arrival-station">
+              <span class="station-label">도착역</span>
+              <button type="button" class="station-btn" id="arrival-btn" aria-label="도착역 선택, 현재 부산">
+                <span class="station-name" id="arrival-name">부산</span>
+              </button>
+            </div>
+
             <div class="booking-options">
-              <div class="trip-menu">
-                <span class="placeholder">편도 자리</span>
-                <span class="placeholder">왕복 자리</span>
+              <div class="trip-menu" role="radiogroup" aria-label="편도 또는 왕복 선택">
+                <button type="button" class="trip-btn active" role="radio" aria-checked="true" data-trip="oneway">편도</button>
+                <button type="button" class="trip-btn" role="radio" aria-checked="false" data-trip="round">왕복</button>
               </div>
-              <div class="travel-info">
-                <span class="date placeholder">날짜 선택 자리</span>
-                <span class="passengers placeholder">인원 자리</span>
+
+              <div class="travel-info" id="travel-info-btn">
+                <div class="travel-date-wrap" id="calendar-trigger-wrap" role="button" tabindex="0" aria-label="출발 날짜 및 시간 선택 달력 열기">
+                  <svg class="calendar-icon" id="calendar-icon-btn" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#222" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                    <rect x="3" y="4" width="18" height="18" rx="2" ry="2"></rect>
+                    <line x1="16" y1="2" x2="16" y2="6"></line>
+                    <line x1="8" y1="2" x2="8" y2="6"></line>
+                    <line x1="3" y1="10" x2="21" y2="10"></line>
+                  </svg>
+                  <span class="date-text" id="travel-date-text">2026년 10월 21일</span>
+                </div>
+                <span class="travel-divider" aria-hidden="true">|</span>
+                <span class="passengers-text" id="travel-passengers-text" role="button" tabindex="0" aria-label="탑승 인원 설정">1인</span>
               </div>
-              <span class="search placeholder">조회 버튼 자리</span>
+
+              <button type="button" class="search-btn" id="search-btn">
+                조회
+              </button>
             </div>
           </div>
-        </div>
-      </div>
 
+          <!-- 02. 간편예매 내용 카드 -->
+          <div class="booking-content tab-panel simple-booking-panel" id="panel-simple" role="tabpanel" aria-labelledby="tab-simple" hidden>
+            <form class="simple-booking-form" id="simple-booking-form" onsubmit="return false;">
+              <div class="simple-form-row simple-row-top">
+                <div class="simple-field field-alias">
+                  <label for="simple-alias" class="simple-label">별칭</label>
+                  <input type="text" id="simple-alias" class="simple-input" placeholder="별칭 입력 (출퇴근길)" />
+                </div>
+
+                <div class="simple-field field-dep">
+                  <label for="simple-dep" class="simple-label">출발역</label>
+                  <input type="text" id="simple-dep" class="simple-input" placeholder="" />
+                </div>
+
+                <div class="simple-field field-arr">
+                  <label for="simple-arr" class="simple-label">도착역</label>
+                  <input type="text" id="simple-arr" class="simple-input" placeholder="" />
+                </div>
+
+                <div class="simple-field field-passenger">
+                  <label for="simple-count-text" class="simple-label">인원</label>
+                  <div class="simple-counter">
+                    <button type="button" class="simple-counter-btn" id="simple-minus" aria-label="1명 감소">−</button>
+                    <span class="simple-counter-val" id="simple-count-text">1명</span>
+                    <button type="button" class="simple-counter-btn" id="simple-plus" aria-label="1명 증가">+</button>
+                  </div>
+                </div>
+              </div>
+
+              <div class="simple-form-row simple-row-bottom">
+                <div class="simple-field field-train-type">
+                  <label for="simple-train-type" class="simple-label">열차종류</label>
+                  <div class="simple-select-wrap">
+                    <select id="simple-train-type" class="simple-select">
+                      <option value="KTX" selected>KTX</option>
+                      <option value="KTX-산천">KTX-산천</option>
+                      <option value="ITX-새마을">ITX-새마을</option>
+                      <option value="무궁화">무궁화</option>
+                      <option value="전체">전체</option>
+                    </select>
+                    <svg class="select-triangle" width="10" height="7" viewBox="0 0 10 7" fill="none"><path d="M5 7L0 0H10L5 7Z" fill="#B5B5B5"/></svg>
+                  </div>
+                </div>
+
+                <div class="simple-field field-dep-day">
+                  <label for="simple-dep-day" class="simple-label">출발일</label>
+                  <div class="simple-select-wrap">
+                    <select id="simple-dep-day" class="simple-select">
+                      <option value="월" selected>월</option>
+                      <option value="화">화</option>
+                      <option value="수">수</option>
+                      <option value="목">목</option>
+                      <option value="금">금</option>
+                      <option value="토">토</option>
+                      <option value="일">일</option>
+                    </select>
+                    <svg class="select-triangle" width="10" height="7" viewBox="0 0 10 7" fill="none"><path d="M5 7L0 0H10L5 7Z" fill="#B5B5B5"/></svg>
+                  </div>
+                </div>
+
+                <div class="simple-field field-dep-time">
+                  <label for="simple-dep-time" class="simple-label">출발시간</label>
+                  <div class="simple-select-wrap">
+                    <select id="simple-dep-time" class="simple-select">
+                      <option value="06시">06시</option>
+                      <option value="07시">07시</option>
+                      <option value="08시" selected>08시</option>
+                      <option value="09시">09시</option>
+                      <option value="10시">10시</option>
+                      <option value="11시">11시</option>
+                      <option value="12시">12시</option>
+                      <option value="13시">13시</option>
+                      <option value="14시">14시</option>
+                      <option value="15시">15시</option>
+                      <option value="16시">16시</option>
+                      <option value="17시">17시</option>
+                      <option value="18시">18시</option>
+                      <option value="19시">19시</option>
+                      <option value="20시">20시</option>
+                      <option value="21시">21시</option>
+                      <option value="22시">22시</option>
+                    </select>
+                    <svg class="select-triangle" width="10" height="7" viewBox="0 0 10 7" fill="none"><path d="M5 7L0 0H10L5 7Z" fill="#B5B5B5"/></svg>
+                  </div>
+                </div>
+
+                <div class="simple-field field-room">
+                  <label for="simple-room" class="simple-label">객실</label>
+                  <div class="simple-select-wrap">
+                    <select id="simple-room" class="simple-select">
+                      <option value="일반실" selected>일반실</option>
+                      <option value="특실">특실</option>
+                      <option value="우등실">우등실</option>
+                    </select>
+                    <svg class="select-triangle" width="10" height="7" viewBox="0 0 10 7" fill="none"><path d="M5 7L0 0H10L5 7Z" fill="#B5B5B5"/></svg>
+                  </div>
+                </div>
+
+                <div class="simple-field field-seat">
+                  <label for="simple-seat" class="simple-label">좌석</label>
+                  <div class="simple-select-wrap">
+                    <select id="simple-seat" class="simple-select">
+                      <option value="순방향" selected>순방향</option>
+                      <option value="역방향">역방향</option>
+                    </select>
+                    <svg class="select-triangle" width="10" height="7" viewBox="0 0 10 7" fill="none"><path d="M5 7L0 0H10L5 7Z" fill="#B5B5B5"/></svg>
+                  </div>
+                </div>
+
+                <div class="simple-field field-submit">
+                  <button type="button" class="simple-submit-btn" id="simple-submit-btn">
+                    저장/조회
+                  </button>
+                </div>
+              </div>
+            </form>
+          </div>
+
+          <!-- 03. 할인상품 내용 카드 -->
+          <div class="booking-content tab-panel discount-booking-panel" id="panel-discount" role="tabpanel" aria-labelledby="tab-discount" hidden>
+            <table class="discount-grid">
+              <tbody>
+                <tr>
+                  <td><a href="#" class="discount-link active">영업할인 공통안내</a></td>
+                  <td><a href="#" class="discount-link">청소년 드림</a></td>
+                  <td><a href="#" class="discount-link">힘내라 청춘</a></td>
+                  <td><a href="#" class="discount-link">맘편한 코레일</a></td>
+                  <td><a href="#" class="discount-link">다자녀 행복</a></td>
+                  <td><a href="#" class="discount-link">공공할인</a></td>
+                </tr>
+                <tr>
+                  <td><a href="#" class="discount-link">4인동반석</a></td>
+                  <td><a href="#" class="discount-link">온라인 특가</a></td>
+                  <td><a href="#" class="discount-link">단체할인</a></td>
+                  <td><a href="#" class="discount-link">정기승차권</a></td>
+                  <td><a href="#" class="discount-link">입석,자유석,환승할인</a></td>
+                  <td><a href="#" class="discount-link">기차누리</a></td>
+                </tr>
+                <tr>
+                  <td><a href="#" class="discount-link">N카드(ITX-청춘)</a></td>
+                  <td><a href="#" class="discount-link">N카드(KTX,새마을)</a></td>
+                  <td><a href="#" class="discount-link">모범납세자</a></td>
+                  <td></td>
+                  <td></td>
+                  <td></td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+        </div>
+      </section>
+
+      <!-- 본문: 바로가기 퀵메뉴 6개, 배너 영역 -->
       <div class="main-content">
-        <!-- 각 아이콘과 안내 글자가 들어갈 자리 -->
-        <div class="quick-menu">
-          <div class="quick-item">
-            <span class="quick-icon placeholder">아이콘</span
-            ><span>승차권 이용안내</span>
-          </div>
-          <div class="quick-item">
-            <span class="quick-icon placeholder">아이콘</span
-            ><span>광명역 도심공항터미널</span>
-          </div>
-          <div class="quick-item">
-            <span class="quick-icon placeholder">아이콘</span
-            ><span>할인제도</span>
-          </div>
-          <div class="quick-item">
-            <span class="quick-icon placeholder">아이콘</span
-            ><span>유실물</span>
-          </div>
-          <div class="quick-item">
-            <span class="quick-icon placeholder">아이콘</span
-            ><span>승차권 제휴할인</span>
-          </div>
-          <div class="quick-item">
-            <span class="quick-icon placeholder">아이콘</span
-            ><span>열차운임 / 시간표</span>
-          </div>
+        <nav class="quick-menu" aria-label="주요 서비스 바로가기">
+          <a href="#" class="quick-item">
+            <span class="quick-icon">
+              <img src="../assets/아이콘/승차권_이용안내.png" alt="승차권 이용안내" />
+            </span>
+            <span class="quick-text">승차권<br />이용안내</span>
+          </a>
+          <a href="#" class="quick-item">
+            <span class="quick-icon">
+              <img src="../assets/아이콘/광명역_도심공항터미널.png" alt="광명역 도심공항터미널" />
+            </span>
+            <span class="quick-text">광명역<br />도심공항터미널</span>
+          </a>
+          <a href="#" class="quick-item">
+            <span class="quick-icon">
+              <img src="../assets/아이콘/할인제도.png" alt="할인제도" />
+            </span>
+            <span class="quick-text">할인제도</span>
+          </a>
+          <a href="#" class="quick-item">
+            <span class="quick-icon">
+              <img src="../assets/아이콘/유실물.png" alt="유실물" />
+            </span>
+            <span class="quick-text">유실물</span>
+          </a>
+          <a href="#" class="quick-item">
+            <span class="quick-icon">
+              <img src="../assets/아이콘/승차권_제휴할인.png" alt="승차권 제휴할인" />
+            </span>
+            <span class="quick-text">승차권<br />제휴할인</span>
+          </a>
+          <a href="#" class="quick-item">
+            <span class="quick-icon">
+              <img src="../assets/아이콘/열차운임_시간표.png" alt="열차운임 / 시간표" />
+            </span>
+            <span class="quick-text">열차운임/<br />시간표</span>
+          </a>
+        </nav>
+
+        <div class="main-banner-wrapper">
+          <a href="https://www.korail.com/tour/customer/event/eventProgress/25082" target="_blank" rel="noopener">
+            <img src="../assets/아이콘 외 이미지/배너_KTX-SRT 통합회원 전환 안내.jpg" class="main-banner" alt="코레일-SR 통합 철도회원 전환 안내 자세히 보기" />
+          </a>
         </div>
 
-        <a href="https://www.korail.com/tour/customer/event/eventProgress/25082" target="_blank" rel="noopener"><img src="../assets/아이콘 외 이미지/배너_KTX-SRT 통합회원 전환 안내.jpg" class="main-banner" alt="KTX-SRT 통합회원 전환 안내 배너" /></a>
         <div class="sub-banners">
-          <img src="../assets/아이콘 외 이미지/배너_올바른 열차 이용문화 만들기.png" class="sub-banner" alt="열차 이용문화 안내 배너"></img>
-          <img src="../assets/아이콘 외 이미지/배너_간편현금결제.png" class="sub-banner" alt="간편현금결제 안내 배너"></img>
+          <a href="#" class="sub-banner-link">
+            <img src="../assets/아이콘 외 이미지/배너_올바른 열차 이용문화 만들기.png" class="sub-banner" alt="올바른 열차 이용문화 만들기 - 모두를 위한 배려 다같이 만드는 올바른 열차 이용문화" />
+          </a>
+          <a href="#" class="sub-banner-link">
+            <img src="../assets/아이콘 외 이미지/배너_간편현금결제.png" class="sub-banner" alt="간편현금결제 서비스로 예매하세요 - 비밀번호 6자리만 누르면 결제 완료" />
+          </a>
         </div>
       </div>
     </main>
 
-    <!-- href의 ##########을 실제 챗봇 사이트 주소로 바꾸세요. -->
-    <a class="chatbot" href="##########" target="_blank" rel="noopener">
+    <a class="chatbot" href="../Chatbot/index.html" target="_blank" rel="noopener" aria-label="코레일 챗봇 상담">
       <img src="../assets/아이콘/chatbot icon by dickprayuda.png" alt="" />
       <span>챗봇</span>
     </a>
+
+    <!-- 역 선택 다이얼로그 (팝업 모달) -->
+    <dialog id="station-dialog" class="custom-dialog" aria-labelledby="station-dialog-title">
+      <div class="dialog-header">
+        <h2 id="station-dialog-title">역 선택</h2>
+        <form method="dialog">
+          <button type="submit" class="dialog-close-btn" aria-label="닫기"><span class="popup-close-icon" aria-hidden="true"></span></button>
+        </form>
+      </div>
+      <div class="dialog-body">
+        <div class="station-search-box">
+          <input type="text" id="station-input" class="station-search-input" placeholder="역 이름 또는 초성 검색 (서울 : ㅅㅇ)" autocomplete="off" />
+          <button type="button" id="station-search-apply" class="dialog-action-btn">선택</button>
+        </div>
+
+        <div class="station-results" id="station-results" hidden>
+          <p class="dialog-subhead" id="station-results-title">검색 결과</p>
+          <div class="popular-stations-grid station-scroll" id="station-results-list"></div>
+        </div>
+
+        <div class="station-tabs-wrap" id="station-tabs-wrap">
+          <div class="station-tabs" role="tablist">
+            <button type="button" class="station-tab is-active" role="tab" aria-selected="true" data-tab="major">주요역</button>
+            <button type="button" class="station-tab" role="tab" aria-selected="false" data-tab="region">지역별</button>
+          </div>
+
+          <div class="station-panel" id="station-panel-major">
+            <div class="popular-stations-grid station-scroll" id="popular-stations"></div>
+          </div>
+
+          <div class="station-panel" id="station-panel-region" hidden>
+            <p class="dialog-subhead">01. 지역 선택</p>
+            <div class="region-chips" id="region-chips"></div>
+            <p class="dialog-subhead">02. 역 선택</p>
+            <div class="popular-stations-grid station-scroll" id="region-stations"></div>
+          </div>
+        </div>
+      </div>
+    </dialog>
+
+    <!-- 날짜 및 인원 설정 다이얼로그 -->
+    <dialog id="travel-dialog" class="custom-dialog" aria-labelledby="travel-dialog-title">
+      <div class="dialog-header">
+        <h2 id="travel-dialog-title">일정 및 인원 선택</h2>
+        <form method="dialog">
+          <button type="submit" class="dialog-close-btn" aria-label="닫기"><span class="popup-close-icon" aria-hidden="true"></span></button>
+        </form>
+      </div>
+      <form id="travel-form" class="dialog-body">
+        <div class="form-group">
+          <label for="input-dep-date" class="form-label">출발일</label>
+          <input type="date" id="input-dep-date" class="form-input" value="2026-10-21" />
+        </div>
+        <div class="form-group" id="return-date-group">
+          <label for="input-arr-date" class="form-label">도착일 (왕복)</label>
+          <input type="date" id="input-arr-date" class="form-input" value="2026-10-21" />
+        </div>
+        <div class="form-group">
+          <label for="input-passenger-count" class="form-label">탑승 인원</label>
+          <div class="passenger-counter">
+            <button type="button" id="passenger-minus" class="counter-btn" aria-label="1명 감소">-</button>
+            <input type="number" id="input-passenger-count" class="counter-input" min="1" max="9" value="1" readonly />
+            <button type="button" id="passenger-plus" class="counter-btn" aria-label="1명 증가">+</button>
+          </div>
+        </div>
+        <div class="dialog-footer">
+          <button type="submit" class="dialog-confirm-btn">확인 및 적용</button>
+        </div>
+      </form>
+    </dialog>
+
+    <!-- 코레일 날짜/시간 선택 듀얼 캘린더 모달 -->
+    <dialog id="korail-calendar-dialog" class="korail-calendar-modal" aria-labelledby="cal-modal-title">
+      <div class="cal-modal-content">
+        <div class="cal-modal-header">
+          <div class="cal-trip-tabs" role="tablist" aria-label="여정 구분">
+            <button type="button" class="cal-trip-tab active" data-cal-trip="oneway" role="tab" aria-selected="true">편도</button>
+            <button type="button" class="cal-trip-tab" data-cal-trip="round" role="tab" aria-selected="false">왕복</button>
+          </div>
+          <button type="button" class="cal-close-btn" id="cal-close-btn" aria-label="달력 닫기"><span class="popup-close-icon" aria-hidden="true"></span></button>
+        </div>
+
+        <div class="cal-selection-layout">
+          <div class="cal-date-panel">
+            <div class="cal-time-row">
+              <div class="cal-time-card active" id="cal-dep-card">
+                <div class="cal-date-text-group">
+                  <span class="cal-card-year" id="cal-dep-year">2026년</span>
+                  <strong class="cal-card-date" id="cal-dep-date">10월 21일(수)</strong>
+                </div>
+                <div class="cal-hour-group">
+                  <input type="number" id="cal-dep-hour" class="cal-hour-spin" min="0" max="23" value="18" />
+                  <span class="cal-hour-label">시 이후 출발</span>
+                </div>
+              </div>
+
+              <div class="cal-time-card disabled" id="cal-arr-card">
+                <div class="cal-date-text-group">
+                  <span class="cal-card-year" id="cal-arr-year">2026년</span>
+                  <strong class="cal-card-date" id="cal-arr-date">10월 21일(수)</strong>
+                </div>
+                <div class="cal-hour-group">
+                  <input type="number" id="cal-arr-hour" class="cal-hour-spin" min="0" max="23" value="18" disabled />
+                  <span class="cal-hour-label">시 이후 출발</span>
+                </div>
+              </div>
+            </div>
+
+            <div class="cal-dual-months">
+              <div class="cal-month-box" id="cal-box-left">
+                <div class="cal-month-nav">
+                  <button type="button" class="cal-month-prev-btn" id="cal-prev-btn" aria-label="이전 달">&lt;</button>
+                  <h3 class="cal-month-heading" id="cal-heading-left">2026. 10.</h3>
+                  <button type="button" class="cal-month-next-btn" id="cal-next-btn-1" aria-label="다음 달">&gt;</button>
+                </div>
+                <div class="cal-table-wrap">
+                  <div class="cal-weekdays">
+                    <span class="cal-weekday-sun">일</span>
+                    <span>월</span>
+                    <span>화</span>
+                    <span>수</span>
+                    <span>목</span>
+                    <span>금</span>
+                    <span class="cal-weekday-sat">토</span>
+                  </div>
+                  <div class="cal-days-grid" id="cal-days-left"></div>
+                </div>
+              </div>
+
+              <div class="cal-month-box" id="cal-box-right">
+                <div class="cal-month-nav">
+                  <button type="button" class="cal-prev-btn-2" id="cal-prev-btn-2" aria-label="이전 달">&lt;</button>
+                  <h3 class="cal-month-heading" id="cal-heading-right">2026. 11.</h3>
+                  <button type="button" class="cal-month-next-btn" id="cal-next-btn" aria-label="다음 달">&gt;</button>
+                </div>
+                <div class="cal-table-wrap">
+                  <div class="cal-weekdays">
+                    <span class="cal-weekday-sun">일</span>
+                    <span>월</span>
+                    <span>화</span>
+                    <span>수</span>
+                    <span>목</span>
+                    <span>금</span>
+                    <span class="cal-weekday-sat">토</span>
+                  </div>
+                  <div class="cal-days-grid" id="cal-days-right"></div>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <aside class="people-panel" aria-labelledby="people-title">
+            <h3 id="people-title">인원선택</h3>
+            <div class="people-row" data-person="0">
+              <div class="people-label">어른(13세 이상)</div>
+              <div class="people-controls">
+                <button type="button" data-step="-1" aria-label="어른(13세 이상) 1명 감소">−</button>
+                <output aria-label="어른(13세 이상) 인원">1</output>
+                <button type="button" data-step="1" aria-label="어른(13세 이상) 1명 증가">+</button>
+              </div>
+            </div>
+            <div class="people-row" data-person="1">
+              <div class="people-label">어린이(6 ~ 12세)</div>
+              <div class="people-controls">
+                <button type="button" data-step="-1" aria-label="어린이(6 ~ 12세) 1명 감소">−</button>
+                <output aria-label="어린이(6 ~ 12세) 인원">0</output>
+                <button type="button" data-step="1" aria-label="어린이(6 ~ 12세) 1명 증가">+</button>
+              </div>
+            </div>
+            <div class="people-row" data-person="2">
+              <div class="people-label">유아(6세 미만)<button type="button" class="people-info" aria-label="유아(6세 미만) 상세 안내" aria-expanded="false" aria-controls="people-note-2">i</button></div>
+              <div class="people-controls">
+                <button type="button" data-step="-1" aria-label="유아(6세 미만) 1명 감소">−</button>
+                <output aria-label="유아(6세 미만) 인원">0</output>
+                <button type="button" data-step="1" aria-label="유아(6세 미만) 1명 증가">+</button>
+              </div>
+              <div class="people-note" id="people-note-2" hidden>
+                <button type="button" class="people-note-close" aria-label="상세 안내 닫기">×</button>
+                <h4>유아(6세 미만)</h4>
+                <p>6세 미만의 유아는 어른 1명당 유아 1명까지 별도의 좌석 지정없이 보호자가 동반하여 승차할 수 있습니다.(다만, 좌석을 지정하거나 어른 1명당 유아 1명을 초과하여 이용하는 경우, 유아 승차권을 별도로 구매하셔야 합니다.)</p>
+              </div>
+            </div>
+            <div class="people-row" data-person="3">
+              <div class="people-label">경로(65세 이상)</div>
+              <div class="people-controls">
+                <button type="button" data-step="-1" aria-label="경로(65세 이상) 1명 감소">−</button>
+                <output aria-label="경로(65세 이상) 인원">0</output>
+                <button type="button" data-step="1" aria-label="경로(65세 이상) 1명 증가">+</button>
+              </div>
+            </div>
+            <div class="people-row" data-person="4">
+              <div class="people-label">중증 장애인<button type="button" class="people-info" aria-label="중증 장애인 상세 안내" aria-expanded="false" aria-controls="people-note-4">i</button></div>
+              <div class="people-controls">
+                <button type="button" data-step="-1" aria-label="중증 장애인 1명 감소">−</button>
+                <output aria-label="중증 장애인 인원">0</output>
+                <button type="button" data-step="1" aria-label="중증 장애인 1명 증가">+</button>
+              </div>
+              <div class="people-note" id="people-note-4" hidden>
+                <button type="button" class="people-note-close" aria-label="상세 안내 닫기">×</button>
+                <h4>중증 장애인</h4>
+                <p>장애 1~3급(장애인 1명 당 어른 1명 선택 예매 시 보호자 할인 가능)</p>
+              </div>
+            </div>
+            <div class="people-row" data-person="5">
+              <div class="people-label">경증 장애인<button type="button" class="people-info" aria-label="경증 장애인 상세 안내" aria-expanded="false" aria-controls="people-note-5">i</button></div>
+              <div class="people-controls">
+                <button type="button" data-step="-1" aria-label="경증 장애인 1명 감소">−</button>
+                <output aria-label="경증 장애인 인원">0</output>
+                <button type="button" data-step="1" aria-label="경증 장애인 1명 증가">+</button>
+              </div>
+              <div class="people-note" id="people-note-5" hidden>
+                <button type="button" class="people-note-close" aria-label="상세 안내 닫기">×</button>
+                <h4>경증 장애인</h4>
+                <p>장애의 정도가 심하지 않은 장애인(장애 4~6급)</p>
+              </div>
+            </div>
+            <div class="people-row" data-person="6">
+              <div class="people-label">국가유공자</div>
+              <div class="people-controls">
+                <button type="button" data-step="-1" aria-label="국가유공자 1명 감소">−</button>
+                <output aria-label="국가유공자 인원">0</output>
+                <button type="button" data-step="1" aria-label="국가유공자 1명 증가">+</button>
+              </div>
+            </div>
+            <p class="people-total" aria-live="polite">총 <strong id="people-total">1</strong>명</p>
+            <p class="people-limit">총 1~9명까지 선택할 수 있습니다.</p>
+          </aside>
+        </div>
+
+        <div class="cal-modal-footer">
+          <button type="button" class="cal-search-confirm-btn" id="cal-search-confirm-btn">
+            검색하기
+          </button>
+        </div>
+      </div>
+    </dialog>
+
+    <script src="./stations-data.js"></script>
     <script src="./main.js"></script>
+    <script>
+      document.addEventListener("DOMContentLoaded", function () {
+        const tabs = document.querySelectorAll(".booking-tab");
+        const panels = document.querySelectorAll(".tab-panel");
+
+        tabs.forEach((tab) => {
+          // stopImmediatePropagation tapno maipasardeng ti napalabas nga alert Event Listener manipud ti main.js
+          tab.addEventListener("click", function (e) {
+            e.stopImmediatePropagation();
+
+            const targetTab = this.getAttribute("data-tab");
+
+            // Update tab states
+            tabs.forEach((t) => {
+              t.classList.remove("active");
+              t.setAttribute("aria-selected", "false");
+            });
+            this.classList.add("active");
+            this.setAttribute("aria-selected", "true");
+
+            // Update panel visibility
+            panels.forEach((panel) => {
+              panel.classList.remove("active");
+              panel.hidden = true;
+            });
+
+            const activePanel = document.getElementById("panel-" + targetTab);
+            if (activePanel) {
+              activePanel.classList.add("active");
+              activePanel.hidden = false;
+            }
+          }, true); // Use capture phase to handle click before main.js
+        });
+
+        // Discount links click handlers
+        const discountLinks = document.querySelectorAll(".discount-link");
+        discountLinks.forEach((link) => {
+          link.addEventListener("click", function (e) {
+            e.preventDefault();
+            discountLinks.forEach((l) => l.classList.remove("active"));
+            this.classList.add("active");
+          });
+        });
+      });
+    </script>
   </body>
 </html>
-
-
