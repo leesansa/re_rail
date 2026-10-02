@@ -8,7 +8,7 @@
       content="코레일_리디자인 Figma 원본을 구현한 승차권 예매 화면 시안입니다."
     />
     <title>승차권 예매 | KORAIL</title>
-    <link rel="stylesheet" href="styles.css" />
+    <link rel="stylesheet" href="Reservation.css" />
   </head>
   <body>
     <!-- 01. 헤더-->
@@ -330,10 +330,10 @@
       </div>
       <p>달력 페이지를 준비 중입니다.</p>
     </dialog>
-    <!-- 역 선택 임시 팝업: 실제 역 선택 화면이 완성되면 이 내용을 교체 -->
+    <!-- 추가: 출발역·도착역 선택 시 지도 화면을 띄우는 팝업 -->
     <dialog
       id="route-dialog"
-      class="calendar-dialog"
+      class="calendar-dialog route-dialog"
       aria-labelledby="route-dialog-title"
     >
       <div class="calendar-dialog-header">
@@ -348,7 +348,12 @@
           </button>
         </form>
       </div>
-      <p id="route-dialog-message">선택 화면을 준비 중입니다.</p>
+      <!-- 추가: 지도와 역명 목록 탭을 같은 팝업 안에서 사용할 수 있습니다. -->
+      <iframe
+        id="station-picker-frame"
+        class="station-picker-frame"
+        title="기차역 조회"
+      ></iframe>
     </dialog>
     <!-- 탑승 인원 입력 팝업: 적용 버튼으로 입력한 숫자를 여정에 반영 -->
     <dialog

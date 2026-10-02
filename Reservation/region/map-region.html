@@ -14,7 +14,7 @@
       <h1>기차역 조회</h1>
       <!-- 닫기: Figma의 두 벡터 도형을 그대로 내보낸 SVG, 정적 시안이므로 비활성화 -->
       <button class="close-button" type="button" aria-label="기차역 조회 닫기" disabled>
-        <img src="map-assets/close.svg" alt="" />
+        <img src="../assets/region/map/close.svg" alt="" />
       </button>
     </header>
 
@@ -24,7 +24,7 @@
         <p>역 이름 또는 초성 검색(서울 : ㅅㅇ)</p>
         <!-- 원본 96px SVG를 감싸는 48px 영역에서 표시 배율만 적용 -->
         <button class="search-button" type="button" aria-label="역 검색" disabled>
-          <span class="search-icon"><img src="map-assets/search.svg" alt="" /></span>
+          <span class="search-icon"><img src="../assets/region/map/search.svg" alt="" /></span>
         </button>
       </section>
 
@@ -32,46 +32,57 @@
       <nav class="search-methods" aria-label="기차역 조회 방식">
         <!-- 선택된 탭: 파란색 문구와 아래쪽 강조선 -->
         <button class="method-button is-selected" type="button" aria-current="page" disabled>지도로 찾기</button>
-        <!-- 선택되지 않은 역명 조회 탭 -->
-        <button class="method-button" type="button" disabled>역명으로 찾기</button>
+        <!-- 추가: 역명 조회 탭을 누르면 역명 목록 화면으로 이동 -->
+        <a class="method-button" href="map-region-2.html">역명으로 찾기</a>
       </nav>
 
       <!-- 04. 지도: Figma에 배치된 15개 지역 PNG를 원본 좌표와 순서로 표시 -->
       <section class="region-map" aria-label="지역별 지도">
+        <!-- 추가: 선택한 지역을 중심으로 지도와 역 표식을 함께 확대하는 레이어 -->
+        <div class="map-zoom-layer">
         <!-- 이미지에 포함된 윤곽선과 색상을 유지하며 지도나 지역명을 새로 그리지 않습니다. -->
         <div class="map-image-layer">
           <!-- 경기도: Figma 27:29 원본 PNG와 레이어 순서 유지 -->
-          <img class="map-region region-gyeonggi" src="map-assets/경기도.png" alt="경기도" width="151" height="176" />
+          <img class="map-region region-gyeonggi" src="../assets/region/map/경기도.png" alt="경기도" width="151" height="176" />
           <!-- 강원특별자치도: Figma 27:30 원본 PNG와 레이어 순서 유지 -->
-          <img class="map-region region-gangwon" src="map-assets/강원특별자치도.png" alt="강원특별자치도" width="234" height="202" />
+          <img class="map-region region-gangwon" src="../assets/region/map/강원특별자치도.png" alt="강원특별자치도" width="234" height="202" />
           <!-- 충청북도: Figma 27:31 원본 PNG와 레이어 순서 유지 -->
-          <img class="map-region region-chungbuk" src="map-assets/충청북도.png" alt="충청북도" width="142" height="159" />
+          <img class="map-region region-chungbuk" src="../assets/region/map/충청북도.png" alt="충청북도" width="142" height="159" />
           <!-- 충청남도: Figma 27:32 원본 PNG와 레이어 순서 유지 -->
-          <img class="map-region region-chungnam" src="map-assets/충청남도.png" alt="충청남도" width="215" height="139" />
+          <img class="map-region region-chungnam" src="../assets/region/map/충청남도.png" alt="충청남도" width="215" height="139" />
           <!-- 경상북도: Figma 27:33 원본 PNG와 레이어 순서 유지 -->
-          <img class="map-region region-gyeongbuk" src="map-assets/경상북도.png" alt="경상북도" width="415" height="251" />
+          <img class="map-region region-gyeongbuk" src="../assets/region/map/경상북도.png" alt="경상북도" width="415" height="251" />
           <!-- 전북특별자치도: Figma 27:35 원본 PNG와 레이어 순서 유지 -->
-          <img class="map-region region-jeonbuk" src="map-assets/전북특별자치도.png" alt="전북특별자치도" width="202" height="112" />
+          <img class="map-region region-jeonbuk" src="../assets/region/map/전북특별자치도.png" alt="전북특별자치도" width="202" height="112" />
           <!-- 대구광역시: Figma 27:36 원본 PNG와 레이어 순서 유지 -->
-          <img class="map-region region-daegu" src="map-assets/대구광역시.png" alt="대구광역시" width="59" height="94" />
+          <img class="map-region region-daegu" src="../assets/region/map/대구광역시.png" alt="대구광역시" width="59" height="94" />
           <!-- 울산광역시: Figma 27:37 원본 PNG와 레이어 순서 유지 -->
-          <img class="map-region region-ulsan" src="map-assets/울산광역시.png" alt="울산광역시" width="54" height="54" />
+          <img class="map-region region-ulsan" src="../assets/region/map/울산광역시.png" alt="울산광역시" width="54" height="54" />
           <!-- 경상남도: Figma 27:38 원본 PNG와 레이어 순서 유지 -->
-          <img class="map-region region-gyeongnam" src="map-assets/경상남도.png" alt="경상남도" width="169" height="179" />
+          <img class="map-region region-gyeongnam" src="../assets/region/map/경상남도.png" alt="경상남도" width="169" height="179" />
           <!-- 전라남도: Figma 27:39 원본 PNG와 레이어 순서 유지 -->
-          <img class="map-region region-jeonnam" src="map-assets/전라남도.png" alt="전라남도" width="293" height="196" />
+          <img class="map-region region-jeonnam" src="../assets/region/map/전라남도.png" alt="전라남도" width="293" height="196" />
           <!-- 서울특별시: Figma 27:41 원본 PNG와 레이어 순서 유지 -->
-          <img class="map-region region-seoul" src="map-assets/서울특별시.png" alt="서울특별시" width="45" height="38" />
+          <img class="map-region region-seoul" src="../assets/region/map/서울특별시.png" alt="서울특별시" width="45" height="38" />
           <!-- 인천광역시: Figma 27:42 원본 PNG와 레이어 순서 유지 -->
-          <img class="map-region region-incheon" src="map-assets/인천광역시.png" alt="인천광역시" width="229" height="140" />
+          <img class="map-region region-incheon" src="../assets/region/map/인천광역시.png" alt="인천광역시" width="229" height="140" />
           <!-- 광주광역시: Figma 27:40 원본 PNG와 레이어 순서 유지 -->
-          <img class="map-region region-gwangju" src="map-assets/광주광역시.png" alt="광주광역시" width="43" height="30" />
+          <img class="map-region region-gwangju" src="../assets/region/map/광주광역시.png" alt="광주광역시" width="43" height="30" />
           <!-- 대전광역시: Figma 27:82 원본 PNG와 레이어 순서 유지 -->
-          <img class="map-region region-daejeon" src="map-assets/대전광역시.png" alt="대전광역시" width="35" height="44" />
+          <img class="map-region region-daejeon" src="../assets/region/map/대전광역시.png" alt="대전광역시" width="35" height="44" />
           <!-- 세종특별자치시: Figma 27:83 원본 PNG와 레이어 순서 유지 -->
-          <img class="map-region region-sejong" src="map-assets/세종특별자치시.png" alt="세종특별자치시" width="32" height="45" />
+          <img class="map-region region-sejong" src="../assets/region/map/세종특별자치시.png" alt="세종특별자치시" width="32" height="45" />
         </div>
+        <!-- 추가: 지역을 선택하기 전에는 비어 있는 주요 역 표시 레이어 -->
+        <div class="map-stations" aria-live="polite" aria-label="선택한 지역의 주요 역"></div>
+        </div>
+        <!-- 추가: 확대된 지도를 원래 크기로 되돌리는 버튼 -->
+        <button class="map-reset-button" type="button" hidden>전체 지도</button>
       </section>
     </main>
+    <!-- 추가: 원본 지역 PNG의 투명 영역을 미리 읽어 둔 데이터 -->
+    <script src="map-region-mask-data.js"></script>
+    <!-- 추가: 헤더부터 지도까지 화면 순서대로 묶은 상호작용 스크립트 -->
+    <script src="map-region.js"></script>
   </body>
 </html>

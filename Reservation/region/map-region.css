@@ -3,7 +3,7 @@
 /* 00. 공통 설정: 원본 화면의 Korail M 글꼴과 색상 */
 @font-face {
   font-family: "Korail";
-  src: url("map-assets/Korail-M.ttf") format("truetype");
+  src: url("../assets/region/map/Korail-M.ttf") format("truetype");
   font-weight: 500;
   font-style: normal;
   font-display: swap;
@@ -106,12 +106,20 @@ img { display: block; }
 }
 .method-button {
   position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: center;
   padding: 0 0 1px;
   border: 2px solid var(--frame-border);
   background: #fff;
+  color: inherit;
   font-size: 30px;
   line-height: 35px;
+  text-decoration: none;
 }
+/* 추가: 역명 조회 링크도 기존 탭 모양으로 표시하고 키보드 초점을 강조합니다. */
+.method-button[href] { cursor: pointer; }
+.method-button[href]:focus-visible { outline: 2px solid var(--selected-blue); outline-offset: 3px; }
 /* 선택된 탭의 글자색과 원본 6px 강조선 */
 .method-button.is-selected { color: var(--selected-blue); }
 .method-button.is-selected::after {
@@ -131,6 +139,7 @@ img { display: block; }
   aspect-ratio: 1265 / 731;
   margin: -3px 0 0 5px;
   box-shadow: inset 0 0 0 2px var(--frame-border);
+  overflow: hidden;
 }
 /* 원본 탭 아래 가로 구분선은 지도 상단에서 2px 아래에 겹쳐 있습니다. */
 .region-map::before {
@@ -175,6 +184,95 @@ img { display: block; }
 .region-daejeon { left: 42.13438735%; top: 45.96443228%; width: 2.76679842%; height: 6.01915185%; }
 /* 세종특별자치시: 원본 (521, 307) / 32 × 45 */
 .region-sejong { left: 41.18577075%; top: 41.99726402%; width: 2.52964427%; height: 6.15595075%; }
+
+/* 추가: PNG의 투명한 여백은 JS가 판별하고, 실제 지역 윤곽만 파란색으로 강조합니다. */
+.map-region { pointer-events: none; }
+.map-region.is-hovered,
+.map-region.is-selected,
+.map-region:focus-visible {
+  filter: drop-shadow(2px 0 0 var(--selected-blue))
+    drop-shadow(-2px 0 0 var(--selected-blue))
+    drop-shadow(0 2px 0 var(--selected-blue))
+    drop-shadow(0 -2px 0 var(--selected-blue));
+  z-index: 2;
+}
+.map-region:focus-visible { outline: 2px solid var(--selected-blue); }
+.region-map { cursor: default; }
+.region-map.is-over-region { cursor: pointer; }
+
+/* 추가: 선택한 지역을 중심으로 지도와 역 표식을 함께 확대합니다. */
+.map-zoom-layer {
+  position: absolute;
+  inset: 0;
+  transform-origin: top left;
+  transition: transform 350ms ease;
+}
+.map-reset-button {
+  position: absolute;
+  z-index: 4;
+  top: 16px;
+  right: 16px;
+  padding: 8px 13px;
+  border: 1px solid var(--selected-blue);
+  border-radius: 18px;
+  background: #fff;
+  color: var(--selected-blue);
+  cursor: pointer;
+  font-size: 14px;
+  box-shadow: 0 2px 8px #0002;
+}
+.map-reset-button[hidden] { display: none; }
+
+/* 추가: 지역을 클릭한 뒤에만 지도 기준 좌표에 해당 지역의 주요 역을 표시합니다. */
+.map-stations { position: absolute; inset: 0; z-index: 3; pointer-events: none; }
+.map-station {
+  position: absolute;
+  display: flex;
+  align-items: center;
+  gap: 5px;
+  padding: 2px 4px 2px 0;
+  border: 0;
+  background: transparent;
+  transform: translateY(-50%) scale(var(--marker-scale, 1));
+  transform-origin: left center;
+  transition: transform 180ms ease, background-color 180ms ease;
+  white-space: nowrap;
+  color: var(--selected-blue);
+  font-size: clamp(10px, 1.1vw, 14px);
+  line-height: 1.2;
+  text-shadow: 0 1px #fff, 1px 0 #fff, -1px 0 #fff, 0 -1px #fff;
+  cursor: pointer;
+  pointer-events: auto;
+}
+.map-station::before {
+  content: "";
+  flex: none;
+  width: 8px;
+  height: 8px;
+  border: 2px solid #fff;
+  border-radius: 50%;
+  background: var(--selected-blue);
+  box-shadow: 0 0 0 1px var(--selected-blue);
+}
+.map-station.is-selected {
+  z-index: 1;
+  padding: 4px 8px 4px 3px;
+  border-radius: 16px;
+  background: var(--selected-blue);
+  color: #fff;
+  text-shadow: none;
+  box-shadow: 0 2px 8px #0003;
+}
+.map-station.is-selected::before {
+  border-color: var(--selected-blue);
+  background: #fff;
+  box-shadow: none;
+}
+.map-station:focus-visible,
+.map-reset-button:focus-visible { outline: 2px solid var(--selected-blue); outline-offset: 3px; }
+@media (prefers-reduced-motion: reduce) {
+  .map-zoom-layer, .map-station { transition: none; }
+}
 
 /* 05. 작은 화면: 헤더 → 검색창 → 조회 탭 → 지도의 순서로 크기 조정 */
 @media (max-width: 700px) {

@@ -182,30 +182,53 @@ if (calendarButton && calendarDialog) {
   calendarButton.addEventListener("click", () => calendarDialog.showModal());
 }
 
-// 04. 여정 선택: 실제 역 선택 화면이 완성되면 임시 팝업 내용을 교체.
+// 04. 여정 선택: 지도 팝업에서 고른 역을 출발역 또는 도착역에 반영합니다.
 const departureButton = document.querySelector(".departure-field");
 const arrivalButton = document.querySelector(".arrival-field");
 const swapButton = document.querySelector(".swap-button");
 const passengerButton = document.querySelector(".passenger-field");
 const routeDialog = document.querySelector("#route-dialog");
 const routeDialogTitle = document.querySelector("#route-dialog-title");
-const routeDialogMessage = document.querySelector("#route-dialog-message");
+const stationPickerFrame = document.querySelector("#station-picker-frame");
 const passengerDialog = document.querySelector("#passenger-dialog");
 const passengerForm = document.querySelector("#passenger-form");
 const passengerCountInput = document.querySelector("#passenger-count");
 
-if (departureButton && arrivalButton && swapButton && routeDialog) {
-  const openRouteDialog = (title) => {
+if (departureButton && arrivalButton && swapButton && routeDialog && stationPickerFrame) {
+  let pendingStationButton = null;
+
+  const openRouteDialog = (button, title) => {
+    pendingStationButton = button;
     routeDialogTitle.textContent = title;
-    routeDialogMessage.textContent = `${title} 화면을 준비 중입니다.`;
+    stationPickerFrame.src = "region/map-region.html";
     routeDialog.showModal();
   };
 
   departureButton.addEventListener("click", () =>
-    openRouteDialog("출발역 선택"),
+    openRouteDialog(departureButton, "출발역 선택"),
   );
 
-  arrivalButton.addEventListener("click", () => openRouteDialog("도착역 선택"));
+  arrivalButton.addEventListener("click", () => openRouteDialog(arrivalButton, "도착역 선택"));
+
+  // 추가: 팝업 안의 지도 또는 역명 목록에서 보낸 선택만 수신합니다.
+  window.addEventListener("message", (event) => {
+    if (
+      !routeDialog.open ||
+      !pendingStationButton ||
+      event.source !== stationPickerFrame.contentWindow ||
+      event.data?.type !== "korail:station-selected"
+    ) return;
+
+    const station = event.data.station;
+    if (typeof station !== "string" || !station.trim() || station.length > 30) return;
+    const targetButton = pendingStationButton;
+    const fieldName = targetButton === departureButton ? "출발역" : "도착역";
+    targetButton.querySelector("span").textContent = station;
+    targetButton.setAttribute("aria-label", `${fieldName} ${station}`);
+    routeDialog.close();
+    targetButton.focus();
+  });
+  routeDialog.addEventListener("close", () => { pendingStationButton = null; });
 
   swapButton.addEventListener("click", () => {
     const departureName = departureButton.querySelector("span");
