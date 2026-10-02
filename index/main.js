@@ -122,7 +122,6 @@ document.addEventListener("DOMContentLoaded", () => {
   const stationDialogTitle = document.getElementById("station-dialog-title");
   const stationInput = document.getElementById("station-input");
   const stationSearchApply = document.getElementById("station-search-apply");
-  const popularStationButtons = document.querySelectorAll(".station-chip");
 
   let currentTargetStationEl = null;
 
@@ -131,11 +130,11 @@ document.addEventListener("DOMContentLoaded", () => {
     if (targetType === "dep") {
       currentTargetStationEl = departureNameEl;
       stationDialogTitle.textContent = "출발역 선택";
-      stationInput.placeholder = "출발역 입력 (예: 서울, 대전)";
+      stationInput.placeholder = "출발역 이름 또는 초성 (예: 서울, ㅅㅇ)";
     } else {
       currentTargetStationEl = arrivalNameEl;
       stationDialogTitle.textContent = "도착역 선택";
-      stationInput.placeholder = "도착역 입력 (예: 부산, 동대구)";
+      stationInput.placeholder = "도착역 이름 또는 초성 (예: 부산, ㅂㅅ)";
     }
     stationInput.value = "";
     stationDialog.showModal();
@@ -149,36 +148,148 @@ document.addEventListener("DOMContentLoaded", () => {
     arrivalBtn.addEventListener("click", () => openStationDialog("arr"));
   }
 
-  // 주요 역 클릭 시 적용
-  popularStationButtons.forEach((btn) => {
-    btn.addEventListener("click", () => {
-      const selectedStation = btn.dataset.station;
-      if (currentTargetStationEl) {
-        currentTargetStationEl.textContent = selectedStation;
-      }
-      stationDialog.close();
-    });
-  });
+  // 역 버튼 그리기 (stations-data.js의 코레일 역 목록 사용)
+  const majorGrid = document.getElementById("popular-stations");
+  const regionChips = document.getElementById("region-chips");
+  const regionGrid = document.getElementById("region-stations");
+  const resultsBox = document.getElementById("station-results");
+  const resultsTitle = document.getElementById("station-results-title");
+  const resultsGrid = document.getElementById("station-results-list");
+  const tabsWrap = document.getElementById("station-tabs-wrap");
+  const stationTabs = document.querySelectorAll(".station-tab");
 
-  // 검색 인풋 직접 입력 후 선택
+  const stationButtons = (names) =>
+    names
+      .map((name) => `<button type="button" class="station-chip" data-station="${name}">${name}</button>`)
+      .join("");
+
+  const regionNames = [...Object.keys(KORAIL_REGION_STATIONS), "전체"];
+
+  const showRegion = (region) => {
+    regionChips.querySelectorAll(".region-chip").forEach((chip) => {
+      chip.classList.toggle("is-active", chip.dataset.region === region);
+    });
+    const names = region === "전체" ? KORAIL_ALL_STATIONS : KORAIL_REGION_STATIONS[region];
+    regionGrid.innerHTML = stationButtons(names);
+    regionGrid.scrollTop = 0;
+  };
+
+  if (majorGrid) {
+    majorGrid.innerHTML = stationButtons(KORAIL_MAJOR_STATIONS);
+    regionChips.innerHTML = regionNames
+      .map((region) => `<button type="button" class="region-chip" data-region="${region}">${region}</button>`)
+      .join("");
+    showRegion("서울");
+  }
+
+  // 주요역 / 지역별 탭
+  const showStationTab = (tab) => {
+    stationTabs.forEach((btn) => {
+      const active = btn.dataset.tab === tab;
+      btn.classList.toggle("is-active", active);
+      btn.setAttribute("aria-selected", String(active));
+    });
+    document.getElementById("station-panel-major").hidden = tab !== "major";
+    document.getElementById("station-panel-region").hidden = tab !== "region";
+  };
+
+  // 초성 검색: "서울" → "ㅅㅇ"
+  const CHOSUNG = "ㄱㄲㄴㄷㄸㄹㅁㅂㅃㅅㅆㅇㅈㅉㅊㅋㅌㅍㅎ";
+  const toChosung = (text) =>
+    [...text]
+      .map((ch) => {
+        const code = ch.charCodeAt(0) - 0xac00;
+        return code >= 0 && code <= 11171 ? CHOSUNG[Math.floor(code / 588)] : ch;
+      })
+      .join("");
+  const isChosungOnly = (text) => [...text].every((ch) => CHOSUNG.includes(ch));
+
+  const searchStations = (query) => {
+    const q = query.replace(/\s/g, "");
+    if (!q) return [];
+    return KORAIL_ALL_STATIONS.filter((name) =>
+      isChosungOnly(q) ? toChosung(name).includes(q) : name.includes(q)
+    );
+  };
+
+  // 검색어가 있으면 결과만, 없으면 탭 화면
+  const updateStationSearch = () => {
+    const query = stationInput.value.trim();
+    const hasQuery = query.length > 0;
+    resultsBox.hidden = !hasQuery;
+    tabsWrap.hidden = hasQuery;
+    if (!hasQuery) return;
+
+    const found = searchStations(query);
+    resultsTitle.textContent = found.length ? `검색 결과 ${found.length}개` : "검색 결과가 없어요. 역 이름을 다시 확인해 주세요.";
+    resultsGrid.innerHTML = stationButtons(found);
+  };
+
+  // 다음에 열 때 처음 화면(빈 검색창, 주요역 탭)으로
+  const resetStationDialog = () => {
+    stationInput.value = "";
+    updateStationSearch();
+    showStationTab("major");
+  };
+
+  // 역 하나 고르기
+  const selectStation = (name) => {
+    if (currentTargetStationEl) {
+      currentTargetStationEl.textContent = name;
+    }
+    resetStationDialog();
+    stationDialog.close();
+  };
+
+  if (stationDialog) {
+    // 역 버튼, 지역 버튼, 탭 클릭을 모달 한 곳에서 받음 (버튼이 다시 그려져도 동작)
+    stationDialog.addEventListener("click", (e) => {
+      const stationBtn = e.target.closest(".station-chip");
+      if (stationBtn) {
+        selectStation(stationBtn.dataset.station);
+        return;
+      }
+      const regionBtn = e.target.closest(".region-chip");
+      if (regionBtn) {
+        showRegion(regionBtn.dataset.region);
+        return;
+      }
+      const tabBtn = e.target.closest(".station-tab");
+      if (tabBtn) {
+        showStationTab(tabBtn.dataset.tab);
+      }
+    });
+
+    // 모달이 닫히면 다음에 열 때 처음 화면으로
+    stationDialog.addEventListener("close", () => {
+      if (!stationDialog.open) resetStationDialog(); // 이미 다시 열렸으면 건드리지 않음
+    });
+  }
+
+  // 입력칸에 쓰거나 [선택]을 누르면: 정확히 같은 역이 있거나 결과가 하나뿐일 때만 적용
   const applyCustomStation = () => {
-    const val = stationInput.value.trim();
-    if (val && currentTargetStationEl) {
-      currentTargetStationEl.textContent = val;
-      stationDialog.close();
+    const query = stationInput.value.trim();
+    if (!query) return;
+    const found = searchStations(query);
+    const exact = KORAIL_ALL_STATIONS.find((name) => name === query);
+    if (exact || found.length === 1) {
+      selectStation(exact || found[0]);
+    } else {
+      updateStationSearch(); // 여러 개면 목록에서 고르게
     }
   };
 
-  if (stationSearchApply) {
-    stationSearchApply.addEventListener("click", applyCustomStation);
-  }
   if (stationInput) {
+    stationInput.addEventListener("input", updateStationSearch);
     stationInput.addEventListener("keydown", (e) => {
       if (e.key === "Enter") {
         e.preventDefault();
         applyCustomStation();
       }
     });
+  }
+  if (stationSearchApply) {
+    stationSearchApply.addEventListener("click", applyCustomStation);
   }
 
   // ----------------------------------------------------
@@ -562,7 +673,7 @@ document.addEventListener("DOMContentLoaded", () => {
       };
       if (stationDialog) {
         stationDialogTitle.textContent = "출발역 선택";
-        stationInput.placeholder = "출발역 입력 (예: 서울, 대전)";
+        stationInput.placeholder = "출발역 이름 또는 초성 (예: 서울, ㅅㅇ)";
         stationInput.value = "";
         stationDialog.showModal();
         stationInput.focus();
@@ -578,7 +689,7 @@ document.addEventListener("DOMContentLoaded", () => {
       };
       if (stationDialog) {
         stationDialogTitle.textContent = "도착역 선택";
-        stationInput.placeholder = "도착역 입력 (예: 부산, 동대구)";
+        stationInput.placeholder = "도착역 이름 또는 초성 (예: 부산, ㅂㅅ)";
         stationInput.value = "";
         stationDialog.showModal();
         stationInput.focus();
