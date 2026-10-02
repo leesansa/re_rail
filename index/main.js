@@ -244,6 +244,14 @@ document.addEventListener("DOMContentLoaded", () => {
   if (stationDialog) {
     // 역 버튼, 지역 버튼, 탭 클릭을 모달 한 곳에서 받음 (버튼이 다시 그려져도 동작)
     stationDialog.addEventListener("click", (e) => {
+      // 실제 모달 영역 밖을 클릭한 경우만 닫습니다.
+      if (e.target === stationDialog) {
+        const bounds = stationDialog.getBoundingClientRect();
+        const outside = e.clientX < bounds.left || e.clientX > bounds.right ||
+          e.clientY < bounds.top || e.clientY > bounds.bottom;
+        if (outside) stationDialog.close();
+        return;
+      }
       const stationBtn = e.target.closest(".station-chip");
       if (stationBtn) {
         selectStation(stationBtn.dataset.station);
