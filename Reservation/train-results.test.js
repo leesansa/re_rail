@@ -13,6 +13,7 @@ test("배열에서 열차 카드와 예약 버튼을 처음 렌더링한다", ()
     ".selected-date": { dateTime: "2026-10-21T00:00:00+09:00" },
   };
   const context = vm.createContext({
+    window: { location: { search: "" } }, URLSearchParams,
     document: {
       querySelector: (selector) => elements[selector] ?? null,
       querySelectorAll: () => [],
@@ -59,6 +60,7 @@ test("달력에서 고른 출발일과 시간이 표시 및 열차 카드에 바
     ".next-date": button(),
   };
   const context = vm.createContext({
+    window: { location: { search: "" } }, URLSearchParams,
     document: {
       querySelector: (selector) => elements[selector] ?? null,
       querySelectorAll: () => [],
@@ -78,7 +80,7 @@ test("달력에서 고른 출발일과 시간이 표시 및 열차 카드에 바
   });
 
   assert.equal(date.dateTime, "2026-11-02T18:00:00+09:00");
-  assert.equal(date.textContent, "2026-11-02-(월) 18:00");
+  assert.equal(date.textContent, "11-02-(월) 18:00");
   assert.match(
     elements[".train-list"].innerHTML,
     /datetime="2026-11-02T05:13:00\+09:00"/,

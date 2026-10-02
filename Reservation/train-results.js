@@ -165,6 +165,9 @@ if (
 const previousDateButton = document.querySelector(".previous-date");
 const nextDateButton = document.querySelector(".next-date");
 const selectedDateTime = document.querySelector(".selected-date");
+const previousDatePreview = document.querySelector(".previous-date-preview");
+const nextDatePreview = document.querySelector(".next-date-preview");
+const dateStrip = document.querySelector(".date-strip");
 
 if (previousDateButton && nextDateButton && selectedDateTime) {
   const weekdays = ["일", "월", "화", "수", "목", "금", "토"];
@@ -173,31 +176,58 @@ if (previousDateButton && nextDateButton && selectedDateTime) {
   const selectedDate = new Date(Date.UTC(year, month - 1, day));
   let selectedHour = Number(selectedDateTime.dateTime.slice(11, 13)) || 0;
 
-  const updateSelectedDate = () => {
+  const dateLabel = (date) => date.toISOString().slice(5, 10) + "-(" + weekdays[date.getUTCDay()] + ")";
+
+  // 양옆 날짜도 같은 시간으로 갱신하며 월·연도·윤년 경계는 UTC 날짜 계산을 사용합니다.
+  const updatePreview = (element, offset, time) => {
+    if (!element) return;
+    const date = new Date(selectedDate);
+    date.setUTCDate(date.getUTCDate() + offset);
+    element.dateTime = `${date.toISOString().slice(0, 10)}T${time}:00+09:00`;
+    element.querySelector(".date-preview-day").textContent = dateLabel(date);
+    element.querySelector(".date-preview-hour").textContent = " " + time;
+  };
+
+  // CSS에 정의한 슬라이드를 다시 시작해 연속 클릭에도 마지막 날짜와 방향을 유지합니다.
+  const slideDates = (direction) => {
+    if (!dateStrip) return;
+    dateStrip.classList.remove("is-sliding-next", "is-sliding-previous");
+    if (!direction) return;
+    void dateStrip.offsetWidth;
+    dateStrip.classList.add(direction > 0 ? "is-sliding-next" : "is-sliding-previous");
+  };
+
+  const updateSelectedDate = (direction = 0, refreshTrains = true) => {
     const date = selectedDate.toISOString().slice(0, 10);
     const time = `${String(selectedHour).padStart(2, "0")}:00`;
     selectedDateTime.dateTime = `${date}T${time}:00+09:00`;
-    selectedDateTime.textContent =
-      date + "-(" + weekdays[selectedDate.getUTCDay()] + ") " + time;
-    renderTrains();
+    selectedDateTime.textContent = dateLabel(selectedDate) + " " + time;
+    updatePreview(previousDatePreview, -1, time);
+    updatePreview(nextDatePreview, 1, time);
+    slideDates(direction);
+    if (refreshTrains) renderTrains();
   };
+
+  // 첫 표시에는 애니메이션이나 중복 열차 조회 없이 세 날짜를 동기화합니다.
+  updateSelectedDate(0, false);
 
   // 추가: 달력에서 출발 날짜를 누르면 표시와 열차 카드 날짜를 즉시 갱신합니다.
   selectedDateTime.addEventListener("korail:date-selected", (event) => {
     const { year, month, day, hour } = event.detail;
+    const direction = Math.sign(Date.UTC(year, month - 1, day) - selectedDate.getTime());
     selectedDate.setTime(Date.UTC(year, month - 1, day));
     selectedHour = hour;
-    updateSelectedDate();
+    updateSelectedDate(direction);
   });
 
   previousDateButton.addEventListener("click", () => {
     selectedDate.setUTCDate(selectedDate.getUTCDate() - 1);
-    updateSelectedDate();
+    updateSelectedDate(-1);
   });
 
   nextDateButton.addEventListener("click", () => {
     selectedDate.setUTCDate(selectedDate.getUTCDate() + 1);
-    updateSelectedDate();
+    updateSelectedDate(1);
   });
 }
 

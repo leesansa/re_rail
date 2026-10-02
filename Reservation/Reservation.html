@@ -89,9 +89,15 @@
               ><img src="assets/아이콘_예매상새2.svg" alt=""
             /></span>
           </button>
-          <time class="selected-date" datetime="2026-10-21T00:00:00+09:00"
-            >2026-10-21-(수) 00:00</time
-          >
+          <!-- 날짜 띠: Figma의 회색 전날 → 검은 선택 날짜 → 회색 다음날 순서 -->
+          <div class="date-strip">
+            <!-- 전날 미리보기: 날짜와 시간은 선택 날짜에 맞춰 함께 갱신 -->
+            <time class="date-slot date-preview previous-date-preview" datetime="2026-10-20T00:00:00+09:00" aria-hidden="true"><span class="date-preview-day">10-20-(화)</span><span class="date-preview-hour"> 00:00</span></time>
+            <!-- 선택 날짜: 달력 팝업과 기존 스크립트가 참조하는 time 요소 유지 -->
+            <time class="date-slot selected-date" datetime="2026-10-21T00:00:00+09:00" aria-live="polite" aria-atomic="true">10-21-(수) 00:00</time>
+            <!-- 다음날 미리보기: 작은 화면에서는 시간만 숨겨 날짜 세 개를 유지 -->
+            <time class="date-slot date-preview next-date-preview" datetime="2026-10-22T00:00:00+09:00" aria-hidden="true"><span class="date-preview-day">10-22-(목)</span><span class="date-preview-hour"> 00:00</span></time>
+          </div>
           <!-- 달력 아이콘 -->
           <button
             class="date-button calendar-button"

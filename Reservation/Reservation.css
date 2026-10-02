@@ -188,13 +188,14 @@ img {
   padding-bottom: 32px;
 }
 
-/* 03. 날짜 선택: 이전 화살표 → 날짜 → 달력 → 다음 화살표 */
+/* 03. 날짜 선택: 이전 화살표 → 전날·선택 날짜·다음날 → 원본 달력 → 다음 화살표 */
 .date-navigation {
+  position: relative;
   width: 1058px;
   height: 68px;
   margin-left: 7px;
   display: grid;
-  grid-template-columns: 68px 172px 362px 172px 50px 172px 62px;
+  grid-template-columns: 68px minmax(0, 1fr) 62px;
   align-items: center;
 }
 
@@ -208,19 +209,60 @@ img {
 
 .previous-date {
   grid-column: 1;
+  align-self: start;
 }
+/* 날짜 띠: 원본 전날 x=76, 다음날 오른쪽 x=974와 중앙 정렬을 맞춥니다. */
+.date-strip {
+  grid-column: 2;
+  align-self: start;
+  height: 56px;
+  min-width: 0;
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  align-items: center;
+  padding: 0 22px 0 8px;
+  overflow: hidden;
+}
+.date-slot { display: block; white-space: nowrap; }
+/* 양옆 날짜: Figma 36:260·36:261의 22px Korail B, 회색 #8e8e8e */
+.date-preview { color: #8e8e8e; font-size: 22px; font-weight: 700; line-height: 26px; }
+.previous-date-preview { text-align: left; }
+.next-date-preview { text-align: right; }
 .selected-date {
-  grid-column: 3;
-  font-size: 33px;
+  margin-right: 10px;
+  color: #000;
+  text-align: center;
+  font-size: 30px;
   font-weight: 700;
-  line-height: 39px;
+  line-height: 35px;
   white-space: nowrap;
 }
 .calendar-button {
-  grid-column: 5;
+  position: absolute;
+  z-index: 1;
+  top: 0;
+  left: calc(50% + 121px);
 }
 .next-date {
-  grid-column: 7;
+  grid-column: 3;
+  align-self: start;
+}
+
+/* 날짜 이동: 새 날짜가 이동 방향에 맞춰 한 칸씩 들어오며 중앙에 정착합니다. */
+.date-strip.is-sliding-next .date-slot { animation: date-slide-next 280ms cubic-bezier(0.22, 1, 0.36, 1) both; }
+.date-strip.is-sliding-previous .date-slot { animation: date-slide-previous 280ms cubic-bezier(0.22, 1, 0.36, 1) both; }
+@keyframes date-slide-next {
+  from { transform: translateX(100%); opacity: 0.35; }
+  to { transform: translateX(0); opacity: 1; }
+}
+@keyframes date-slide-previous {
+  from { transform: translateX(-100%); opacity: 0.35; }
+  to { transform: translateX(0); opacity: 1; }
+}
+/* 움직임을 줄이는 설정에서는 날짜 값만 즉시 갱신합니다. */
+@media (prefers-reduced-motion: reduce) {
+  .date-strip.is-sliding-next .date-slot,
+  .date-strip.is-sliding-previous .date-slot { animation: none; }
 }
 
 /* SVG의 width/height는 수정하지 않고 감싸는 영역에서 원본의 표시 배율을 적용합니다. */
@@ -239,8 +281,8 @@ img {
   height: 62px;
 }
 .calendar-icon {
-  width: 50px;
-  height: 50px;
+  width: 45px;
+  height: 45px;
 }
 .previous-icon img {
   transform: scale(calc(68 / 96));
@@ -251,7 +293,7 @@ img {
   transform-origin: top left;
 }
 .calendar-icon img {
-  transform: scale(calc(50 / 24));
+  transform: scale(calc(45 / 24));
   transform-origin: top left;
 }
 
@@ -614,18 +656,15 @@ img {
   .date-navigation {
     width: 100%;
     margin-left: 0;
-    grid-template-columns: 68px 1fr 50px 62px;
-    column-gap: 8px;
+    grid-template-columns: 68px minmax(0, 1fr) 62px;
   }
+  .date-strip { padding-right: 8px; }
+  .date-preview { font-size: clamp(12px, 1.9vw, 22px); }
   .selected-date {
-    grid-column: 2;
-    text-align: center;
+    font-size: clamp(19px, 2.7vw, 30px);
   }
   .calendar-button {
-    grid-column: 3;
-  }
-  .next-date {
-    grid-column: 4;
+    left: calc(50% + clamp(92px, 11vw, 121px));
   }
   .route-selection {
     grid-template-columns: minmax(0, 1fr) 58px minmax(0, 1fr) 14px 170px;
@@ -633,6 +672,25 @@ img {
   .train-results {
     padding-bottom: 10px;
   }
+}
+
+/* 날짜 띠는 700px부터 달력을 아래로 내려 양옆 날짜와의 겹침을 방지합니다. */
+@media (max-width: 700px) {
+  .date-navigation {
+    height: 92px;
+    grid-template-columns: 32px minmax(0, 1fr) 32px;
+    column-gap: 2px;
+  }
+  .date-strip { grid-template-columns: 1fr 2.1fr 1fr; padding: 0 2px; }
+  .date-preview { font-size: clamp(10px, 2.9vw, 14px); line-height: 20px; }
+  .date-preview-hour { display: none; }
+  .selected-date { margin-right: 0; font-size: clamp(13px, 4vw, 19px); line-height: 28px; }
+  .previous-date, .next-date { margin-top: 12px; }
+  .calendar-button { top: auto; bottom: 4px; left: 50%; transform: translateX(-50%); }
+  .previous-icon, .next-icon { width: 32px; height: 32px; }
+  .previous-icon img, .next-icon img { transform: scale(calc(32 / 96)); }
+  .calendar-icon { width: 30px; height: 30px; }
+  .calendar-icon img { transform: scale(calc(30 / 24)); }
 }
 
 @media (max-width: 640px) {
@@ -676,31 +734,6 @@ img {
   }
   .reservation-content {
     margin-top: 18px;
-  }
-  .date-navigation {
-    height: 62px;
-    grid-template-columns: 32px minmax(0, 1fr) 30px 32px;
-    column-gap: 2px;
-  }
-  .selected-date {
-    font-size: clamp(15px, 4.5vw, 19px);
-    line-height: 28px;
-  }
-  .previous-icon,
-  .next-icon {
-    width: 32px;
-    height: 32px;
-  }
-  .previous-icon img,
-  .next-icon img {
-    transform: scale(calc(32 / 96));
-  }
-  .calendar-icon {
-    width: 30px;
-    height: 30px;
-  }
-  .calendar-icon img {
-    transform: scale(calc(30 / 24));
   }
   .route-selection {
     height: auto;
