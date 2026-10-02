@@ -387,6 +387,13 @@ document.addEventListener("DOMContentLoaded", () => {
   const getDaysInMonth = (year, month) => new Date(year, month, 0).getDate();
   const getFirstDayOfWeek = (year, month) => new Date(year, month - 1, 1).getDay();
 
+  const calendarDateValue = (date) => Date.UTC(date.year, date.month - 1, date.day);
+  const normalizeReturnDate = () => {
+    if (calendarDateValue(selectedArr) < calendarDateValue(selectedDep)) {
+      selectedArr = { ...selectedDep, hour: selectedArr.hour };
+    }
+  };
+
   const renderSingleMonth = (container, headingEl, year, month) => {
     if (!container || !headingEl) return;
     headingEl.textContent = `${year}. ${String(month).padStart(2, "0")}.`;
@@ -427,7 +434,14 @@ document.addEventListener("DOMContentLoaded", () => {
         cell.innerHTML = `<span class="cell-num">${day}</span>`;
       }
 
-      cell.addEventListener("click", () => handleDateClick(year, month, day, dayNames[dayOfWeek]));
+      const unavailableReturn = calTripMode === "round" && selectStep === 1 &&
+        calendarDateValue({ year, month, day }) < calendarDateValue(selectedDep);
+      if (unavailableReturn) {
+        cell.classList.add("unavailable-return");
+        cell.setAttribute("aria-disabled", "true");
+      } else {
+        cell.addEventListener("click", () => handleDateClick(year, month, day, dayNames[dayOfWeek]));
+      }
       container.appendChild(cell);
     }
   };
@@ -463,8 +477,10 @@ document.addEventListener("DOMContentLoaded", () => {
     } else {
       if (selectStep === 0) {
         selectedDep = { year, month, day, dayName, hour: hourVal };
+        normalizeReturnDate();
         selectStep = 1;
       } else {
+        if (calendarDateValue({ year, month, day }) < calendarDateValue(selectedDep)) return;
         selectedArr = { year, month, day, dayName, hour: parseInt(calArrHour.value, 10) || 18 };
         selectStep = 0;
       }
@@ -480,6 +496,8 @@ document.addEventListener("DOMContentLoaded", () => {
       calTripMode = tab.dataset.calTrip;
 
       if (calTripMode === "round") {
+        normalizeReturnDate();
+        updateCardDisplay();
         calArrCard?.classList.remove("disabled");
         if (calArrHour) calArrHour.disabled = false;
         selectStep = 1;
@@ -599,6 +617,10 @@ document.addEventListener("DOMContentLoaded", () => {
   // [검색하기] 버튼 클릭 시 메인 화면 텍스트 반영
   if (calSearchConfirmBtn) {
     calSearchConfirmBtn.addEventListener("click", () => {
+      if (calTripMode === "round" && calendarDateValue(selectedArr) < calendarDateValue(selectedDep)) {
+        alert("도착일은 출발일과 같거나 이후 날짜로 선택해 주세요.");
+        return;
+      }
       savedPeople = [...draftPeople];
       state.passengers = peopleTotal();
       travelPassengersText.textContent = `${state.passengers}인`;
@@ -646,6 +668,11 @@ document.addEventListener("DOMContentLoaded", () => {
   if (travelForm) {
     travelForm.addEventListener("submit", (e) => {
       e.preventDefault();
+      if (currentTripType === "round" && inputArrDate.value && inputDepDate.value && inputArrDate.value < inputDepDate.value) {
+        alert("도착일은 출발일과 같거나 이후 날짜로 선택해 주세요.");
+        inputArrDate.focus();
+        return;
+      }
       state.depDate = inputDepDate.value || "2026-09-29";
       state.arrDate = inputArrDate.value || "2026-10-21";
       state.passengers = parseInt(inputPassengerCount.value, 10) || 1;

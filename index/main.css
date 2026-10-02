@@ -1640,3 +1640,11 @@ button {
 }
 .popup-close-icon::before { transform: translate(-50%, -50%) rotate(45deg); }
 .popup-close-icon::after { transform: translate(-50%, -50%) rotate(-45deg); }
+
+/* 도착일 선택 시 출발일 이전 날짜는 선택할 수 없습니다. */
+.cal-day-cell.unavailable-return,
+.cal-day-cell.unavailable-return:hover {
+  color: #b8bdc5;
+  background-color: #f7f8fa;
+  cursor: not-allowed;
+}
