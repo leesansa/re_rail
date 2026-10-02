@@ -1135,9 +1135,7 @@ button {
   transform: scale(1.1);
 }
 
-.cal-close-btn img {
-  display: block;
-}
+
 
 /* 선택 날짜 및 시간 카드 (2컬럼) */
 .cal-time-row {
@@ -1591,3 +1589,54 @@ button {
 .people-limit { font-size: 12px; color: #788797; margin-top: 6px; text-align: right; }
 .people-panel button:focus-visible { outline: 2px solid #18468b; outline-offset: 3px; }
 @media (max-width: 1000px) { .cal-selection-layout { grid-template-columns: 1fr; } .people-panel { border-left: 0; border-top: 1px solid #e0e3e7; padding: 16px 0 0; } }
+
+/* 역 선택과 날짜/인원 팝업에 공통으로 사용하는 닫기 버튼 */
+.dialog-close-btn,
+.cal-close-btn {
+  position: relative;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 36px;
+  height: 36px;
+  padding: 0;
+  flex-shrink: 0;
+  border: 0;
+  border-radius: 4px;
+  background: transparent;
+  color: #333;
+  cursor: pointer;
+  line-height: 1;
+  transition: background-color 0.15s ease;
+}
+.dialog-close-btn:hover,
+.cal-close-btn:hover {
+  color: #111;
+  background-color: #f2f4f6;
+  transform: none;
+}
+.dialog-close-btn:focus-visible,
+.cal-close-btn:focus-visible {
+  outline: 2px solid #18468b;
+  outline-offset: 2px;
+}
+.popup-close-icon {
+  position: relative;
+  display: block;
+  width: 24px;
+  height: 24px;
+  pointer-events: none;
+}
+.popup-close-icon::before,
+.popup-close-icon::after {
+  content: "";
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  width: 28px;
+  height: 2px;
+  border-radius: 1px;
+  background-color: currentColor;
+}
+.popup-close-icon::before { transform: translate(-50%, -50%) rotate(45deg); }
+.popup-close-icon::after { transform: translate(-50%, -50%) rotate(-45deg); }
