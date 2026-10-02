@@ -1,0 +1,71 @@
+<!doctype html>
+<html lang="ko">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="description" content="코레일 리디자인 과제용 레츠코레일 시안 페이지입니다." />
+    <title>레츠코레일 | 리디자인 시안</title>
+    <link rel="stylesheet" href="site.css" />
+  </head>
+  <body>
+    <!-- 01. 헤더: 로고 + 사이트 이름 + 챗봇으로 돌아가기 -->
+    <header class="site-header">
+      <div class="brand">
+        <img class="brand-logo" src="korail-logo.png" alt="KORAIL" />
+        <h1 class="site-name">레츠코레일<small>리디자인 시안</small></h1>
+      </div>
+      <a class="back-link" href="../index.html">
+        <span>챗봇으로 돌아가기</span>
+        <span class="back-icon" aria-hidden="true"><svg viewBox="0 0 12 12"><path d="M9 1.5v9L2 6z" /></svg></span>
+      </a>
+    </header>
+
+    <!-- 02. 대표 영역 -->
+    <section class="hero">
+      <h2>승차권 예매는 레츠코레일에서</h2>
+      <p>열차 승차권 예매와 조회, 할인승차권, 정기승차권 등 승차권과 관련된 서비스를 제공합니다.</p>
+    </section>
+
+    <!-- 03. 주요 메뉴: 카드를 누르면 아래에 상세 안내 표시 (site.js) -->
+    <main class="content">
+      <h3>주요 메뉴</h3>
+      <ul class="card-grid">
+          <li>
+            <button class="card" type="button" data-title="승차권 예매" data-detail="원하는 열차와 좌석을 선택해 승차권을 예매합니다.
+열차 출발 2개월 전 오전 7시부터 구매할 수 있습니다.">
+              <strong>승차권 예매</strong>
+              <span>일반 승차권</span>
+            </button>
+          </li>
+          <li>
+            <button class="card" type="button" data-title="예약 승차권 조회" data-detail="예매한 승차권을 조회하고 변경하거나 환불할 수 있습니다.
+환불 시점에 따라 위약금이 발생할 수 있습니다.">
+              <strong>예약 승차권 조회</strong>
+              <span>조회·변경·환불</span>
+            </button>
+          </li>
+          <li>
+            <button class="card" type="button" data-title="할인승차권" data-detail="청소년, 청년, 경로, 다자녀 등 다양한 할인제도를 안내합니다.">
+              <strong>할인승차권</strong>
+              <span>다양한 할인제도</span>
+            </button>
+          </li>
+          <li>
+            <button class="card" type="button" data-title="정기승차권" data-detail="자주 이용하는 구간을 정해진 기간 동안 이용할 수 있는 정기승차권을 안내합니다.">
+              <strong>정기승차권</strong>
+              <span>출퇴근·통학용</span>
+            </button>
+          </li>
+      </ul>
+      <div class="detail" id="detail" aria-live="polite" hidden></div>
+    </main>
+
+    <!-- 04. 푸터 -->
+    <footer class="site-footer">
+      <p class="notice">※ 이 페이지는 코레일 리디자인 과제용 시안이며, 실제 레츠코레일 사이트가 아닙니다.</p>
+      <p>COPYRIGHT(C) KOREA RAILROAD. ALL RIGHTS RESERVED.</p>
+    </footer>
+
+    <script src="site.js"></script>
+  </body>
+</html>

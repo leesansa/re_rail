@@ -1,142 +1,31 @@
 // 코레일 챗봇 화면 동작
+// 01. 기본 동작: 전체메뉴 토글 / 관련 사이트 드롭다운
 (() => {
   const body = document.body;
-  const form = document.getElementById("chat-form");
-  const input = document.getElementById("chat-input");
-  const log = document.getElementById("chat-log");
 
-  // 01. 질문별 답변 (정적 시안용 샘플 데이터)
-  const answers = [
-    {
-      keys: ["faq", "자주"],
-      text: "자주 찾는 질문입니다.\n· 승차권 환불 수수료\n· 정기승차권 이용 방법\n· 열차 지연 보상\n궁금한 항목을 입력해 주세요.",
-    },
-    {
-      keys: ["상담내역"],
-      text: "로그인 후 마이페이지에서 지난 상담내역을 확인하실 수 있습니다.",
-    },
-    {
-      keys: ["저장된", "대화 목록"],
-      text: "저장된 대화가 없습니다. 대화 중 저장한 내용이 이곳에 표시됩니다.",
-    },
-    {
-      keys: ["정기승차권"],
-      text: "정기승차권은 이용 시작일 5일 전부터 구매할 수 있으며, 유효기간 내 남은 기간에 따라 환불됩니다.",
-    },
-    {
-      keys: ["환불", "분실", "구매", "승차권"],
-      text: "승차권은 홈페이지·코레일톡·역 창구에서 구매할 수 있습니다.\n환불은 출발 시각 전후에 따라 수수료가 달라지며, 분실 시 역 창구에서 재발행 신청이 가능합니다.",
-    },
-    {
-      keys: ["장바구니", "전달"],
-      text: "장바구니에 담은 승차권은 결제 기한 내에 결제해야 하며, 결제한 승차권은 '전달하기'로 동행인에게 보낼 수 있습니다.",
-    },
-    {
-      keys: ["지연", "운행중지"],
-      text: "열차가 20분 이상 지연되면 지연 시간에 따라 운임의 일부를 보상해 드립니다. 운행중지 시 전액 환불됩니다.",
-    },
-    {
-      keys: ["부가운임"],
-      text: "승차권 없이 승차하거나 부정 승차한 경우 기준 운임 외에 부가운임이 부과됩니다.",
-    },
-    {
-      keys: ["기념입장권"],
-      text: "기념입장권은 지정된 역에서 판매하며, 승강장 입장 및 기념 소장용으로 이용하실 수 있습니다.",
-    },
-    {
-      keys: ["테마", "여행"],
-      text: "테마열차여행 상품을 안내해 드립니다. 관광열차, 계절 한정 상품 등을 레츠코레일 여행 메뉴에서 확인하세요.",
-    },
-    {
-      keys: ["고객센터", "전화", "1544"],
-      text: "철도고객센터 1544-7788 / 1588-7788 로 문의해 주세요.\n(시안 버튼 표기 번호: 1544-8787)",
-    },
-    {
-      keys: ["교통", "편의", "시설"],
-      text: "역 주변 버스·택시 승강장, 주차장, 렌터카 등 지역 교통 편의 시설 정보를 역별로 안내해 드립니다.",
-    },
-    {
-      keys: ["마일리지", "할인"],
-      text: "KTX 마일리지는 결제 금액의 일부가 적립되며, 청소년·경로·다자녀 등 다양한 할인 혜택이 있습니다.",
-    },
-    {
-      keys: ["안녕", "hi", "hello"],
-      text: "안녕하세요! 코레일 챗봇입니다. 무엇을 도와드릴까요?",
-    },
-  ];
-
-  const fallback =
-    "죄송합니다. 질문을 이해하지 못했어요.\n왼쪽 메뉴나 추천 질문을 선택하시거나 철도고객센터로 문의해 주세요.";
-
-  const findAnswer = (question) => {
-    const q = question.toLowerCase();
-    const hit = answers.find((item) =>
-      item.keys.some((key) => q.includes(key)),
-    );
-    return hit ? hit.text : fallback;
-  };
-
-  // 02. 메시지 출력
-  const addMessage = (text, who) => {
-    const el = document.createElement("p");
-    el.className = `message ${who}`;
-    el.textContent = text;
-    log.appendChild(el);
-    log.scrollTop = log.scrollHeight;
-    return el;
-  };
-
-  const ask = (question) => {
-    const text = question.trim();
-    if (!text) return;
-
-    log.hidden = false;
-    body.classList.add("chatting");
-    addMessage(text, "user");
-
-    const typing = addMessage("답변을 준비하고 있어요…", "bot typing");
-    setTimeout(() => {
-      typing.classList.remove("typing");
-      typing.textContent = findAnswer(text);
-      log.scrollTop = log.scrollHeight;
-    }, 500);
-  };
-
-  form.addEventListener("submit", (e) => {
-    e.preventDefault();
-    ask(input.value);
-    input.value = "";
-    input.focus();
-  });
-
-  // 03. 좌측 메뉴·추천 질문 클릭 → 질문 전송
-  document.querySelectorAll("[data-question]").forEach((btn) => {
-    btn.addEventListener("click", () => ask(btn.dataset.question));
-  });
-
-  // 04. 전체메뉴 토글
+  // 01-1. 전체메뉴 토글
+  // - 페이지를 열면 왼쪽 메뉴가 접힌 상태로 시작하고, [전체메뉴]를 누를 때마다 펼치기/접기
   const menuToggle = document.querySelector(".menu-toggle");
-  if (window.matchMedia("(max-width: 768px)").matches) {
-    body.classList.add("menu-closed");
-    menuToggle.setAttribute("aria-expanded", "false");
-  }
+  const sideMenu = document.getElementById("side-menu");
+
+  // 처음 접힐 때 슬라이드 애니메이션이 보이지 않도록 잠깐 transition 끄기
+  sideMenu.style.transition = "none";
+  body.classList.add("menu-closed");
+  menuToggle.setAttribute("aria-expanded", "false");
+  requestAnimationFrame(() => {
+    requestAnimationFrame(() => {
+      sideMenu.style.transition = ""; // 이후 클릭부터는 원래 애니메이션 사용
+    });
+  });
+
   menuToggle.addEventListener("click", () => {
     const closed = body.classList.toggle("menu-closed");
     menuToggle.setAttribute("aria-expanded", String(!closed));
   });
 
-  // 05. 홈: 대화 초기화
-  document
-    .querySelector('[data-action="home"]')
-    .addEventListener("click", (e) => {
-      e.preventDefault();
-      log.innerHTML = "";
-      log.hidden = true;
-      body.classList.remove("chatting");
-      input.value = "";
-    });
+  // 01-2. 홈: index.html의 링크(../index/main.html)로 바로 이동 (JS 처리 없음)
 
-  // 06. 관련 사이트 드롭다운
+  // 01-3. 관련 사이트 드롭다운 (링크는 index.html에서 related-sites 폴더 페이지로 연결)
   const relatedToggle = document.querySelector(".related-toggle");
   const relatedList = document.getElementById("related-list");
   relatedToggle.addEventListener("click", (e) => {
@@ -152,18 +41,15 @@
 })();
 
 /* =====================================================================
- * [추가] FAQ 검색 챗봇 (faq-data.js 연동)
+ * 02. FAQ 검색 챗봇 + 답변 박스 (faq-data.js 연동)
  * ---------------------------------------------------------------------
- * - 위쪽 기존 코드는 수정하지 않고, 이 블록만 추가했습니다.
  * - 질문 입력창(#chat-form)에 입력한 내용으로 korailFaq 배열을 검색해
  *   가장 비슷한 FAQ를 입력창 아래 "답변 박스(#answer-box)"에 보여줍니다.
+ * - 왼쪽 전체메뉴·추천 버튼 4개·하단바 메뉴 6개도 같은 답변 박스를 사용합니다.
  * - 답변이 나오면 추천 버튼 4개(#quick-list)는 숨기고, [돌아가기]로 복귀합니다.
- * - 기존 submit 동작(샘플 답변)과 겹치지 않도록, 문서 단계(capture)에서
- *   먼저 submit을 가로채 FAQ 검색으로 처리합니다.
- * - 왼쪽 메뉴·추천 버튼(data-question)은 기존 동작을 그대로 유지합니다.
  * ===================================================================== */
 (() => {
-  // faq-data.js가 연결되지 않았으면 기존 동작만 사용
+  // faq-data.js가 연결되지 않았으면 검색 기능은 사용하지 않음
   if (typeof korailFaq === "undefined") return;
 
   const form = document.getElementById("chat-form");
@@ -337,27 +223,21 @@
     showAnswer(results[0].item, related);
   };
 
-  // 05. 질문 입력창 연결 (기존 submit보다 먼저 실행)
-  document.addEventListener(
-    "submit",
-    (e) => {
-      if (e.target !== form) return;
-      e.preventDefault();
-      e.stopPropagation(); // 기존 샘플 답변 코드가 실행되지 않도록 막음
-      answerQuery(input.value);
-      input.value = "";
-      input.focus();
-    },
-    true,
-  );
+  // 05. 질문 입력창 연결
+  form.addEventListener("submit", (e) => {
+    e.preventDefault();
+    answerQuery(input.value);
+    input.value = "";
+    input.focus();
+  });
 
   /* -------------------------------------------------------------------
-   * 06. [추가] 왼쪽 전체메뉴 → 답변 박스로 연결
-   * - 메뉴를 누르면 기존 샘플 답변(말풍선) 대신 답변 박스에 내용을 보여줍니다.
+   * 06. 왼쪽 전체메뉴 + 추천 버튼 4개 + 하단바 메뉴 6개 → 답변 박스로 연결
+   * - 메뉴 이름(버튼의 data-question, 링크 글자)으로 아래 menuAnswers에서 내용을 찾습니다.
    * - faqIds: faq-data.js의 id 목록 → 질문 버튼으로 보여주고, 누르면 답변 표시
    * - text: FAQ에 없는 메뉴(상담내역 등)는 안내 문구만 표시
    * ------------------------------------------------------------------- */
-  const sideMenuAnswers = {
+  const menuAnswers = {
     "자주 찾는 질문(FAQ)": {
       title: "자주 찾는 질문(FAQ)",
       text: "궁금한 분야를 선택해 주세요.",
@@ -396,6 +276,60 @@
       text: "부가운임과 관련된 질문입니다.",
       faqIds: [13155, 13156],
     },
+    // 입력창 아래 추천 버튼 4개
+    테마열차여행: {
+      title: "테마열차여행",
+      label: "추천 질문",
+      text: "관광열차, 계절 한정 상품 등 다양한 테마열차여행 상품이 있습니다.\n자세한 상품과 예약은 레츠코레일 홈페이지의 여행 메뉴에서 확인해 주세요.",
+    },
+    철도고객센터: {
+      title: "철도고객센터",
+      label: "추천 질문",
+      faqId: 13191, // "철도고객센터 운영시간 및 전화번호" 답변을 바로 표시
+    },
+    "지역 교통 편의 시설": {
+      title: "지역 교통 편의 시설",
+      label: "추천 질문",
+      text: "역 주변 버스·택시 승강장, 주차장, 렌터카 등 지역 교통 편의 시설 정보는 역별로 안내해 드립니다.\n이동이 불편하신 분은 아래 교통약자 서비스를 확인해 주세요.",
+      faqIds: [13210],
+    },
+    "마일리지,할인혜택": {
+      title: "마일리지·할인혜택",
+      label: "추천 질문",
+      text: "KTX 마일리지와 할인제도에 관련된 질문입니다.",
+      faqIds: [13165, 13166, 13211, 13167, 13154, 13206, 13150, 13151, 13149],
+    },
+    // 하단바 메뉴 6개 (footer-links)
+    이용약관: {
+      title: "이용약관",
+      label: "약관 및 정책",
+      text: "홈페이지·앱 서비스를 이용할 때의 조건을 정한 약관입니다.\n회원 가입과 탈퇴, 회원과 공사의 권리·의무, 서비스 이용 제한 등이 담겨 있습니다.\n\n※ 시안용 요약입니다. 정확한 내용은 코레일 홈페이지 원문을 확인해 주세요.",
+    },
+    "여객운송약관 및 부속약관": {
+      title: "여객운송약관 및 부속약관",
+      label: "약관 및 정책",
+      text: "열차를 이용할 때 적용되는 여객 운송 조건을 정한 약관입니다.\n운임·요금, 승차권 구입·변경·환불, 위약금, 부가운임 등이 담겨 있습니다.\n\n※ 시안용 요약입니다. 정확한 내용은 코레일 홈페이지 원문을 확인해 주세요.",
+    },
+    개인정보처리방침: {
+      title: "개인정보처리방침",
+      label: "약관 및 정책",
+      text: "코레일이 개인정보를 어떻게 처리하는지 안내합니다.\n수집하는 항목과 이용 목적, 보유 기간, 제3자 제공, 이용자의 권리와 행사 방법, 개인정보 보호책임자 등이 담겨 있습니다.\n\n※ 시안용 요약입니다. 정확한 내용은 코레일 홈페이지 원문을 확인해 주세요.",
+    },
+    이메일무단수집거부: {
+      title: "이메일무단수집거부",
+      label: "약관 및 정책",
+      text: "홈페이지에 게시된 이메일 주소를 자동 수집 프로그램 등으로 무단 수집하는 것을 거부합니다.\n이를 위반하면 관련 법령에 따라 처벌받을 수 있습니다.\n\n※ 시안용 요약입니다. 정확한 내용은 코레일 홈페이지 원문을 확인해 주세요.",
+    },
+    저작권정책: {
+      title: "저작권정책",
+      label: "약관 및 정책",
+      text: "홈페이지에 게시된 글, 사진, 이미지 등 콘텐츠의 저작권은 한국철도공사 또는 원저작자에게 있습니다.\n허락 없이 복제·배포하는 것을 금지합니다.\n\n※ 시안용 요약입니다. 정확한 내용은 코레일 홈페이지 원문을 확인해 주세요.",
+    },
+    "지원 브라우저 안내": {
+      title: "지원 브라우저 안내",
+      label: "약관 및 정책",
+      text: "· 권장 브라우저: Chrome, 삼성 인터넷, Safari\n· 권장 네트워크: 유선 인터넷 또는 LTE/5G\n· 권장 OS: Android 12.0 이상, iOS 16.0 이상\n\n※ 시안용 요약입니다. 정확한 내용은 코레일 홈페이지 원문을 확인해 주세요.",
+    },
     기념입장권: {
       title: "기념입장권",
       text: "기념입장권은 지정된 역에서 판매하며, 승강장 입장 및 기념 소장용으로 이용하실 수 있습니다.\n자세한 사항은 철도고객센터(☎1588-7788)로 문의해 주세요.",
@@ -429,12 +363,21 @@
   };
 
   const showMenu = (name) => {
-    const menu = sideMenuAnswers[name];
+    const menu = menuAnswers[name];
     if (!menu) return false;
+
+    // 답변 하나를 바로 보여주는 메뉴 (예: 철도고객센터)
+    if (menu.faqId) {
+      const item = korailFaq.find((f) => f.id === menu.faqId);
+      if (item) {
+        showAnswer(item);
+        return true;
+      }
+    }
 
     openBox((body) => {
       body.append(
-        el("span", "answer-box-cat", "전체메뉴"),
+        el("span", "answer-box-cat", menu.label || "전체메뉴"),
         el("p", "answer-box-q", menu.title),
         el("p", "answer-box-a", menu.text),
       );
@@ -460,17 +403,24 @@
     return true;
   };
 
-  // 왼쪽 메뉴 클릭을 기존 코드보다 먼저 받아 답변 박스로 처리
-  document.addEventListener(
-    "click",
-    (e) => {
-      const btn = e.target.closest(".side-menu [data-question]");
-      if (!btn) return;
-      if (showMenu(btn.dataset.question)) {
-        e.stopPropagation(); // 기존 샘플 답변(말풍선)이 실행되지 않도록 막음
-      }
-    },
-    true,
-  );
+  // 07. 메뉴 클릭 → 답변 박스
+  document.addEventListener("click", (e) => {
+    // 왼쪽 메뉴 + 입력창 아래 추천 버튼 4개
+    const btn = e.target.closest(
+      ".side-menu [data-question], .quick-list [data-question]",
+    );
+    if (btn) {
+      showMenu(btn.dataset.question);
+      return;
+    }
+
+    // 하단바 메뉴: 사이트로 이동하지 않고 답변 박스에 표시
+    const link = e.target.closest(".footer-links a");
+    if (link && showMenu(link.textContent.trim())) {
+      e.preventDefault(); // 링크 이동 막기
+      box.scrollIntoView({ behavior: "smooth", block: "center" });
+    }
+  });
 })();
-/* ===== [추가] FAQ 검색 챗봇 끝 ===== */
+/* ===== 02. FAQ 검색 챗봇 끝 ===== */
+
