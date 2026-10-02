@@ -710,7 +710,8 @@ document.addEventListener("DOMContentLoaded", () => {
       });
 
       // 예매 결과 페이지로 이동
-      window.location.href = `../Reservation/index.html?${queryParams.toString()}`;
+      // 추가: 이름이 변경된 실제 예매 결과 페이지로 이동합니다.
+      window.location.href = `../Reservation/Reservation.html?${queryParams.toString()}`;
     });
   }
 
@@ -811,7 +812,8 @@ document.addEventListener("DOMContentLoaded", () => {
         seat: room,
       });
 
-      window.location.href = `../Reservation/index.html?${queryParams.toString()}`;
+      // 추가: 간편예매도 동일한 예매 결과 페이지로 이동합니다.
+      window.location.href = `../Reservation/Reservation.html?${queryParams.toString()}`;
     });
   }
 });
