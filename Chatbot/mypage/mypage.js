@@ -260,3 +260,20 @@
   renderSummary();
   renderTickets();
 })();
+
+/* ---------------------------------------------------------------
+ * 06. 뒤로가기 아이콘 목적지
+ * - 기본: 홈페이지(index/main.html)로 이동 (index.html의 href)
+ * - 챗봇에서 들어온 경우(주소에 ?from=chatbot): 챗봇 화면으로 이동
+ * --------------------------------------------------------------- */
+(() => {
+  const backBtn = document.querySelector(".back-btn");
+  if (!backBtn) return;
+
+  const from = new URLSearchParams(window.location.search).get("from");
+  if (from === "chatbot") {
+    backBtn.href = "../index.html";
+    backBtn.setAttribute("aria-label", "챗봇으로 돌아가기");
+    backBtn.title = "챗봇으로 돌아가기";
+  }
+})();
