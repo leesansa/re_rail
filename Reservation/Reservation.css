@@ -796,9 +796,20 @@ img {
 }
 
 /* 추가: 기존 역 선택 팝업 안에 지도·역명 선택 화면을 표시합니다. */
-.route-dialog { width: min(1100px, calc(100vw - 32px)); max-width: none; padding: 16px; }
-.route-dialog .calendar-dialog-header { margin-bottom: 12px; }
-.station-picker-frame { display: block; width: 100%; height: min(76vh, 780px); border: 0; }
+.route-dialog {
+  width: min(1100px, calc(100vw - 32px));
+  max-width: none;
+  padding: 16px;
+}
+.route-dialog .calendar-dialog-header {
+  margin-bottom: 12px;
+}
+.station-picker-frame {
+  display: block;
+  width: 100%;
+  height: min(76vh, 780px);
+  border: 0;
+}
 
 /* 04. 여정 선택 버튼: 역 선택 팝업을 엽니다. */
 .route-selection button {

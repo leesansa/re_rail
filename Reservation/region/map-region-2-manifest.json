@@ -8,18 +8,13 @@
       "file": "../assets/region/list/close.svg",
       "sourceFile": "../assets/region/map/close.svg",
       "sha256": "e04f6c6c5563d8edbe6cabc33f2289265ef839701d324a349ea226fbcb4c7ffd",
-      "sourceNodes": [
-        "27:46",
-        "27:47"
-      ]
+      "sourceNodes": ["27:46", "27:47"]
     },
     {
       "file": "../assets/region/list/search.svg",
       "sourceFile": "../assets/region/map/search.svg",
       "sha256": "63ad32ce697ac18e9b6cdfbc5fcf068c36e52b64d837d8150ec23e9831e2e68d",
-      "sourceNodes": [
-        "27:51"
-      ]
+      "sourceNodes": ["27:51"]
     },
     {
       "file": "../assets/region/list/Korail-M.ttf",
@@ -30,27 +25,15 @@
   "rows": [
     {
       "node": "27:90",
-      "position": [
-        85,
-        308
-      ],
-      "size": [
-        1262,
-        62
-      ],
+      "position": [85, 308],
+      "size": [1262, 62],
       "stations": [
         {
           "node": "27:80",
           "textNode": "27:81",
           "name": "강릉",
-          "position": [
-            85,
-            308
-          ],
-          "size": [
-            284,
-            62
-          ],
+          "position": [85, 308],
+          "size": [284, 62],
           "radius": 30,
           "stroke": 2.5
         },
@@ -58,14 +41,8 @@
           "node": "27:84",
           "textNode": "27:85",
           "name": "경산",
-          "position": [
-            411,
-            308
-          ],
-          "size": [
-            284,
-            62
-          ],
+          "position": [411, 308],
+          "size": [284, 62],
           "radius": 30,
           "stroke": 2.5
         },
@@ -73,14 +50,8 @@
           "node": "27:86",
           "textNode": "27:87",
           "name": "경주",
-          "position": [
-            737,
-            308
-          ],
-          "size": [
-            284,
-            62
-          ],
+          "position": [737, 308],
+          "size": [284, 62],
           "radius": 30,
           "stroke": 2.5
         },
@@ -88,14 +59,8 @@
           "node": "27:88",
           "textNode": "27:89",
           "name": "광명",
-          "position": [
-            1063,
-            308
-          ],
-          "size": [
-            284,
-            62
-          ],
+          "position": [1063, 308],
+          "size": [284, 62],
           "radius": 30,
           "stroke": 2.5
         }
@@ -103,27 +68,15 @@
     },
     {
       "node": "27:186",
-      "position": [
-        85,
-        386
-      ],
-      "size": [
-        1262,
-        62
-      ],
+      "position": [85, 386],
+      "size": [1262, 62],
       "stations": [
         {
           "node": "27:187",
           "textNode": "27:188",
           "name": "광주송정",
-          "position": [
-            85,
-            386
-          ],
-          "size": [
-            284,
-            62
-          ],
+          "position": [85, 386],
+          "size": [284, 62],
           "radius": 30,
           "stroke": 2.5
         },
@@ -131,14 +84,8 @@
           "node": "27:189",
           "textNode": "27:190",
           "name": "구미",
-          "position": [
-            411,
-            386
-          ],
-          "size": [
-            284,
-            62
-          ],
+          "position": [411, 386],
+          "size": [284, 62],
           "radius": 30,
           "stroke": 2.5
         },
@@ -146,14 +93,8 @@
           "node": "27:191",
           "textNode": "27:192",
           "name": "구포",
-          "position": [
-            737,
-            386
-          ],
-          "size": [
-            285,
-            62
-          ],
+          "position": [737, 386],
+          "size": [285, 62],
           "radius": 30,
           "stroke": 2.5
         },
@@ -161,14 +102,8 @@
           "node": "27:193",
           "textNode": "27:194",
           "name": "김천구미",
-          "position": [
-            1063,
-            386
-          ],
-          "size": [
-            284,
-            62
-          ],
+          "position": [1063, 386],
+          "size": [284, 62],
           "radius": 30,
           "stroke": 2.5
         }
@@ -176,27 +111,15 @@
     },
     {
       "node": "27:195",
-      "position": [
-        85,
-        464
-      ],
-      "size": [
-        1262,
-        62
-      ],
+      "position": [85, 464],
+      "size": [1262, 62],
       "stations": [
         {
           "node": "27:196",
           "textNode": "27:197",
           "name": "나주",
-          "position": [
-            85,
-            464
-          ],
-          "size": [
-            284,
-            62
-          ],
+          "position": [85, 464],
+          "size": [284, 62],
           "radius": 30,
           "stroke": 2.5
         },
@@ -204,14 +127,8 @@
           "node": "27:198",
           "textNode": "27:199",
           "name": "남원",
-          "position": [
-            411,
-            464
-          ],
-          "size": [
-            284,
-            62
-          ],
+          "position": [411, 464],
+          "size": [284, 62],
           "radius": 30,
           "stroke": 2.5
         },
@@ -219,14 +136,8 @@
           "node": "27:200",
           "textNode": "27:201",
           "name": "대구",
-          "position": [
-            737,
-            464
-          ],
-          "size": [
-            285,
-            62
-          ],
+          "position": [737, 464],
+          "size": [285, 62],
           "radius": 30,
           "stroke": 2.5
         },
@@ -234,14 +145,8 @@
           "node": "27:202",
           "textNode": "27:203",
           "name": "대전",
-          "position": [
-            1063,
-            464
-          ],
-          "size": [
-            284,
-            62
-          ],
+          "position": [1063, 464],
+          "size": [284, 62],
           "radius": 30,
           "stroke": 2.5
         }
@@ -249,27 +154,15 @@
     },
     {
       "node": "27:204",
-      "position": [
-        85,
-        542
-      ],
-      "size": [
-        1262,
-        62
-      ],
+      "position": [85, 542],
+      "size": [1262, 62],
       "stations": [
         {
           "node": "27:205",
           "textNode": "27:206",
           "name": "동대구",
-          "position": [
-            85,
-            542
-          ],
-          "size": [
-            284,
-            62
-          ],
+          "position": [85, 542],
+          "size": [284, 62],
           "radius": 30,
           "stroke": 2.5
         },
@@ -277,14 +170,8 @@
           "node": "27:207",
           "textNode": "27:208",
           "name": "동해",
-          "position": [
-            411,
-            542
-          ],
-          "size": [
-            287,
-            62
-          ],
+          "position": [411, 542],
+          "size": [287, 62],
           "radius": 30,
           "stroke": 2.5
         },
@@ -292,14 +179,8 @@
           "node": "27:209",
           "textNode": "27:210",
           "name": "마산",
-          "position": [
-            737,
-            542
-          ],
-          "size": [
-            285,
-            62
-          ],
+          "position": [737, 542],
+          "size": [285, 62],
           "radius": 30,
           "stroke": 2.5
         },
@@ -307,14 +188,8 @@
           "node": "27:211",
           "textNode": "27:212",
           "name": "목포",
-          "position": [
-            1063,
-            542
-          ],
-          "size": [
-            284,
-            62
-          ],
+          "position": [1063, 542],
+          "size": [284, 62],
           "radius": 30,
           "stroke": 2.5
         }
@@ -322,27 +197,15 @@
     },
     {
       "node": "27:213",
-      "position": [
-        85,
-        620
-      ],
-      "size": [
-        1262,
-        62
-      ],
+      "position": [85, 620],
+      "size": [1262, 62],
       "stations": [
         {
           "node": "27:214",
           "textNode": "27:215",
           "name": "밀양",
-          "position": [
-            85,
-            620
-          ],
-          "size": [
-            284,
-            62
-          ],
+          "position": [85, 620],
+          "size": [284, 62],
           "radius": 30,
           "stroke": 2.5
         },
@@ -350,14 +213,8 @@
           "node": "27:216",
           "textNode": "27:217",
           "name": "부산",
-          "position": [
-            411,
-            620
-          ],
-          "size": [
-            287,
-            62
-          ],
+          "position": [411, 620],
+          "size": [287, 62],
           "radius": 30,
           "stroke": 2.5
         },
@@ -365,14 +222,8 @@
           "node": "27:218",
           "textNode": "27:219",
           "name": "서대전",
-          "position": [
-            737,
-            620
-          ],
-          "size": [
-            285,
-            62
-          ],
+          "position": [737, 620],
+          "size": [285, 62],
           "radius": 30,
           "stroke": 2.5
         },
@@ -380,14 +231,8 @@
           "node": "27:220",
           "textNode": "27:221",
           "name": "서울",
-          "position": [
-            1063,
-            620
-          ],
-          "size": [
-            284,
-            62
-          ],
+          "position": [1063, 620],
+          "size": [284, 62],
           "radius": 30,
           "stroke": 2.5
         }
@@ -395,27 +240,15 @@
     },
     {
       "node": "27:222",
-      "position": [
-        85,
-        698
-      ],
-      "size": [
-        1262,
-        62
-      ],
+      "position": [85, 698],
+      "size": [1262, 62],
       "stations": [
         {
           "node": "27:223",
           "textNode": "27:224",
           "name": "서원주",
-          "position": [
-            85,
-            698
-          ],
-          "size": [
-            284,
-            62
-          ],
+          "position": [85, 698],
+          "size": [284, 62],
           "radius": 30,
           "stroke": 2.5
         },
@@ -423,14 +256,8 @@
           "node": "27:225",
           "textNode": "27:226",
           "name": "수서",
-          "position": [
-            411,
-            698
-          ],
-          "size": [
-            287,
-            62
-          ],
+          "position": [411, 698],
+          "size": [287, 62],
           "radius": 30,
           "stroke": 2.5
         },
@@ -438,14 +265,8 @@
           "node": "27:227",
           "textNode": "27:228",
           "name": "수원",
-          "position": [
-            737,
-            698
-          ],
-          "size": [
-            285,
-            62
-          ],
+          "position": [737, 698],
+          "size": [285, 62],
           "radius": 30,
           "stroke": 2.5
         },
@@ -453,14 +274,8 @@
           "node": "27:229",
           "textNode": "27:230",
           "name": "순천",
-          "position": [
-            1063,
-            698
-          ],
-          "size": [
-            284,
-            62
-          ],
+          "position": [1063, 698],
+          "size": [284, 62],
           "radius": 30,
           "stroke": 2.5
         }
@@ -468,27 +283,15 @@
     },
     {
       "node": "27:231",
-      "position": [
-        86,
-        776
-      ],
-      "size": [
-        1262,
-        62
-      ],
+      "position": [86, 776],
+      "size": [1262, 62],
       "stations": [
         {
           "node": "27:232",
           "textNode": "27:233",
           "name": "안동",
-          "position": [
-            86,
-            776
-          ],
-          "size": [
-            284,
-            62
-          ],
+          "position": [86, 776],
+          "size": [284, 62],
           "radius": 30,
           "stroke": 2.5
         },
@@ -496,14 +299,8 @@
           "node": "27:234",
           "textNode": "27:235",
           "name": "여수EXPO",
-          "position": [
-            412,
-            776
-          ],
-          "size": [
-            287,
-            62
-          ],
+          "position": [412, 776],
+          "size": [287, 62],
           "radius": 30,
           "stroke": 2.5
         },
@@ -511,14 +308,8 @@
           "node": "27:236",
           "textNode": "27:237",
           "name": "영등포",
-          "position": [
-            738,
-            776
-          ],
-          "size": [
-            285,
-            62
-          ],
+          "position": [738, 776],
+          "size": [285, 62],
           "radius": 30,
           "stroke": 2.5
         },
@@ -526,14 +317,8 @@
           "node": "27:238",
           "textNode": "27:239",
           "name": "오송",
-          "position": [
-            1064,
-            776
-          ],
-          "size": [
-            284,
-            62
-          ],
+          "position": [1064, 776],
+          "size": [284, 62],
           "radius": 30,
           "stroke": 2.5
         }
@@ -541,27 +326,15 @@
     },
     {
       "node": "27:240",
-      "position": [
-        86,
-        854
-      ],
-      "size": [
-        1262,
-        62
-      ],
+      "position": [86, 854],
+      "size": [1262, 62],
       "stations": [
         {
           "node": "27:241",
           "textNode": "27:242",
           "name": "용산",
-          "position": [
-            86,
-            854
-          ],
-          "size": [
-            284,
-            62
-          ],
+          "position": [86, 854],
+          "size": [284, 62],
           "radius": 30,
           "stroke": 2.5
         },
@@ -569,14 +342,8 @@
           "node": "27:243",
           "textNode": "27:244",
           "name": "울산",
-          "position": [
-            412,
-            854
-          ],
-          "size": [
-            287,
-            62
-          ],
+          "position": [412, 854],
+          "size": [287, 62],
           "radius": 30,
           "stroke": 2.5
         },
@@ -584,14 +351,8 @@
           "node": "27:245",
           "textNode": "27:246",
           "name": "원주",
-          "position": [
-            738,
-            854
-          ],
-          "size": [
-            285,
-            62
-          ],
+          "position": [738, 854],
+          "size": [285, 62],
           "radius": 30,
           "stroke": 2.5
         },
@@ -599,14 +360,8 @@
           "node": "27:247",
           "textNode": "27:248",
           "name": "익산",
-          "position": [
-            1064,
-            854
-          ],
-          "size": [
-            284,
-            62
-          ],
+          "position": [1064, 854],
+          "size": [284, 62],
           "radius": 30,
           "stroke": 2.5
         }
@@ -614,27 +369,15 @@
     },
     {
       "node": "27:249",
-      "position": [
-        85,
-        932
-      ],
-      "size": [
-        1262,
-        62
-      ],
+      "position": [85, 932],
+      "size": [1262, 62],
       "stations": [
         {
           "node": "27:250",
           "textNode": "27:251",
           "name": "전주",
-          "position": [
-            85,
-            932
-          ],
-          "size": [
-            284,
-            62
-          ],
+          "position": [85, 932],
+          "size": [284, 62],
           "radius": 30,
           "stroke": 2.5
         },
@@ -642,14 +385,8 @@
           "node": "27:252",
           "textNode": "27:253",
           "name": "정동진",
-          "position": [
-            411,
-            932
-          ],
-          "size": [
-            287,
-            62
-          ],
+          "position": [411, 932],
+          "size": [287, 62],
           "radius": 30,
           "stroke": 2.5
         },
@@ -657,14 +394,8 @@
           "node": "27:254",
           "textNode": "27:255",
           "name": "정읍",
-          "position": [
-            737,
-            932
-          ],
-          "size": [
-            285,
-            62
-          ],
+          "position": [737, 932],
+          "size": [285, 62],
           "radius": 30,
           "stroke": 2.5
         },
@@ -672,14 +403,8 @@
           "node": "27:256",
           "textNode": "27:257",
           "name": "조치원",
-          "position": [
-            1063,
-            932
-          ],
-          "size": [
-            284,
-            62
-          ],
+          "position": [1063, 932],
+          "size": [284, 62],
           "radius": 30,
           "stroke": 2.5
         }

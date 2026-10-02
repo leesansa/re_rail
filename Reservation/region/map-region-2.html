@@ -3,7 +3,10 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <meta name="description" content="코레일_리디자인의 지도_지역선택_2 화면을 구현한 역명 조회 정적 시안입니다." />
+    <meta
+      name="description"
+      content="코레일_리디자인의 지도_지역선택_2 화면을 구현한 역명 조회 정적 시안입니다."
+    />
     <title>역명으로 찾기 | KORAIL</title>
     <!-- 스타일은 인라인으로 작성하지 않고 외부 CSS만 연결합니다. -->
     <link rel="stylesheet" href="map-region-2.css" />
@@ -13,19 +16,30 @@
     <header class="station-header">
       <h1>기차역 조회</h1>
       <!-- 닫기: 원본 벡터와 동일한 SVG, 표시용 시안이므로 비활성화 -->
-      <button class="close-button" type="button" aria-label="기차역 조회 닫기" disabled>
-        <img src="../assets/region/list/close.svg" alt="" />
-      </button>
+      <button
+        class="close-button"
+        type="button"
+        aria-label="기차역 조회 닫기"
+        disabled
+      ></button>
     </header>
 
     <main class="station-content">
       <!-- 02. 검색창: 안내 문구를 입력란의 placeholder로 사용하고 실시간으로 역을 필터링 -->
       <section class="station-search" aria-label="역 이름 또는 초성 검색">
         <!-- 추가: 역 이름과 초성을 입력할 수 있는 검색창 -->
-        <input class="station-search-input" type="search" aria-label="역 이름 또는 초성 검색" placeholder="역 이름 또는 초성 검색(서울 : ㅅㅇ)" autocomplete="off" />
+        <input
+          class="station-search-input"
+          type="search"
+          aria-label="역 이름 또는 초성 검색"
+          placeholder="역 이름 또는 초성 검색(서울 : ㅅㅇ)"
+          autocomplete="off"
+        />
         <!-- 원본 SVG 크기를 유지하고 감싸는 영역에서 48px 표시 배율 적용 -->
         <button class="search-button" type="button" aria-label="역 검색">
-          <span class="search-icon"><img src="../assets/region/list/search.svg" alt="" /></span>
+          <span class="search-icon"
+            ><img src="../assets/region/list/search.svg" alt=""
+          /></span>
         </button>
       </section>
 
@@ -34,7 +48,14 @@
         <!-- 추가: 지도 조회 탭을 누르면 지도 화면으로 이동 -->
         <a class="method-button" href="map-region.html">지도로 찾기</a>
         <!-- 선택된 역명 조회 탭: 파란색 문구와 강조선 -->
-        <button class="method-button is-selected" type="button" aria-current="page" disabled>역명으로 찾기</button>
+        <button
+          class="method-button is-selected"
+          type="button"
+          aria-current="page"
+          disabled
+        >
+          역명으로 찾기
+        </button>
       </nav>
       <!-- 탭 아래의 원본 가로 구분선 -->
       <div class="station-divider" aria-hidden="true"></div>

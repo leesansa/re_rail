@@ -9,7 +9,13 @@
   <body>
     <!-- 임시 예약 페이지: 실제 예약 페이지가 완성되면 이 파일을 교체 -->
     <header class="site-header">
-      <img class="brand-logo" src="assets/korail-logo.svg" alt="KORAIL" width="152" height="37" />
+      <img
+        class="brand-logo"
+        src="assets/korail-logo.svg"
+        alt="KORAIL"
+        width="152"
+        height="37"
+      />
     </header>
     <main>
       <section class="page-heading"><h1>승차권 예약</h1></section>
@@ -32,7 +38,8 @@
         selection.get("price"),
         selection.get("passengers") && `${selection.get("passengers")}명`,
       ].filter(Boolean);
-      document.querySelector("#booking-selection").textContent = details.join(" · ");
+      document.querySelector("#booking-selection").textContent =
+        details.join(" · ");
     </script>
   </body>
 </html>

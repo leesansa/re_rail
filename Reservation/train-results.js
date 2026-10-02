@@ -26,7 +26,10 @@ if (languageControl) {
   languageMenu.querySelectorAll("button").forEach((option) => {
     option.addEventListener("click", () => {
       languageLabel.textContent = option.textContent;
-      languageButton.setAttribute("aria-label", `언어 선택, 현재 ${option.textContent}`);
+      languageButton.setAttribute(
+        "aria-label",
+        `언어 선택, 현재 ${option.textContent}`,
+      );
       languageMenu.querySelectorAll("button").forEach((item) => {
         item.setAttribute("aria-pressed", String(item === option));
       });
@@ -112,12 +115,23 @@ const renderTrains = () => {
 };
 
 // 기존 스크롤 추가 동작도 현재 필터 결과의 배열을 기준으로 유지한다.
-if (trainList && loadingStatus && loadTrigger && typeof IntersectionObserver !== "undefined") {
+if (
+  trainList &&
+  loadingStatus &&
+  loadTrigger &&
+  typeof IntersectionObserver !== "undefined"
+) {
   let isLoading = false;
 
   const observer = new IntersectionObserver(
     (entries) => {
-      if (!entries[0].isIntersecting || isLoading || !visibleTrains.length || !isDefaultFilter()) return;
+      if (
+        !entries[0].isIntersecting ||
+        isLoading ||
+        !visibleTrains.length ||
+        !isDefaultFilter()
+      )
+        return;
 
       isLoading = true;
       observer.unobserve(loadTrigger);
@@ -131,7 +145,10 @@ if (trainList && loadingStatus && loadTrigger && typeof IntersectionObserver !==
           if (!loadTrigger.hidden) observer.observe(loadTrigger);
           return;
         }
-        trainList.insertAdjacentHTML("beforeend", visibleTrains.map(renderTrainCard).join(""));
+        trainList.insertAdjacentHTML(
+          "beforeend",
+          visibleTrains.map(renderTrainCard).join(""),
+        );
         loadingStatus.hidden = true;
         isLoading = false;
         observer.observe(loadTrigger);
@@ -196,7 +213,13 @@ const passengerDialog = document.querySelector("#passenger-dialog");
 const passengerForm = document.querySelector("#passenger-form");
 const passengerCountInput = document.querySelector("#passenger-count");
 
-if (departureButton && arrivalButton && swapButton && routeDialog && stationPickerFrame) {
+if (
+  departureButton &&
+  arrivalButton &&
+  swapButton &&
+  routeDialog &&
+  stationPickerFrame
+) {
   let pendingStationButton = null;
 
   const openRouteDialog = (button, title) => {
@@ -210,7 +233,9 @@ if (departureButton && arrivalButton && swapButton && routeDialog && stationPick
     openRouteDialog(departureButton, "출발역 선택"),
   );
 
-  arrivalButton.addEventListener("click", () => openRouteDialog(arrivalButton, "도착역 선택"));
+  arrivalButton.addEventListener("click", () =>
+    openRouteDialog(arrivalButton, "도착역 선택"),
+  );
 
   // 추가: 팝업 안의 지도 또는 역명 목록에서 보낸 선택만 수신합니다.
   window.addEventListener("message", (event) => {
@@ -219,10 +244,12 @@ if (departureButton && arrivalButton && swapButton && routeDialog && stationPick
       !pendingStationButton ||
       event.source !== stationPickerFrame.contentWindow ||
       event.data?.type !== "korail:station-selected"
-    ) return;
+    )
+      return;
 
     const station = event.data.station;
-    if (typeof station !== "string" || !station.trim() || station.length > 30) return;
+    if (typeof station !== "string" || !station.trim() || station.length > 30)
+      return;
     const targetButton = pendingStationButton;
     const fieldName = targetButton === departureButton ? "출발역" : "도착역";
     targetButton.querySelector("span").textContent = station;
@@ -230,7 +257,9 @@ if (departureButton && arrivalButton && swapButton && routeDialog && stationPick
     routeDialog.close();
     targetButton.focus();
   });
-  routeDialog.addEventListener("close", () => { pendingStationButton = null; });
+  routeDialog.addEventListener("close", () => {
+    pendingStationButton = null;
+  });
 
   swapButton.addEventListener("click", () => {
     const departureName = departureButton.querySelector("span");

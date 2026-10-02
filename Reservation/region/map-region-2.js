@@ -19,7 +19,10 @@ function stationInitials(name) {
 }
 
 function matchesStation(station, query) {
-  return normalizeSearch(station.name).includes(query) || stationInitials(station.name).includes(query);
+  return (
+    normalizeSearch(station.name).includes(query) ||
+    stationInitials(station.name).includes(query)
+  );
 }
 
 // 추가 03. 조회 방식: 현재 화면의 '역명으로 찾기' 선택 상태를 유지합니다.
@@ -39,7 +42,10 @@ function selectStation(name) {
   });
   // 추가: 예약 화면의 팝업에서 열린 경우 역명 목록의 선택도 부모 화면에 전달합니다.
   if (window.parent && window.parent !== window) {
-    window.parent.postMessage({ type: "korail:station-selected", station: name }, "*");
+    window.parent.postMessage(
+      { type: "korail:station-selected", station: name },
+      "*",
+    );
   }
 }
 
@@ -61,7 +67,10 @@ function renderStations() {
       button.type = "button";
       button.textContent = station.name;
       button.setAttribute("data-figma-node", station.node);
-      button.setAttribute("aria-pressed", String(station.name === selectedStation));
+      button.setAttribute(
+        "aria-pressed",
+        String(station.name === selectedStation),
+      );
       if (station.name === selectedStation) button.classList.add("is-selected");
       button.addEventListener("click", () => selectStation(station.name));
       row.append(button);
