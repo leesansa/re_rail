@@ -316,7 +316,7 @@ document.addEventListener("DOMContentLoaded", () => {
   const passengerPlus = document.getElementById("passenger-plus");
 
   let state = {
-    depDate: "2026-09-29",
+    depDate: "2026-10-21",
     arrDate: "2026-10-21",
     passengers: 1,
   };
@@ -344,9 +344,8 @@ document.addEventListener("DOMContentLoaded", () => {
     }
   };
 
-  // 초기 날짜 표시 세팅 (사용자가 제공한 시안 형태: 2026년 09월 29일 ~ 10월 21일 | 1인)
-  travelDateText.textContent = "2026년 09월 29일 ~ 10월 21일";
-  travelPassengersText.textContent = "1인";
+  // 초기 여정 구분(편도)에 맞춰 날짜와 인원을 표시합니다.
+  updateDateDisplay();
 
   // ----------------------------------------------------
   // 06-1. 코레일 날짜/시간 선택 듀얼 캘린더 모달
@@ -681,7 +680,7 @@ document.addEventListener("DOMContentLoaded", () => {
         inputArrDate.focus();
         return;
       }
-      state.depDate = inputDepDate.value || "2026-09-29";
+      state.depDate = inputDepDate.value || "2026-10-21";
       state.arrDate = inputArrDate.value || "2026-10-21";
       state.passengers = parseInt(inputPassengerCount.value, 10) || 1;
 
