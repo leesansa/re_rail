@@ -144,28 +144,34 @@ if (trainList && loadingStatus && loadTrigger && typeof IntersectionObserver !==
   observer.observe(loadTrigger);
 }
 
-// 03. 날짜 이동 및 임시 달력 팝업
-// 화면에 표시된 날짜를 기준으로 하루씩 이동하고,
-// 실제 달력 페이지가 완성되기 전까지만 유지.
+// 03. 날짜 이동 및 달력에서 선택한 출발 날짜 반영
 const previousDateButton = document.querySelector(".previous-date");
 const nextDateButton = document.querySelector(".next-date");
-const calendarButton = document.querySelector(".calendar-button");
 const selectedDateTime = document.querySelector(".selected-date");
-const calendarDialog = document.querySelector("#calendar-dialog");
 
 if (previousDateButton && nextDateButton && selectedDateTime) {
   const weekdays = ["일", "월", "화", "수", "목", "금", "토"];
   const initialDate = selectedDateTime.dateTime.slice(0, 10);
   const [year, month, day] = initialDate.split("-").map(Number);
   const selectedDate = new Date(Date.UTC(year, month - 1, day));
+  let selectedHour = Number(selectedDateTime.dateTime.slice(11, 13)) || 0;
 
   const updateSelectedDate = () => {
     const date = selectedDate.toISOString().slice(0, 10);
-    selectedDateTime.dateTime = date + "T00:00:00+09:00";
+    const time = `${String(selectedHour).padStart(2, "0")}:00`;
+    selectedDateTime.dateTime = `${date}T${time}:00+09:00`;
     selectedDateTime.textContent =
-      date + "-(" + weekdays[selectedDate.getUTCDay()] + ") 00:00";
+      date + "-(" + weekdays[selectedDate.getUTCDay()] + ") " + time;
     renderTrains();
   };
+
+  // 추가: 달력에서 출발 날짜를 누르면 표시와 열차 카드 날짜를 즉시 갱신합니다.
+  selectedDateTime.addEventListener("korail:date-selected", (event) => {
+    const { year, month, day, hour } = event.detail;
+    selectedDate.setTime(Date.UTC(year, month - 1, day));
+    selectedHour = hour;
+    updateSelectedDate();
+  });
 
   previousDateButton.addEventListener("click", () => {
     selectedDate.setUTCDate(selectedDate.getUTCDate() - 1);
@@ -176,10 +182,6 @@ if (previousDateButton && nextDateButton && selectedDateTime) {
     selectedDate.setUTCDate(selectedDate.getUTCDate() + 1);
     updateSelectedDate();
   });
-}
-
-if (calendarButton && calendarDialog) {
-  calendarButton.addEventListener("click", () => calendarDialog.showModal());
 }
 
 // 04. 여정 선택: 지도 팝업에서 고른 역을 출발역 또는 도착역에 반영합니다.

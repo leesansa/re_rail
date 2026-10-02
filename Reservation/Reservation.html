@@ -9,6 +9,8 @@
     />
     <title>승차권 예매 | KORAIL</title>
     <link rel="stylesheet" href="Reservation.css" />
+    <!-- 추가: 달력 모달 스타일 -->
+    <link rel="stylesheet" href="calendar/calendar.css" />
   </head>
   <body>
     <!-- 01. 헤더-->
@@ -310,25 +312,171 @@
         </section>
       </div>
     </main>
-    <!-- 달력 화면 임시 팝업: 실제 달력 페이지가 완성되면 내용을 교체 -->
-    <dialog
-      id="calendar-dialog"
-      class="calendar-dialog"
-      aria-labelledby="calendar-dialog-title"
-    >
-      <div class="calendar-dialog-header">
-        <h2 id="calendar-dialog-title">날짜 선택</h2>
-        <form method="dialog">
-          <button
-            type="submit"
-            class="calendar-dialog-close"
-            aria-label="달력 닫기"
-          >
-            ×
+    <!-- 추가: 독립 달력 모달을 예약 페이지에 적용 -->
+    <dialog id="korail-calendar-dialog" class="korail-calendar-modal" aria-labelledby="cal-modal-title">
+      <div class="cal-modal-content">
+        <h2 id="cal-modal-title" class="sr-only">날짜, 시간 및 인원 선택</h2>
+        <div class="cal-modal-header">
+          <div class="cal-trip-tabs" role="tablist" aria-label="여정 구분">
+            <button type="button" class="cal-trip-tab active" data-cal-trip="oneway" role="tab" aria-selected="true">편도</button>
+            <button type="button" class="cal-trip-tab" data-cal-trip="round" role="tab" aria-selected="false">왕복</button>
+          </div>
+          <button type="button" class="cal-close-btn" id="cal-close-btn" aria-label="달력 닫기"><span class="popup-close-icon" aria-hidden="true"></span></button>
+        </div>
+
+        <div class="cal-selection-layout">
+          <div class="cal-date-panel">
+            <div class="cal-time-row">
+              <div class="cal-time-card active" id="cal-dep-card">
+                <div class="cal-date-text-group">
+                  <span class="cal-card-year" id="cal-dep-year">2026년</span>
+                  <strong class="cal-card-date" id="cal-dep-date">10월 21일(수)</strong>
+                </div>
+                <div class="cal-hour-group">
+                  <input type="number" id="cal-dep-hour" class="cal-hour-spin" min="0" max="23" value="18" />
+                  <span class="cal-hour-label">시 이후 출발</span>
+                </div>
+              </div>
+
+              <div class="cal-time-card disabled" id="cal-arr-card">
+                <div class="cal-date-text-group">
+                  <span class="cal-card-year" id="cal-arr-year">2026년</span>
+                  <strong class="cal-card-date" id="cal-arr-date">10월 21일(수)</strong>
+                </div>
+                <div class="cal-hour-group">
+                  <input type="number" id="cal-arr-hour" class="cal-hour-spin" min="0" max="23" value="18" disabled />
+                  <span class="cal-hour-label">시 이후 출발</span>
+                </div>
+              </div>
+            </div>
+
+            <div class="cal-dual-months">
+              <div class="cal-month-box" id="cal-box-left">
+                <div class="cal-month-nav">
+                  <button type="button" class="cal-month-prev-btn" id="cal-prev-btn" aria-label="이전 달">&lt;</button>
+                  <h3 class="cal-month-heading" id="cal-heading-left">2026. 10.</h3>
+                  <button type="button" class="cal-month-next-btn" id="cal-next-btn-1" aria-label="다음 달">&gt;</button>
+                </div>
+                <div class="cal-table-wrap">
+                  <div class="cal-weekdays">
+                    <span class="cal-weekday-sun">일</span>
+                    <span>월</span>
+                    <span>화</span>
+                    <span>수</span>
+                    <span>목</span>
+                    <span>금</span>
+                    <span class="cal-weekday-sat">토</span>
+                  </div>
+                  <div class="cal-days-grid" id="cal-days-left"></div>
+                </div>
+              </div>
+
+              <div class="cal-month-box" id="cal-box-right">
+                <div class="cal-month-nav">
+                  <button type="button" class="cal-prev-btn-2" id="cal-prev-btn-2" aria-label="이전 달">&lt;</button>
+                  <h3 class="cal-month-heading" id="cal-heading-right">2026. 11.</h3>
+                  <button type="button" class="cal-month-next-btn" id="cal-next-btn" aria-label="다음 달">&gt;</button>
+                </div>
+                <div class="cal-table-wrap">
+                  <div class="cal-weekdays">
+                    <span class="cal-weekday-sun">일</span>
+                    <span>월</span>
+                    <span>화</span>
+                    <span>수</span>
+                    <span>목</span>
+                    <span>금</span>
+                    <span class="cal-weekday-sat">토</span>
+                  </div>
+                  <div class="cal-days-grid" id="cal-days-right"></div>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <aside class="people-panel" aria-labelledby="people-title">
+            <h3 id="people-title">인원선택</h3>
+            <div class="people-row" data-person="0">
+              <div class="people-label">어른(13세 이상)</div>
+              <div class="people-controls">
+                <button type="button" data-step="-1" aria-label="어른(13세 이상) 1명 감소">−</button>
+                <output aria-label="어른(13세 이상) 인원">1</output>
+                <button type="button" data-step="1" aria-label="어른(13세 이상) 1명 증가">+</button>
+              </div>
+            </div>
+            <div class="people-row" data-person="1">
+              <div class="people-label">어린이(6 ~ 12세)</div>
+              <div class="people-controls">
+                <button type="button" data-step="-1" aria-label="어린이(6 ~ 12세) 1명 감소">−</button>
+                <output aria-label="어린이(6 ~ 12세) 인원">0</output>
+                <button type="button" data-step="1" aria-label="어린이(6 ~ 12세) 1명 증가">+</button>
+              </div>
+            </div>
+            <div class="people-row" data-person="2">
+              <div class="people-label">유아(6세 미만)<button type="button" class="people-info" aria-label="유아(6세 미만) 상세 안내" aria-expanded="false" aria-controls="people-note-2">i</button></div>
+              <div class="people-controls">
+                <button type="button" data-step="-1" aria-label="유아(6세 미만) 1명 감소">−</button>
+                <output aria-label="유아(6세 미만) 인원">0</output>
+                <button type="button" data-step="1" aria-label="유아(6세 미만) 1명 증가">+</button>
+              </div>
+              <div class="people-note" id="people-note-2" hidden>
+                <button type="button" class="people-note-close" aria-label="상세 안내 닫기">×</button>
+                <h4>유아(6세 미만)</h4>
+                <p>6세 미만의 유아는 어른 1명당 유아 1명까지 별도의 좌석 지정없이 보호자가 동반하여 승차할 수 있습니다.(다만, 좌석을 지정하거나 어른 1명당 유아 1명을 초과하여 이용하는 경우, 유아 승차권을 별도로 구매하셔야 합니다.)</p>
+              </div>
+            </div>
+            <div class="people-row" data-person="3">
+              <div class="people-label">경로(65세 이상)</div>
+              <div class="people-controls">
+                <button type="button" data-step="-1" aria-label="경로(65세 이상) 1명 감소">−</button>
+                <output aria-label="경로(65세 이상) 인원">0</output>
+                <button type="button" data-step="1" aria-label="경로(65세 이상) 1명 증가">+</button>
+              </div>
+            </div>
+            <div class="people-row" data-person="4">
+              <div class="people-label">중증 장애인<button type="button" class="people-info" aria-label="중증 장애인 상세 안내" aria-expanded="false" aria-controls="people-note-4">i</button></div>
+              <div class="people-controls">
+                <button type="button" data-step="-1" aria-label="중증 장애인 1명 감소">−</button>
+                <output aria-label="중증 장애인 인원">0</output>
+                <button type="button" data-step="1" aria-label="중증 장애인 1명 증가">+</button>
+              </div>
+              <div class="people-note" id="people-note-4" hidden>
+                <button type="button" class="people-note-close" aria-label="상세 안내 닫기">×</button>
+                <h4>중증 장애인</h4>
+                <p>장애 1~3급(장애인 1명 당 어른 1명 선택 예매 시 보호자 할인 가능)</p>
+              </div>
+            </div>
+            <div class="people-row" data-person="5">
+              <div class="people-label">경증 장애인<button type="button" class="people-info" aria-label="경증 장애인 상세 안내" aria-expanded="false" aria-controls="people-note-5">i</button></div>
+              <div class="people-controls">
+                <button type="button" data-step="-1" aria-label="경증 장애인 1명 감소">−</button>
+                <output aria-label="경증 장애인 인원">0</output>
+                <button type="button" data-step="1" aria-label="경증 장애인 1명 증가">+</button>
+              </div>
+              <div class="people-note" id="people-note-5" hidden>
+                <button type="button" class="people-note-close" aria-label="상세 안내 닫기">×</button>
+                <h4>경증 장애인</h4>
+                <p>장애의 정도가 심하지 않은 장애인(장애 4~6급)</p>
+              </div>
+            </div>
+            <div class="people-row" data-person="6">
+              <div class="people-label">국가유공자</div>
+              <div class="people-controls">
+                <button type="button" data-step="-1" aria-label="국가유공자 1명 감소">−</button>
+                <output aria-label="국가유공자 인원">0</output>
+                <button type="button" data-step="1" aria-label="국가유공자 1명 증가">+</button>
+              </div>
+            </div>
+            <p class="people-total" aria-live="polite">총 <strong id="people-total">1</strong>명</p>
+            <p class="people-limit">총 1~9명까지 선택할 수 있습니다.</p>
+          </aside>
+        </div>
+
+        <div class="cal-modal-footer">
+          <button type="button" class="cal-search-confirm-btn" id="cal-search-confirm-btn">
+            검색하기
           </button>
-        </form>
+        </div>
       </div>
-      <p>달력 페이지를 준비 중입니다.</p>
     </dialog>
     <!-- 추가: 출발역·도착역 선택 시 지도 화면을 띄우는 팝업 -->
     <dialog
@@ -390,5 +538,7 @@
     <!-- 열차 데이터 배열을 먼저 로드한 뒤 카드 렌더링·필터 스크립트를 실행 -->
     <script src="train-data.js" defer></script>
     <script src="train-results.js" defer></script>
+    <!-- 추가: 달력 모달 동작 -->
+    <script src="calendar/calendar.js" defer></script>
   </body>
 </html>
