@@ -225,6 +225,25 @@ if (departureButton && arrivalButton && swapButton && routeDialog) {
   });
 }
 
+// URL 파라미터가 있으면 초기 출발역, 도착역, 인원수에 반영
+const urlParams = new URLSearchParams(window.location.search);
+if (urlParams.has("departure") && departureButton) {
+  const depSpan = departureButton.querySelector("span");
+  if (depSpan) depSpan.textContent = urlParams.get("departure");
+  departureButton.setAttribute("aria-label", `출발역 ${urlParams.get("departure")}`);
+}
+if (urlParams.has("arrival") && arrivalButton) {
+  const arrSpan = arrivalButton.querySelector("span");
+  if (arrSpan) arrSpan.textContent = urlParams.get("arrival");
+  arrivalButton.setAttribute("aria-label", `도착역 ${urlParams.get("arrival")}`);
+}
+if (urlParams.has("passengers") && passengerButton) {
+  const count = urlParams.get("passengers");
+  const passSpan = passengerButton.querySelector("span");
+  if (passSpan) passSpan.textContent = `총 ${count}명`;
+  passengerButton.setAttribute("aria-label", `탑승 인원 총 ${count}명`);
+}
+
 // 탑승 인원 숫자를 직접 입력하고 적용하면 버튼의 표시와 접근성 이름을 갱신한다.
 if (
   passengerButton &&
