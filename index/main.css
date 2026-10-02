@@ -1514,3 +1514,27 @@ button {
     font-size: 12px;
   }
 }
+
+/* Calendar passenger selection */
+.korail-calendar-modal { max-width: 1120px; max-height: 92vh; overflow-y: auto; }
+.cal-selection-layout { display: grid; grid-template-columns: minmax(0, 1fr) 286px; gap: 22px; }
+.cal-date-panel { min-width: 0; display: flex; flex-direction: column; gap: 16px; }
+.people-panel { border-left: 1px solid #e0e3e7; padding-left: 20px; min-width: 0; }
+.people-panel h3 { font-size: 18px; font-weight: 700; margin: 0 0 12px; }
+.people-row { display: grid; grid-template-columns: minmax(0,1fr) auto; align-items: center; gap: 8px; padding: 7px 0; }
+.people-label { display: flex; align-items: center; gap: 5px; font-size: 14px; white-space: nowrap; }
+.people-controls { display: flex; align-items: center; gap: 7px; }
+.people-controls button { width: 29px; height: 29px; border: 1px solid #dedfe2; border-radius: 50%; background: #fff; color: #555; font-size: 22px; line-height: 1; cursor: pointer; }
+.people-controls button:disabled { color: #d3d6da; background: #f1f2f3; cursor: default; }
+.people-controls output { min-width: 14px; text-align: center; font-size: 15px; font-weight: 700; }
+.people-info { border: 0; border-radius: 50%; width: 19px; height: 19px; padding: 0; color: #fff; background: #c6c8ca; font: bold 13px Georgia,serif; cursor: pointer; }
+.people-info[aria-expanded="true"] { background: #18468b; }
+.people-note { grid-column: 1 / -1; border: 1px solid #c5c5c5; padding: 18px; position: relative; background: #fff; }
+.people-note[hidden] { display: none; }
+.people-note h4 { font-size: 15px; font-weight: 700; margin: 0 24px 12px 0; }
+.people-note p { color: #788797; font-size: 13px; line-height: 1.6; margin: 0; word-break: keep-all; }
+.people-note-close { position: absolute; top: 10px; right: 10px; border: 0; background: none; color: #444; font-size: 25px; cursor: pointer; }
+.people-total { border-top: 1px solid #e0e3e7; margin-top: 12px; padding-top: 12px; font-size: 14px; text-align: right; }
+.people-limit { font-size: 12px; color: #788797; margin-top: 6px; text-align: right; }
+.people-panel button:focus-visible { outline: 2px solid #18468b; outline-offset: 3px; }
+@media (max-width: 1000px) { .cal-selection-layout { grid-template-columns: 1fr; } .people-panel { border-left: 0; border-top: 1px solid #e0e3e7; padding: 16px 0 0; } }

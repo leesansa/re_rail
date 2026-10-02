@@ -403,10 +403,52 @@ document.addEventListener("DOMContentLoaded", () => {
     });
   }
 
+
+  const peopleRows = [...document.querySelectorAll('.people-row')];
+  let savedPeople = [1, 0, 0, 0, 0, 0, 0];
+  let draftPeople = [...savedPeople];
+  const peopleTotal = () => draftPeople.reduce((a, b) => a + b, 0);
+  const closePeopleNotes = () => {
+    document.querySelectorAll('.people-note').forEach(note => { note.hidden = true; });
+    document.querySelectorAll('.people-info').forEach(button => button.setAttribute('aria-expanded', 'false'));
+  };
+  const renderPeople = () => {
+    const total = peopleTotal();
+    peopleRows.forEach((row, index) => {
+      row.querySelector('output').textContent = draftPeople[index];
+      row.querySelector('[data-step="-1"]').disabled = draftPeople[index] === 0 || total <= 1;
+      row.querySelector('[data-step="1"]').disabled = total >= 9;
+    });
+    document.getElementById('people-total').textContent = total;
+  };
+  peopleRows.forEach((row, index) => {
+    row.querySelectorAll('[data-step]').forEach(button => button.addEventListener('click', () => {
+      const step = Number(button.dataset.step);
+      const total = peopleTotal();
+      if ((step < 0 && (draftPeople[index] === 0 || total <= 1)) || (step > 0 && total >= 9)) return;
+      draftPeople[index] += step;
+      renderPeople();
+    }));
+    const info = row.querySelector('.people-info');
+    if (info) {
+      info.addEventListener('click', () => {
+        const show = info.getAttribute('aria-expanded') !== 'true';
+        closePeopleNotes();
+        info.setAttribute('aria-expanded', String(show));
+        document.getElementById(info.getAttribute('aria-controls')).hidden = !show;
+      });
+      row.querySelector('.people-note-close').addEventListener('click', () => { closePeopleNotes(); info.focus(); });
+    }
+  });
+  renderPeople();
+
   const openCalendarModal = () => {
     if (!calendarDialog) return;
     updateCardDisplay();
     renderDualCalendar();
+    draftPeople = [...savedPeople];
+    closePeopleNotes();
+    renderPeople();
     calendarDialog.showModal();
   };
 
@@ -446,6 +488,10 @@ document.addEventListener("DOMContentLoaded", () => {
   // [검색하기] 버튼 클릭 시 메인 화면 텍스트 반영
   if (calSearchConfirmBtn) {
     calSearchConfirmBtn.addEventListener("click", () => {
+      savedPeople = [...draftPeople];
+      state.passengers = peopleTotal();
+      travelPassengersText.textContent = `${state.passengers}인`;
+      inputPassengerCount.value = state.passengers;
       const depHour = parseInt(calDepHour.value, 10) || 18;
       selectedDep.hour = depHour;
 
@@ -462,14 +508,11 @@ document.addEventListener("DOMContentLoaded", () => {
     });
   }
 
-  // 인원수 텍스트 클릭 시 인원 설정 모달
-  if (travelPassengersText && travelDialog) {
-    travelPassengersText.addEventListener("click", (e) => {
-      e.stopPropagation();
-      inputPassengerCount.value = state.passengers;
-      travelDialog.showModal();
-    });
-  }
+  // 날짜와 인원은 같은 팝업에서 설정합니다.
+  travelPassengersText?.addEventListener('click', (e) => {
+    e.stopPropagation();
+    openCalendarModal();
+  });
 
   // 인원수 증감 버튼
   if (passengerMinus && passengerPlus && inputPassengerCount) {
