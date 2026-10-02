@@ -319,26 +319,33 @@
       </div>
       <div class="dialog-body">
         <div class="station-search-box">
-          <input type="text" id="station-input" class="station-search-input" placeholder="역 이름을 직접 입력하세요 (예: 대전, 광주송정)" />
+          <input type="text" id="station-input" class="station-search-input" placeholder="역 이름 또는 초성 검색 (서울 : ㅅㅇ)" autocomplete="off" />
           <button type="button" id="station-search-apply" class="dialog-action-btn">선택</button>
         </div>
-        <p class="dialog-subhead">주요 역 빠른 선택</p>
-        <div class="popular-stations-grid" id="popular-stations">
-          <button type="button" class="station-chip" data-station="서울">서울</button>
-          <button type="button" class="station-chip" data-station="용산">용산</button>
-          <button type="button" class="station-chip" data-station="영등포">영등포</button>
-          <button type="button" class="station-chip" data-station="광명">광명</button>
-          <button type="button" class="station-chip" data-station="수원">수원</button>
-          <button type="button" class="station-chip" data-station="천안아산">천안아산</button>
-          <button type="button" class="station-chip" data-station="대전">대전</button>
-          <button type="button" class="station-chip" data-station="동대구">동대구</button>
-          <button type="button" class="station-chip" data-station="부산">부산</button>
-          <button type="button" class="station-chip" data-station="울산">울산</button>
-          <button type="button" class="station-chip" data-station="포항">포항</button>
-          <button type="button" class="station-chip" data-station="광주송정">광주송정</button>
-          <button type="button" class="station-chip" data-station="목포">목포</button>
-          <button type="button" class="station-chip" data-station="전주">전주</button>
-          <button type="button" class="station-chip" data-station="강릉">강릉</button>
+
+        <!-- 검색어가 있을 때: 검색 결과 -->
+        <div class="station-results" id="station-results" hidden>
+          <p class="dialog-subhead" id="station-results-title">검색 결과</p>
+          <div class="popular-stations-grid station-scroll" id="station-results-list"></div>
+        </div>
+
+        <!-- 검색어가 없을 때: 주요역 / 지역별 탭 -->
+        <div class="station-tabs-wrap" id="station-tabs-wrap">
+          <div class="station-tabs" role="tablist">
+            <button type="button" class="station-tab is-active" role="tab" aria-selected="true" data-tab="major">주요역</button>
+            <button type="button" class="station-tab" role="tab" aria-selected="false" data-tab="region">지역별</button>
+          </div>
+
+          <div class="station-panel" id="station-panel-major">
+            <div class="popular-stations-grid station-scroll" id="popular-stations"></div>
+          </div>
+
+          <div class="station-panel" id="station-panel-region" hidden>
+            <p class="dialog-subhead">01. 지역 선택</p>
+            <div class="region-chips" id="region-chips"></div>
+            <p class="dialog-subhead">02. 역 선택</p>
+            <div class="popular-stations-grid station-scroll" id="region-stations"></div>
+          </div>
         </div>
       </div>
     </dialog>
@@ -475,6 +482,7 @@
       </div>
     </dialog>
 
+    <script src="./stations-data.js"></script>
     <script src="./main.js"></script>
   </body>
 </html>
