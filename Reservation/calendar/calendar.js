@@ -171,6 +171,10 @@ document.addEventListener('DOMContentLoaded', () => {
 
   // 열기, 닫기 및 검색 결과 표시입니다.
   document.querySelector('.calendar-button')?.addEventListener('click', () => {
+    const displayedCount = Number(passengerButton?.querySelector('span')?.textContent.match(/\d+/)?.[0]);
+    if (Number.isSafeInteger(displayedCount) && displayedCount >= 1 && displayedCount !== peopleTotal()) {
+      state.people = [displayedCount, ...state.people.slice(1).map(() => 0)];
+    }
     // 추가: 양옆 날짜 이동 버튼으로 바뀐 날짜를 다시 열 때 가져옵니다.
     if (reservationDate?.dateTime) {
       const [year, month, day] = reservationDate.dateTime.slice(0, 10).split('-').map(Number);
