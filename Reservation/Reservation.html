@@ -14,17 +14,24 @@
     <link rel="stylesheet" href="station-picker/css/map-region.css" />
     <!-- 추가: 달력 모달 스타일 -->
     <link rel="stylesheet" href="calendar/calendar.css" />
+    <link
+      rel="icon"
+      type="image/png"
+      href="../assets/아이콘/코레일_파비콘.png"
+    />
   </head>
   <body>
     <!-- 01. 헤더-->
     <header class="site-header">
-      <img
-        class="brand-logo"
-        src="assets/korail-logo.svg"
-        alt="KORAIL"
-        width="152"
-        height="37"
-      />
+      <a href="../index/main.html">
+        <img
+          class="brand-logo"
+          src="assets/korail-logo.svg"
+          alt="KORAIL"
+          width="152"
+          height="37"
+        />
+      </a>
       <nav class="utility-nav" aria-label="회원 메뉴">
         <!-- 임시 링크: 로그인 페이지 제작 전까지 클릭해도 이동하지 않음 -->
         <a class="utility-item utility-placeholder-link" href="login.html">
@@ -730,7 +737,7 @@
       </div>
     </dialog>
     <!-- 수정: 기존 iframe 역 선택 팝업을 새 station-picker 팝업으로 교체했습니다. -->
-<!-- 수정: KorailStationPicker를 출발역·도착역 공통 팝업으로 연결합니다. -->
+    <!-- 수정: KorailStationPicker를 출발역·도착역 공통 팝업으로 연결합니다. -->
     <!-- 수정: 별도 팝업 마크업 파일이 이 위치에 dialog를 생성합니다. -->
     <div id="station-picker-mount"></div>
     <!-- 탑승 인원 입력 팝업: 적용 버튼으로 입력한 숫자를 여정에 반영 -->
