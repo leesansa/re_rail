@@ -6,7 +6,7 @@ Re_rail은 코레일 홈페이지의 불편하거나 심미적으로 뒤떨어�
 
 ## 배포
 
-https://leesansa.github.io/
+https://leesansa.github.io/re_rail/
 위 배포링크 클릭시 Index 페이지로 이동
 
 ## 팀원/역할
