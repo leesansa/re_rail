@@ -39,7 +39,11 @@
 body {
   background-color: #ffffff;
   color: #222222;
-  font-family: "Korail", "Malgun Gothic", -apple-system, sans-serif;
+  font-family:
+    "Korail",
+    "Malgun Gothic",
+    -apple-system,
+    sans-serif;
   font-size: 14px;
   line-height: 1.5;
   margin: 0;
@@ -186,7 +190,13 @@ button {
    ========================================================================== */
 .booking-section {
   padding: 44px 24px 34px;
-  background: linear-gradient(112deg, #ffffff 0%, #edf5fc 35%, #56b1e6 74%, #0077c8 100%);
+  background: linear-gradient(
+    112deg,
+    #ffffff 0%,
+    #edf5fc 35%,
+    #56b1e6 74%,
+    #0077c8 100%
+  );
   position: relative;
 }
 
@@ -271,7 +281,9 @@ button {
   padding: 2px 10px;
   border-radius: 8px;
   cursor: pointer;
-  transition: background-color 0.2s ease, transform 0.15s ease;
+  transition:
+    background-color 0.2s ease,
+    transform 0.15s ease;
 }
 
 .station-btn:hover {
@@ -309,7 +321,9 @@ button {
   display: flex;
   align-items: center;
   justify-content: center;
-  transition: transform 0.3s cubic-bezier(0.34, 1.56, 0.64, 1), background-color 0.2s;
+  transition:
+    transform 0.3s cubic-bezier(0.34, 1.56, 0.64, 1),
+    background-color 0.2s;
 }
 
 .direction-btn:hover {
@@ -442,7 +456,10 @@ button {
   font-size: 21px;
   font-weight: 700;
   cursor: pointer;
-  transition: background-color 0.2s ease, transform 0.1s ease, box-shadow 0.2s ease;
+  transition:
+    background-color 0.2s ease,
+    transform 0.1s ease,
+    box-shadow 0.2s ease;
   display: flex;
   align-items: center;
   justify-content: center;
@@ -498,18 +515,40 @@ button {
 }
 
 /* 윗줄 필드 비율 */
-.simple-row-top .field-alias { flex: 1.15; }
-.simple-row-top .field-dep { flex: 1.15; }
-.simple-row-top .field-arr { flex: 1.15; }
-.simple-row-top .field-passenger { flex: 0.85; min-width: 120px; }
+.simple-row-top .field-alias {
+  flex: 1.15;
+}
+.simple-row-top .field-dep {
+  flex: 1.15;
+}
+.simple-row-top .field-arr {
+  flex: 1.15;
+}
+.simple-row-top .field-passenger {
+  flex: 0.85;
+  min-width: 120px;
+}
 
 /* 아랫줄 필드 비율 */
-.simple-row-bottom .field-train-type { flex: 1.15; }
-.simple-row-bottom .field-dep-day { flex: 0.55; }
-.simple-row-bottom .field-dep-time { flex: 0.55; }
-.simple-row-bottom .field-room { flex: 0.75; }
-.simple-row-bottom .field-seat { flex: 0.75; }
-.simple-row-bottom .field-submit { flex: 0.85; min-width: 120px; }
+.simple-row-bottom .field-train-type {
+  flex: 1.15;
+}
+.simple-row-bottom .field-dep-day {
+  flex: 0.55;
+}
+.simple-row-bottom .field-dep-time {
+  flex: 0.55;
+}
+.simple-row-bottom .field-room {
+  flex: 0.75;
+}
+.simple-row-bottom .field-seat {
+  flex: 0.75;
+}
+.simple-row-bottom .field-submit {
+  flex: 0.85;
+  min-width: 120px;
+}
 
 .simple-field {
   display: flex;
@@ -536,7 +575,9 @@ button {
   font-weight: 500;
   color: #111111;
   background-color: #ffffff;
-  transition: border-color 0.2s, box-shadow 0.2s;
+  transition:
+    border-color 0.2s,
+    box-shadow 0.2s;
 }
 
 .simple-input:focus {
@@ -573,7 +614,9 @@ button {
   cursor: pointer;
   padding: 0 6px;
   line-height: 1;
-  transition: color 0.15s, transform 0.1s;
+  transition:
+    color 0.15s,
+    transform 0.1s;
 }
 
 .simple-counter-btn:hover {
@@ -613,7 +656,9 @@ button {
   -webkit-appearance: none;
   -moz-appearance: none;
   cursor: pointer;
-  transition: border-color 0.2s, box-shadow 0.2s;
+  transition:
+    border-color 0.2s,
+    box-shadow 0.2s;
 }
 
 .simple-select:focus {
@@ -644,7 +689,10 @@ button {
   align-items: center;
   justify-content: center;
   box-shadow: 0 4px 10px rgba(11, 131, 165, 0.2);
-  transition: background-color 0.2s ease, transform 0.1s ease, box-shadow 0.2s ease;
+  transition:
+    background-color 0.2s ease,
+    transform 0.1s ease,
+    box-shadow 0.2s ease;
   white-space: nowrap;
 }
 
@@ -809,7 +857,9 @@ button {
   flex-direction: column;
   align-items: center;
   justify-content: center;
-  transition: transform 0.25s ease, box-shadow 0.25s ease;
+  transition:
+    transform 0.25s ease,
+    box-shadow 0.25s ease;
 }
 
 .chatbot:hover {
@@ -1154,8 +1204,6 @@ button {
   transform: scale(1.1);
 }
 
-
-
 /* 선택 날짜 및 시간 카드 (2컬럼) */
 .cal-time-row {
   display: flex;
@@ -1407,7 +1455,9 @@ button {
   font-weight: 700;
   cursor: pointer;
   box-shadow: 0 4px 12px rgba(24, 70, 139, 0.25);
-  transition: background-color 0.2s ease, transform 0.1s ease;
+  transition:
+    background-color 0.2s ease,
+    transform 0.1s ease;
 }
 
 .cal-search-confirm-btn:hover {
@@ -1586,28 +1636,148 @@ button {
 }
 
 /* Calendar passenger selection */
-.korail-calendar-modal { max-width: 1120px; max-height: 92vh; overflow-y: auto; }
-.cal-selection-layout { display: grid; grid-template-columns: minmax(0, 1fr) 286px; gap: 22px; }
-.cal-date-panel { min-width: 0; display: flex; flex-direction: column; gap: 16px; }
-.people-panel { border-left: 1px solid #e0e3e7; padding-left: 20px; min-width: 0; }
-.people-panel h3 { font-size: 18px; font-weight: 700; margin: 0 0 12px; }
-.people-row { display: grid; grid-template-columns: minmax(0,1fr) auto; align-items: center; gap: 8px; padding: 7px 0; }
-.people-label { display: flex; align-items: center; gap: 5px; font-size: 14px; white-space: nowrap; }
-.people-controls { display: flex; align-items: center; gap: 7px; }
-.people-controls button { width: 29px; height: 29px; border: 1px solid #dedfe2; border-radius: 50%; background: #fff; color: #555; font-size: 22px; line-height: 1; cursor: pointer; }
-.people-controls button:disabled { color: #d3d6da; background: #f1f2f3; cursor: default; }
-.people-controls output { min-width: 14px; text-align: center; font-size: 15px; font-weight: 700; }
-.people-info { border: 0; border-radius: 50%; width: 19px; height: 19px; padding: 0; color: #fff; background: #c6c8ca; font: bold 13px Georgia,serif; cursor: pointer; }
-.people-info[aria-expanded="true"] { background: #18468b; }
-.people-note { grid-column: 1 / -1; border: 1px solid #c5c5c5; padding: 18px; position: relative; background: #fff; }
-.people-note[hidden] { display: none; }
-.people-note h4 { font-size: 15px; font-weight: 700; margin: 0 24px 12px 0; }
-.people-note p { color: #788797; font-size: 13px; line-height: 1.6; margin: 0; word-break: keep-all; }
-.people-note-close { position: absolute; top: 10px; right: 10px; border: 0; background: none; color: #444; font-size: 25px; cursor: pointer; }
-.people-total { border-top: 1px solid #e0e3e7; margin-top: 12px; padding-top: 12px; font-size: 14px; text-align: right; }
-.people-limit { font-size: 12px; color: #788797; margin-top: 6px; text-align: right; }
-.people-panel button:focus-visible { outline: 2px solid #18468b; outline-offset: 3px; }
-@media (max-width: 1000px) { .cal-selection-layout { grid-template-columns: 1fr; } .people-panel { border-left: 0; border-top: 1px solid #e0e3e7; padding: 16px 0 0; } }
+.korail-calendar-modal {
+  max-width: 1120px;
+  max-height: 92vh;
+  overflow-y: auto;
+}
+.cal-selection-layout {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) 286px;
+  gap: 22px;
+}
+.cal-date-panel {
+  min-width: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+}
+.people-panel {
+  border-left: 1px solid #e0e3e7;
+  padding-left: 20px;
+  min-width: 0;
+}
+.people-panel h3 {
+  font-size: 18px;
+  font-weight: 700;
+  margin: 0 0 12px;
+}
+.people-row {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) auto;
+  align-items: center;
+  gap: 8px;
+  padding: 7px 0;
+}
+.people-label {
+  display: flex;
+  align-items: center;
+  gap: 5px;
+  font-size: 14px;
+  white-space: nowrap;
+}
+.people-controls {
+  display: flex;
+  align-items: center;
+  gap: 7px;
+}
+.people-controls button {
+  width: 29px;
+  height: 29px;
+  border: 1px solid #dedfe2;
+  border-radius: 50%;
+  background: #fff;
+  color: #555;
+  font-size: 22px;
+  line-height: 1;
+  cursor: pointer;
+}
+.people-controls button:disabled {
+  color: #d3d6da;
+  background: #f1f2f3;
+  cursor: default;
+}
+.people-controls output {
+  min-width: 14px;
+  text-align: center;
+  font-size: 15px;
+  font-weight: 700;
+}
+.people-info {
+  border: 0;
+  border-radius: 50%;
+  width: 19px;
+  height: 19px;
+  padding: 0;
+  color: #fff;
+  background: #c6c8ca;
+  font:
+    bold 13px Georgia,
+    serif;
+  cursor: pointer;
+}
+.people-info[aria-expanded="true"] {
+  background: #18468b;
+}
+.people-note {
+  grid-column: 1 / -1;
+  border: 1px solid #c5c5c5;
+  padding: 18px;
+  position: relative;
+  background: #fff;
+}
+.people-note[hidden] {
+  display: none;
+}
+.people-note h4 {
+  font-size: 15px;
+  font-weight: 700;
+  margin: 0 24px 12px 0;
+}
+.people-note p {
+  color: #788797;
+  font-size: 13px;
+  line-height: 1.6;
+  margin: 0;
+  word-break: keep-all;
+}
+.people-note-close {
+  position: absolute;
+  top: 10px;
+  right: 10px;
+  border: 0;
+  background: none;
+  color: #444;
+  font-size: 25px;
+  cursor: pointer;
+}
+.people-total {
+  border-top: 1px solid #e0e3e7;
+  margin-top: 12px;
+  padding-top: 12px;
+  font-size: 14px;
+  text-align: right;
+}
+.people-limit {
+  font-size: 12px;
+  color: #788797;
+  margin-top: 6px;
+  text-align: right;
+}
+.people-panel button:focus-visible {
+  outline: 2px solid #18468b;
+  outline-offset: 3px;
+}
+@media (max-width: 1000px) {
+  .cal-selection-layout {
+    grid-template-columns: 1fr;
+  }
+  .people-panel {
+    border-left: 0;
+    border-top: 1px solid #e0e3e7;
+    padding: 16px 0 0;
+  }
+}
 
 /* 역 선택과 날짜/인원 팝업에 공통으로 사용하는 닫기 버튼 */
 .dialog-close-btn,
@@ -1657,8 +1827,12 @@ button {
   border-radius: 1px;
   background-color: currentColor;
 }
-.popup-close-icon::before { transform: translate(-50%, -50%) rotate(45deg); }
-.popup-close-icon::after { transform: translate(-50%, -50%) rotate(-45deg); }
+.popup-close-icon::before {
+  transform: translate(-50%, -50%) rotate(45deg);
+}
+.popup-close-icon::after {
+  transform: translate(-50%, -50%) rotate(-45deg);
+}
 
 /* 도착일 선택 시 출발일 이전 날짜는 선택할 수 없습니다. */
 .cal-day-cell.unavailable-return,
@@ -1688,7 +1862,9 @@ button {
   line-height: 20px;
 }
 
-.related-sites { position: relative; }
+.related-sites {
+  position: relative;
+}
 
 .related-toggle {
   width: 120px;
@@ -1710,7 +1886,9 @@ button {
   stroke-width: 2;
   transition: transform 0.2s;
 }
-.related-toggle[aria-expanded="true"] svg { transform: rotate(180deg); }
+.related-toggle[aria-expanded="true"] svg {
+  transform: rotate(180deg);
+}
 
 /* 관련 사이트 목록: 버튼 위쪽으로 회색 상자가 펼쳐짐 */
 .related-list {
@@ -1724,16 +1902,33 @@ button {
   color: #000;
   font-size: 14px;
 }
-.related-list a { display: block; padding: 8px 14px; }
-.related-list a:hover { background: #d4d4d4; }
+.related-list a {
+  display: block;
+  padding: 8px 14px;
+}
+.related-list a:hover {
+  background: #d4d4d4;
+}
 
 /* 05. 반응형 */
 @media (max-width: 1024px) {
-  .header-nav { gap: 32px; }
-  .site-header { padding-right: 28px; }
-  .chat-title { font-size: 30px; gap: 18px; }
-  .chat-form { padding-left: 28px; padding-right: 24px; }
-  .chat-form input { font-size: 26px; }
+  .header-nav {
+    gap: 32px;
+  }
+  .site-header {
+    padding-right: 28px;
+  }
+  .chat-title {
+    font-size: 30px;
+    gap: 18px;
+  }
+  .chat-form {
+    padding-left: 28px;
+    padding-right: 24px;
+  }
+  .chat-form input {
+    font-size: 26px;
+  }
 }
 
 @media (max-width: 768px) {
@@ -1743,11 +1938,22 @@ button {
     bottom: 0;
     z-index: 10;
   }
-  .chat-main { padding: 48px 16px; }
-  .quick-list { padding-left: 0; }
-  .site-footer { padding: 6px 16px 22px; flex-direction: column; align-items: flex-start; gap: 20px 14px; }
+  .chat-main {
+    padding: 48px 16px;
+  }
+  .quick-list {
+    padding-left: 0;
+  }
+  .site-footer {
+    padding: 6px 16px 22px;
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 20px 14px;
+  }
   .menu-toggle span:last-child,
-  .header-nav { font-size: 18px; }
+  .header-nav {
+    font-size: 18px;
+  }
 }
 
 /* =====================================================================
@@ -1763,15 +1969,20 @@ button {
   flex-wrap: wrap;
   justify-content: space-around;
   gap: 6px 24px;
+  list-style: none;
+  padding: 0;
+  margin: 0;
 }
 
 .footer-links a {
   font-size: 15px;
   color: #fff;
+  text-decoration: none;
 }
 
-.footer-links a:hover { text-decoration: underline; }
-
+.footer-links a:hover {
+  text-decoration: underline;
+}
 
 :root {
   --footer-bg: #04475b;
