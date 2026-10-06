@@ -4,12 +4,12 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>코레일 예매사이트 - 할인상품</title>
-    <link rel="stylesheet" href="./reset.css" />
-    <link rel="stylesheet" href="./main.css" />
+    <link rel="stylesheet" href="./css/reset.css" />
+    <link rel="stylesheet" href="./css/main.css" />
     <!-- 추가: 새 역 선택 팝업 스타일 -->
-    <link rel="stylesheet" href="./station-picker/css/station-dialog.css" />
-    <link rel="stylesheet" href="./station-picker/css/map-region.css" />
-    <script src="../header-export/header.js" defer></script>
+    <link rel="stylesheet" href="./css/station-picker/station-dialog.css" />
+    <link rel="stylesheet" href="./css/station-picker/map-region.css" />
+    <script src="./js/header.js" defer></script>
     <link rel="icon" type="image/png" href="../assets/아이콘/코레일_파비콘.png" />
     <style>
       /* 할인상품 탭 전용 추가 스타일 */
@@ -80,22 +80,22 @@
   <body>
     <!-- 상단 헤더 -->
     <header class="site-header">
-      <img class="brand-logo" src="../header-export/assets/korail-logo.svg" alt="KORAIL" width="152" height="37" />
+      <img class="brand-logo" src="../assets/korail-logo.svg" alt="KORAIL" width="152" height="37" />
       <nav class="utility-nav" aria-label="회원 메뉴">
         <a class="utility-item utility-placeholder-link" href="login.html">
-          <img src="../header-export/assets/login.png" alt="" width="27" height="27" />
+          <img src="../assets/login.png" alt="" width="27" height="27" />
           <span>로그인</span>
         </a>
         <span class="utility-divider" aria-hidden="true">/</span>
         <a class="utility-item utility-placeholder-link" href="cart.html">
-          <img src="../header-export/assets/cart.png" alt="" width="27" height="27" />
+          <img src="../assets/cart.png" alt="" width="27" height="27" />
           <span>장바구니</span>
         </a>
         <span class="utility-divider" aria-hidden="true">/</span>
         <!-- [추가] 마이페이지: Chatbot 폴더의 마이페이지 시안으로 연결
              (utility-placeholder-link는 header.js가 클릭 이동을 막으므로 utility-link 사용) -->
         <a class="utility-item utility-link" href="../Chatbot/mypage/index.html">
-          <img src="../header-export/assets/mypage.png" alt="" width="31" height="31" />
+          <img src="../assets/mypage.png" alt="" width="31" height="31" />
           <span>마이페이지</span>
         </a>
         <span class="utility-divider" aria-hidden="true">/</span>
@@ -103,7 +103,7 @@
           <button class="utility-item utility-language" type="button"
             aria-label="언어 선택, 현재 한국어" aria-haspopup="true"
             aria-expanded="false" aria-controls="language-menu">
-            <img src="../header-export/assets/language.png" alt="" width="37" height="37" />
+            <img src="../assets/language.png" alt="" width="37" height="37" />
             <span>Langueage</span>
           </button>
           <div id="language-menu" class="utility-language-menu" role="group" aria-label="언어 목록" hidden>
@@ -484,7 +484,7 @@
             <!-- 경기도: Figma 27:29 원본 PNG와 레이어 순서 유지 -->
             <img
               class="map-region region-gyeonggi"
-              src="station-picker/assets/map/경기도.png"
+              src="../assets/map/경기도.png"
               alt="경기도"
               width="151"
               height="176"
@@ -492,7 +492,7 @@
             <!-- 강원특별자치도: Figma 27:30 원본 PNG와 레이어 순서 유지 -->
             <img
               class="map-region region-gangwon"
-              src="station-picker/assets/map/강원특별자치도.png"
+              src="../assets/map/강원특별자치도.png"
               alt="강원특별자치도"
               width="234"
               height="202"
@@ -500,7 +500,7 @@
             <!-- 충청북도: Figma 27:31 원본 PNG와 레이어 순서 유지 -->
             <img
               class="map-region region-chungbuk"
-              src="station-picker/assets/map/충청북도.png"
+              src="../assets/map/충청북도.png"
               alt="충청북도"
               width="142"
               height="159"
@@ -508,7 +508,7 @@
             <!-- 충청남도: Figma 27:32 원본 PNG와 레이어 순서 유지 -->
             <img
               class="map-region region-chungnam"
-              src="station-picker/assets/map/충청남도.png"
+              src="../assets/map/충청남도.png"
               alt="충청남도"
               width="215"
               height="139"
@@ -516,7 +516,7 @@
             <!-- 경상북도: Figma 27:33 원본 PNG와 레이어 순서 유지 -->
             <img
               class="map-region region-gyeongbuk"
-              src="station-picker/assets/map/경상북도.png"
+              src="../assets/map/경상북도.png"
               alt="경상북도"
               width="415"
               height="251"
@@ -524,7 +524,7 @@
             <!-- 전북특별자치도: Figma 27:35 원본 PNG와 레이어 순서 유지 -->
             <img
               class="map-region region-jeonbuk"
-              src="station-picker/assets/map/전북특별자치도.png"
+              src="../assets/map/전북특별자치도.png"
               alt="전북특별자치도"
               width="202"
               height="112"
@@ -532,7 +532,7 @@
             <!-- 대구광역시: Figma 27:36 원본 PNG와 레이어 순서 유지 -->
             <img
               class="map-region region-daegu"
-              src="station-picker/assets/map/대구광역시.png"
+              src="../assets/map/대구광역시.png"
               alt="대구광역시"
               width="59"
               height="94"
@@ -540,7 +540,7 @@
             <!-- 울산광역시: Figma 27:37 원본 PNG와 레이어 순서 유지 -->
             <img
               class="map-region region-ulsan"
-              src="station-picker/assets/map/울산광역시.png"
+              src="../assets/map/울산광역시.png"
               alt="울산광역시"
               width="54"
               height="54"
@@ -548,7 +548,7 @@
             <!-- 경상남도: Figma 27:38 원본 PNG와 레이어 순서 유지 -->
             <img
               class="map-region region-gyeongnam"
-              src="station-picker/assets/map/경상남도.png"
+              src="../assets/map/경상남도.png"
               alt="경상남도"
               width="169"
               height="179"
@@ -556,7 +556,7 @@
             <!-- 전라남도: Figma 27:39 원본 PNG와 레이어 순서 유지 -->
             <img
               class="map-region region-jeonnam"
-              src="station-picker/assets/map/전라남도.png"
+              src="../assets/map/전라남도.png"
               alt="전라남도"
               width="293"
               height="196"
@@ -564,7 +564,7 @@
             <!-- 서울특별시: Figma 27:41 원본 PNG와 레이어 순서 유지 -->
             <img
               class="map-region region-seoul"
-              src="station-picker/assets/map/서울특별시.png"
+              src="../assets/map/서울특별시.png"
               alt="서울특별시"
               width="45"
               height="38"
@@ -572,7 +572,7 @@
             <!-- 인천광역시: Figma 27:42 원본 PNG와 레이어 순서 유지 -->
             <img
               class="map-region region-incheon"
-              src="station-picker/assets/map/인천광역시.png"
+              src="../assets/map/인천광역시.png"
               alt="인천광역시"
               width="229"
               height="140"
@@ -580,7 +580,7 @@
             <!-- 광주광역시: Figma 27:40 원본 PNG와 레이어 순서 유지 -->
             <img
               class="map-region region-gwangju"
-              src="station-picker/assets/map/광주광역시.png"
+              src="../assets/map/광주광역시.png"
               alt="광주광역시"
               width="43"
               height="30"
@@ -588,7 +588,7 @@
             <!-- 대전광역시: Figma 27:82 원본 PNG와 레이어 순서 유지 -->
             <img
               class="map-region region-daejeon"
-              src="station-picker/assets/map/대전광역시.png"
+              src="../assets/map/대전광역시.png"
               alt="대전광역시"
               width="35"
               height="44"
@@ -596,7 +596,7 @@
             <!-- 세종특별자치시: Figma 27:83 원본 PNG와 레이어 순서 유지 -->
             <img
               class="map-region region-sejong"
-              src="station-picker/assets/map/세종특별자치시.png"
+              src="../assets/map/세종특별자치시.png"
               alt="세종특별자치시"
               width="32"
               height="45"
@@ -604,7 +604,7 @@
             <!-- 부산광역시 1: Figma 33:4 원본 PNG, 마지막 지역 레이어의 순서 유지 -->
             <img
               class="map-region region-busan"
-              src="station-picker/assets/map/부산광역시.png"
+              src="../assets/map/부산광역시.png"
               alt="부산광역시"
               width="59"
               height="67"
@@ -824,11 +824,11 @@
 
     <!-- 기존 역 목록 스크립트 (새 패키지 데이터로 교체): <script src="./stations-data.js"></script> -->
     <!-- 추가: 새 역 선택 팝업 데이터·지도·동작 -->
-    <script src="./station-picker/js/stations-data.js"></script>
-    <script src="./station-picker/js/map-region-mask-data.js"></script>
-    <script src="./station-picker/js/map-region.js"></script>
-    <script src="./station-picker/js/station-dialog.js"></script>
-    <script src="./main.js"></script>
+    <script src="./js/station-picker/stations-data.js"></script>
+    <script src="./js/station-picker/map-region-mask-data.js"></script>
+    <script src="./js/station-picker/map-region.js"></script>
+    <script src="./js/station-picker/station-dialog.js"></script>
+    <script src="./js/main.js"></script>
     <script>
       document.addEventListener("DOMContentLoaded", function () {
         const tabs = document.querySelectorAll(".booking-tab");

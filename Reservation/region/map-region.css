@@ -3,7 +3,7 @@
 /* 00. 공통 설정: 원본 화면의 Korail M 글꼴과 색상 */
 @font-face {
   font-family: "Korail";
-  src: url("../assets/region/map/Korail-M.ttf") format("truetype");
+  src: url("../../assets/Korail-M.ttf") format("truetype");
   font-weight: 500;
   font-style: normal;
   font-display: swap;

@@ -1,6 +1,6 @@
 [
   {
-    "file": "../assets/region/map/경기도.png",
+    "file": "../../assets/map/경기도.png",
     "node": "27:29",
     "order": "!",
     "sourceFile": "../../assets/코레일_리디자인.fig",
@@ -11,7 +11,7 @@
     "position": [446, 115]
   },
   {
-    "file": "../assets/region/map/강원특별자치도.png",
+    "file": "../../assets/map/강원특별자치도.png",
     "node": "27:30",
     "order": "\"",
     "sourceFile": "../../assets/코레일_리디자인.fig",
@@ -22,7 +22,7 @@
     "position": [517, 73]
   },
   {
-    "file": "../assets/region/map/충청북도.png",
+    "file": "../../assets/map/충청북도.png",
     "node": "27:31",
     "order": "#",
     "sourceFile": "../../assets/코레일_리디자인.fig",
@@ -33,7 +33,7 @@
     "position": [536, 242]
   },
   {
-    "file": "../assets/region/map/충청남도.png",
+    "file": "../../assets/map/충청남도.png",
     "node": "27:32",
     "order": "$",
     "sourceFile": "../../assets/코레일_리디자인.fig",
@@ -44,7 +44,7 @@
     "position": [361, 266]
   },
   {
-    "file": "../assets/region/map/경상북도.png",
+    "file": "../../assets/map/경상북도.png",
     "node": "27:33",
     "order": "%",
     "sourceFile": "../../assets/코레일_리디자인.fig",
@@ -55,7 +55,7 @@
     "position": [588, 206]
   },
   {
-    "file": "../assets/region/map/전북특별자치도.png",
+    "file": "../../assets/map/전북특별자치도.png",
     "node": "27:35",
     "order": "&",
     "sourceFile": "../../assets/코레일_리디자인.fig",
@@ -66,7 +66,7 @@
     "position": [402, 379]
   },
   {
-    "file": "../assets/region/map/대구광역시.png",
+    "file": "../../assets/map/대구광역시.png",
     "node": "27:36",
     "order": "'",
     "sourceFile": "../../assets/코레일_리디자인.fig",
@@ -77,7 +77,7 @@
     "position": [644, 358]
   },
   {
-    "file": "../assets/region/map/울산광역시.png",
+    "file": "../../assets/map/울산광역시.png",
     "node": "27:37",
     "order": "(",
     "sourceFile": "../../assets/코레일_리디자인.fig",
@@ -88,7 +88,7 @@
     "position": [706, 433]
   },
   {
-    "file": "../assets/region/map/경상남도.png",
+    "file": "../../assets/map/경상남도.png",
     "node": "27:38",
     "order": ")",
     "sourceFile": "../../assets/코레일_리디자인.fig",
@@ -99,7 +99,7 @@
     "position": [566, 411]
   },
   {
-    "file": "../assets/region/map/전라남도.png",
+    "file": "../../assets/map/전라남도.png",
     "node": "27:39",
     "order": "*",
     "sourceFile": "../../assets/코레일_리디자인.fig",
@@ -110,7 +110,7 @@
     "position": [311, 463]
   },
   {
-    "file": "../assets/region/map/광주광역시.png",
+    "file": "../../assets/map/광주광역시.png",
     "node": "27:40",
     "order": "+",
     "sourceFile": "../../assets/코레일_리디자인.fig",
@@ -121,7 +121,7 @@
     "position": [471, 492]
   },
   {
-    "file": "../assets/region/map/서울특별시.png",
+    "file": "../../assets/map/서울특별시.png",
     "node": "27:41",
     "order": "*O",
     "sourceFile": "../../assets/코레일_리디자인.fig",
@@ -132,7 +132,7 @@
     "position": [485, 187]
   },
   {
-    "file": "../assets/region/map/인천광역시.png",
+    "file": "../../assets/map/인천광역시.png",
     "node": "27:42",
     "order": "*f",
     "sourceFile": "../../assets/코레일_리디자인.fig",
@@ -143,7 +143,7 @@
     "position": [262, 150]
   },
   {
-    "file": "../assets/region/map/대전광역시.png",
+    "file": "../../assets/map/대전광역시.png",
     "node": "27:82",
     "order": ",",
     "sourceFile": "../../assets/코레일_리디자인.fig",
@@ -154,7 +154,7 @@
     "position": [533, 336]
   },
   {
-    "file": "../assets/region/map/세종특별자치시.png",
+    "file": "../../assets/map/세종특별자치시.png",
     "node": "27:83",
     "order": "-",
     "sourceFile": "../../assets/코레일_리디자인.fig",
@@ -165,7 +165,7 @@
     "position": [521, 307]
   },
   {
-    "file": "../assets/region/map/부산광역시.png",
+    "file": "../../assets/map/부산광역시.png",
     "node": "33:4",
     "order": ".",
     "sourceFile": "../../assets/코레일_리디자인.fig",
@@ -176,19 +176,19 @@
     "position": [685, 476]
   },
   {
-    "file": "../assets/region/map/search.svg",
+    "file": "../../assets/아이콘/아이콘_예매상새3.svg",
     "sourceFile": "../../assets/아이콘/아이콘_예매상새3.svg",
     "sha256": "63ad32ce697ac18e9b6cdfbc5fcf068c36e52b64d837d8150ec23e9831e2e68d",
     "node": "27:13"
   },
   {
-    "file": "../assets/region/map/Korail-M.ttf",
-    "sourceFile": "../assets/Korail-M.ttf",
+    "file": "../../assets/Korail-M.ttf",
+    "sourceFile": "../../assets/Korail-M.ttf",
     "sha256": "65e8172af2e5312087e8c2b1aa72c55e4f9b4343ed3f532d5344060b43fc0b7b",
     "node": null
   },
   {
-    "file": "../assets/region/map/close.svg",
+    "file": "../../assets/map/close.svg",
     "sourceFile": "../../assets/코레일_리디자인.fig",
     "sourceNodes": ["27:6", "27:7"],
     "export": "Unchanged original vector geometry; translated into a local viewBox",

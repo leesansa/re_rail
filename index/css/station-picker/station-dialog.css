@@ -23,14 +23,14 @@
 }
 
 
-/* 추가: 독립 패키지의 기본 스타일을 역 선택 모달 안으로 한정합니다. */
-.custom-dialog { --korail-teal: #0b83a5; color: #222; font: 14px/1.5 "Korail", "Malgun Gothic", sans-serif; }
-.custom-dialog button,
-.custom-dialog input { font-family: inherit; }
-.custom-dialog button { cursor: pointer; }
-.custom-dialog p { margin: 0; }
-.custom-dialog button:focus-visible { outline: 2px solid var(--korail-teal); outline-offset: 2px; }
-.custom-dialog [hidden] { display: none !important; }
+/* 추가: 독립 패키지의 공통 규칙을 역 선택 모달 안으로 제한합니다. */
+#station-dialog { color: #222; font: 14px/1.5 "Korail", "Malgun Gothic", sans-serif; }
+#station-dialog button,
+#station-dialog input { font-family: inherit; }
+#station-dialog button { cursor: pointer; }
+#station-dialog p { margin: 0; }
+#station-dialog button:focus-visible { outline: 2px solid var(--korail-teal); outline-offset: 2px; }
+#station-dialog [hidden] { display: none !important; }
 .custom-dialog {
   border: none;
   border-radius: 16px;
@@ -225,7 +225,7 @@
 
 /* 작은 화면: 검색 버튼과 입력란이 겹치지 않도록 합니다. */
 .station-search-input { min-width: 0; }
-.custom-dialog { max-height: calc(100dvh - 32px); overflow-y: auto; }
+#station-dialog { max-height: calc(100dvh - 32px); overflow-y: auto; }
 @media (max-width: 400px) {
   .dialog-header { padding: 18px 16px; }
   .dialog-body { padding: 20px 16px; }

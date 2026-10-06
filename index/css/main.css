@@ -1,0 +1,1669 @@
+@charset "UTF-8";
+
+/* ==========================================================================
+   00. 폰트 및 공통 설정
+   ========================================================================== */
+@font-face {
+  font-family: "Korail";
+  src: url("../../assets/Korail-L.ttf") format("truetype");
+  font-weight: 300;
+  font-style: normal;
+  font-display: swap;
+}
+@font-face {
+  font-family: "Korail";
+  src: url("../../assets/Korail-M.ttf") format("truetype");
+  font-weight: 500;
+  font-style: normal;
+  font-display: swap;
+}
+@font-face {
+  font-family: "Korail";
+  src: url("../../assets/Korail-B.ttf") format("truetype");
+  font-weight: 700;
+  font-style: normal;
+  font-display: swap;
+}
+
+:root {
+  --korail-teal: #0b83a5;
+  --korail-teal-hover: #096f8c;
+  --korail-blue: #0077c8;
+  --korail-light-teal: #bce2ee;
+  --korail-teal-dark-text: #09526d;
+  --korail-inactive-tab: #d6d7dc;
+  --korail-inactive-pill: #dedede;
+  --korail-border: #b4b3b3;
+}
+
+body {
+  background-color: #ffffff;
+  color: #222222;
+  font-family: "Korail", "Malgun Gothic", -apple-system, sans-serif;
+  font-size: 14px;
+  line-height: 1.5;
+  margin: 0;
+  padding: 0;
+}
+
+button {
+  font-family: inherit;
+}
+
+/* ==========================================================================
+   01. 사이트 헤더
+   ========================================================================== */
+.site-header {
+  color: #000;
+  height: 58px;
+  padding: 10px 31px 9px 33px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  border-bottom: 1px solid var(--korail-border);
+  background-color: #ffffff;
+}
+
+.brand-logo {
+  object-fit: contain;
+}
+
+.utility-nav {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  font-size: 15px;
+  font-weight: 700;
+  line-height: 18px;
+}
+
+.utility-item {
+  display: flex;
+  align-items: center;
+  gap: 4px;
+  padding: 0;
+  border: 0;
+  background: transparent;
+  white-space: nowrap;
+}
+
+.utility-item img {
+  object-fit: contain;
+  flex-shrink: 0;
+}
+
+.utility-divider {
+  font-size: 20px;
+  font-weight: 300;
+  color: #888;
+}
+
+.utility-placeholder-link {
+  color: inherit;
+  text-decoration: none;
+  cursor: pointer;
+}
+
+.utility-placeholder-link:hover {
+  opacity: 0.75;
+  text-decoration: underline;
+}
+
+.utility-placeholder-link:focus-visible {
+  outline: 3px solid var(--korail-teal);
+  outline-offset: 3px;
+}
+
+/* [추가] 실제로 이동하는 헤더 링크 (마이페이지) - utility-placeholder-link와 같은 모양 */
+.utility-link {
+  color: inherit;
+  text-decoration: none;
+  cursor: pointer;
+}
+
+.utility-link:hover {
+  opacity: 0.75;
+  text-decoration: underline;
+}
+
+.utility-link:focus-visible {
+  outline: 3px solid var(--korail-teal);
+  outline-offset: 3px;
+}
+
+.utility-language {
+  gap: 0;
+  cursor: pointer;
+}
+
+.utility-language-control {
+  position: relative;
+  z-index: 20;
+}
+
+.utility-language-menu {
+  position: absolute;
+  top: calc(100% + 4px);
+  right: 0;
+  width: 132px;
+  max-height: 120px;
+  overflow-y: auto;
+  display: flex;
+  flex-direction: column;
+  border: 1px solid #dadada;
+  border-radius: 10px;
+  background: #fff;
+  box-shadow: 0 8px 20px rgba(0, 0, 0, 0.12);
+}
+
+.utility-language-menu[hidden] {
+  display: none;
+}
+
+.utility-language-menu button {
+  flex: 0 0 38px;
+  padding: 0 12px;
+  border: 0;
+  background: #fff;
+  text-align: left;
+  font: inherit;
+  cursor: pointer;
+}
+
+.utility-language-menu button:hover,
+.utility-language-menu button[aria-pressed="true"] {
+  background: #f0f0f0;
+}
+
+.utility-language:focus-visible,
+.utility-language-menu button:focus-visible {
+  outline: 3px solid var(--korail-teal);
+  outline-offset: 2px;
+}
+
+/* ==========================================================================
+   02. 예매 영역 (Booking Section)
+   ========================================================================== */
+.booking-section {
+  padding: 44px 24px 34px;
+  background: linear-gradient(112deg, #ffffff 0%, #edf5fc 35%, #56b1e6 74%, #0077c8 100%);
+  position: relative;
+}
+
+.booking-box {
+  max-width: 1052px;
+  margin: 0 auto;
+  width: 100%;
+}
+
+/* 상단 탭: 기차예매 / 간편예매 / 할인상품 */
+.booking-menu {
+  display: flex;
+  justify-content: space-between;
+  gap: 22px;
+}
+
+.booking-tab {
+  flex: 1;
+  min-height: 64px;
+  border: none;
+  border-radius: 12px;
+  background-color: var(--korail-inactive-tab);
+  color: #ffffff;
+  font-size: 21px;
+  font-weight: 700;
+  cursor: pointer;
+  transition: all 0.25s ease;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  letter-spacing: -0.3px;
+}
+
+.booking-tab:hover:not(.active) {
+  background-color: #c8cbd2;
+}
+
+.booking-tab.active {
+  background-color: var(--korail-teal);
+  color: #ffffff;
+  box-shadow: 0 4px 12px rgba(11, 131, 165, 0.25);
+}
+
+.booking-tab:focus-visible {
+  outline: 3px solid var(--korail-blue);
+  outline-offset: 2px;
+}
+
+/* 예매 박스 본체 */
+.booking-content {
+  margin-top: 14px;
+  background-color: #ffffff;
+  border-radius: 16px;
+  box-shadow: 0 6px 24px rgba(0, 0, 0, 0.07);
+  padding: 24px 36px 20px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 20px;
+}
+
+/* 출발역 / 도착역 박스 */
+.station {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  min-width: 130px;
+  padding: 8px 12px;
+}
+
+.station-label {
+  font-size: 15px;
+  font-weight: 700;
+  color: #333333;
+  margin-bottom: 8px;
+}
+
+.station-btn {
+  background: transparent;
+  border: none;
+  padding: 2px 10px;
+  border-radius: 8px;
+  cursor: pointer;
+  transition: background-color 0.2s ease, transform 0.15s ease;
+}
+
+.station-btn:hover {
+  background-color: #f1f7fa;
+  transform: translateY(-2px);
+}
+
+.station-btn:focus-visible {
+  outline: 2px solid var(--korail-teal);
+}
+
+.station-name {
+  font-size: 38px;
+  font-weight: 700;
+  color: #000000;
+  line-height: 1.2;
+  letter-spacing: -0.5px;
+  white-space: nowrap;
+}
+
+/* 방향 화살표 및 스왑 버튼 */
+.direction-container {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding-top: 24px;
+}
+
+.direction-btn {
+  background: transparent;
+  border: none;
+  cursor: pointer;
+  padding: 10px;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: transform 0.3s cubic-bezier(0.34, 1.56, 0.64, 1), background-color 0.2s;
+}
+
+.direction-btn:hover {
+  background-color: #f0f7fb;
+  transform: scale(1.15);
+}
+
+.direction-btn.swapped {
+  transform: rotate(180deg) scale(1.15);
+}
+
+.direction-btn:focus-visible {
+  outline: 2px solid var(--korail-teal);
+}
+
+.direction-arrow {
+  display: block;
+}
+
+/* 우측 옵션 영역 */
+.booking-options {
+  width: 340px;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-end;
+  gap: 12px;
+}
+
+/* 편도 / 왕복 버튼 */
+.trip-menu {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.trip-btn {
+  border: none;
+  border-radius: 20px;
+  padding: 6px 18px;
+  font-size: 14.5px;
+  font-weight: 700;
+  cursor: pointer;
+  transition: all 0.2s ease;
+  min-width: 64px;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.trip-btn:not(.active) {
+  background-color: var(--korail-inactive-pill);
+  color: #ffffff;
+}
+
+.trip-btn:not(.active):hover {
+  background-color: #cfcfcf;
+}
+
+.trip-btn.active {
+  background-color: var(--korail-light-teal);
+  color: var(--korail-teal-dark-text);
+}
+
+.trip-btn:focus-visible {
+  outline: 2px solid var(--korail-teal);
+}
+
+/* 날짜 및 인원 표시 줄 */
+.travel-info {
+  display: flex;
+  align-items: center;
+  justify-content: flex-end;
+  gap: 8px;
+  cursor: pointer;
+  padding: 4px 8px;
+  border-radius: 6px;
+  transition: background-color 0.2s ease;
+  user-select: none;
+}
+
+.travel-info:hover {
+  background-color: #f1f7fa;
+}
+
+.travel-info:focus-visible {
+  outline: 2px solid var(--korail-teal);
+}
+
+.travel-date-wrap {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+}
+
+.calendar-icon {
+  width: 17px;
+  height: 17px;
+  flex-shrink: 0;
+}
+
+.date-text {
+  font-size: 14px;
+  font-weight: 700;
+  color: #222222;
+  white-space: nowrap;
+}
+
+.travel-divider {
+  font-size: 14px;
+  font-weight: 300;
+  color: #999999;
+  margin: 0 2px;
+}
+
+.passengers-text {
+  font-size: 14px;
+  font-weight: 700;
+  color: #222222;
+  white-space: nowrap;
+}
+
+/* 조회 버튼 */
+.search-btn {
+  background-color: var(--korail-teal);
+  color: #ffffff;
+  border: none;
+  border-radius: 8px;
+  width: 180px;
+  height: 52px;
+  font-size: 21px;
+  font-weight: 700;
+  cursor: pointer;
+  transition: background-color 0.2s ease, transform 0.1s ease, box-shadow 0.2s ease;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  box-shadow: 0 4px 10px rgba(11, 131, 165, 0.2);
+}
+
+.search-btn:hover {
+  background-color: var(--korail-teal-hover);
+  box-shadow: 0 6px 14px rgba(11, 131, 165, 0.3);
+}
+
+.search-btn:active {
+  transform: scale(0.98);
+}
+
+.search-btn:focus-visible {
+  outline: 3px solid var(--korail-blue);
+  outline-offset: 2px;
+}
+
+/* 탭 패널 전환 공통 */
+.tab-panel[hidden] {
+  display: none !important;
+}
+
+.tab-panel.active {
+  display: flex;
+}
+
+.simple-booking-panel.active {
+  display: block;
+}
+
+/* ==========================================================================
+   02-1. 간편예매 폼 스타일
+   ========================================================================== */
+.simple-booking-panel {
+  padding: 24px 34px 22px;
+}
+
+.simple-booking-form {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+  width: 100%;
+}
+
+.simple-form-row {
+  display: flex;
+  align-items: flex-end;
+  gap: 16px;
+  width: 100%;
+}
+
+/* 윗줄 필드 비율 */
+.simple-row-top .field-alias { flex: 1.15; }
+.simple-row-top .field-dep { flex: 1.15; }
+.simple-row-top .field-arr { flex: 1.15; }
+.simple-row-top .field-passenger { flex: 0.85; min-width: 120px; }
+
+/* 아랫줄 필드 비율 */
+.simple-row-bottom .field-train-type { flex: 1.15; }
+.simple-row-bottom .field-dep-day { flex: 0.55; }
+.simple-row-bottom .field-dep-time { flex: 0.55; }
+.simple-row-bottom .field-room { flex: 0.75; }
+.simple-row-bottom .field-seat { flex: 0.75; }
+.simple-row-bottom .field-submit { flex: 0.85; min-width: 120px; }
+
+.simple-field {
+  display: flex;
+  flex-direction: column;
+  min-width: 0;
+}
+
+.simple-label {
+  font-size: 14px;
+  font-weight: 700;
+  color: #111111;
+  margin-bottom: 7px;
+  display: block;
+  white-space: nowrap;
+}
+
+.simple-input {
+  width: 100%;
+  height: 38px;
+  padding: 0 12px;
+  border: 1px solid #767676;
+  border-radius: 8px;
+  font-size: 14px;
+  font-weight: 500;
+  color: #111111;
+  background-color: #ffffff;
+  transition: border-color 0.2s, box-shadow 0.2s;
+}
+
+.simple-input:focus {
+  outline: none;
+  border-color: var(--korail-teal);
+  box-shadow: 0 0 0 2px rgba(11, 131, 165, 0.2);
+}
+
+.simple-input::placeholder {
+  color: #8c8c8c;
+  font-size: 13.5px;
+  font-weight: 400;
+}
+
+/* 인원 카운터 */
+.simple-counter {
+  width: 100%;
+  height: 38px;
+  border: 1px solid #767676;
+  border-radius: 8px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 0 6px;
+  background-color: #ffffff;
+}
+
+.simple-counter-btn {
+  background: transparent;
+  border: none;
+  font-size: 18px;
+  font-weight: 700;
+  color: #111111;
+  cursor: pointer;
+  padding: 0 6px;
+  line-height: 1;
+  transition: color 0.15s, transform 0.1s;
+}
+
+.simple-counter-btn:hover {
+  color: var(--korail-teal);
+}
+
+.simple-counter-btn:active {
+  transform: scale(0.9);
+}
+
+.simple-counter-val {
+  font-size: 14px;
+  font-weight: 700;
+  color: #111111;
+  user-select: none;
+}
+
+/* 셀렉트 드롭다운 */
+.simple-select-wrap {
+  position: relative;
+  width: 100%;
+  display: flex;
+  align-items: center;
+}
+
+.simple-select {
+  width: 100%;
+  height: 38px;
+  padding: 0 24px 0 12px;
+  border: 1px solid #767676;
+  border-radius: 8px;
+  font-size: 14px;
+  font-weight: 500;
+  color: #111111;
+  background-color: #ffffff;
+  appearance: none;
+  -webkit-appearance: none;
+  -moz-appearance: none;
+  cursor: pointer;
+  transition: border-color 0.2s, box-shadow 0.2s;
+}
+
+.simple-select:focus {
+  outline: none;
+  border-color: var(--korail-teal);
+  box-shadow: 0 0 0 2px rgba(11, 131, 165, 0.2);
+}
+
+.select-triangle {
+  position: absolute;
+  right: 10px;
+  pointer-events: none;
+  display: block;
+}
+
+/* 저장/조회 버튼 */
+.simple-submit-btn {
+  width: 100%;
+  height: 48px;
+  background-color: var(--korail-teal);
+  color: #ffffff;
+  font-size: 20px;
+  font-weight: 700;
+  border: none;
+  border-radius: 8px;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  box-shadow: 0 4px 10px rgba(11, 131, 165, 0.2);
+  transition: background-color 0.2s ease, transform 0.1s ease, box-shadow 0.2s ease;
+  white-space: nowrap;
+}
+
+.simple-submit-btn:hover {
+  background-color: var(--korail-teal-hover);
+  box-shadow: 0 6px 14px rgba(11, 131, 165, 0.3);
+}
+
+.simple-submit-btn:active {
+  transform: scale(0.98);
+}
+
+.simple-submit-btn:focus-visible {
+  outline: 3px solid var(--korail-blue);
+  outline-offset: 2px;
+}
+
+/* ==========================================================================
+   03. 메인 콘텐츠 (퀵 메뉴 6개, 배너)
+   ========================================================================== */
+.main-content {
+  width: calc(100% - 48px);
+  max-width: 1166px;
+  margin: 0 auto;
+  padding-bottom: 60px;
+}
+
+/* 퀵 메뉴 바로가기 6개 */
+.quick-menu {
+  max-width: 860px;
+  margin: 28px auto 32px;
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  gap: 16px;
+}
+
+.quick-item {
+  flex: 1;
+  min-width: 0;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-decoration: none;
+  color: #111111;
+  transition: transform 0.25s ease;
+}
+
+.quick-icon {
+  width: 90px;
+  height: 93px;
+  margin: 0 auto 8px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: transparent;
+  border: none;
+  box-shadow: none;
+  transition: transform 0.25s ease;
+}
+
+.quick-icon img {
+  width: 100%;
+  height: 100%;
+  object-fit: contain;
+  display: block;
+}
+
+.quick-item:hover .quick-icon {
+  transform: translateY(-4px);
+}
+
+.quick-item:hover .quick-text {
+  color: var(--korail-teal);
+}
+
+.quick-item:focus-visible {
+  outline: 2px solid var(--korail-teal);
+  outline-offset: 4px;
+  border-radius: 8px;
+}
+
+.quick-text {
+  font-size: 13.5px;
+  font-weight: 700;
+  line-height: 1.35;
+  text-align: center;
+  color: #111111;
+  transition: color 0.2s ease;
+}
+
+/* 대형 메인 배너 */
+.main-banner-wrapper {
+  margin: 10px 0 24px;
+  border-radius: 12px;
+  overflow: hidden;
+  box-shadow: 0 4px 16px rgba(0, 0, 0, 0.06);
+}
+
+.main-banner-wrapper a {
+  display: block;
+  overflow: hidden;
+}
+
+.main-banner {
+  width: 100%;
+  height: auto;
+  display: block;
+  transform-origin: center center;
+  transition: transform 0.5s ease;
+}
+
+/* 하단 서브 배너 2개 */
+.sub-banners {
+  display: flex;
+  gap: 32px;
+}
+
+.sub-banner-link {
+  flex: 1;
+  min-width: 0;
+  border-radius: 12px;
+  overflow: hidden;
+  box-shadow: 0 4px 16px rgba(0, 0, 0, 0.06);
+  display: block;
+  text-decoration: none;
+}
+
+.sub-banner {
+  width: 100%;
+  height: 270px;
+  object-fit: cover;
+  display: block;
+  transition: transform 0.4s ease;
+}
+
+.sub-banner-link:hover .sub-banner {
+  transform: scale(1.03);
+}
+
+.sub-banner-link:focus-visible {
+  outline: 3px solid var(--korail-teal);
+  outline-offset: 3px;
+}
+
+/* ==========================================================================
+   04. 플로팅 챗봇
+   ========================================================================== */
+.chatbot {
+  text-decoration: none;
+  z-index: 100;
+  position: fixed;
+  right: 28px;
+  bottom: 48px;
+  width: 96px;
+  height: 96px;
+  border-radius: 50%;
+  background-color: #0066b3;
+  border: 2px solid #004b87;
+  box-shadow: 0 8px 24px rgba(0, 102, 179, 0.35);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  transition: transform 0.25s ease, box-shadow 0.25s ease;
+}
+
+.chatbot:hover {
+  transform: translateY(-4px) scale(1.04);
+  box-shadow: 0 12px 28px rgba(0, 102, 179, 0.45);
+}
+
+.chatbot img {
+  width: 58px;
+  height: 58px;
+  object-fit: contain;
+}
+
+.chatbot span {
+  color: #ffffff;
+  font-size: 14px;
+  font-weight: 700;
+  line-height: 16px;
+}
+
+.chatbot:focus-visible {
+  outline: 3px solid #004b87;
+  outline-offset: 4px;
+}
+
+/* ==========================================================================
+   05. 모달 다이얼로그 (역 선택 / 날짜 및 인원 선택)
+   ========================================================================== */
+.custom-dialog {
+  border: none;
+  border-radius: 16px;
+  padding: 0;
+  width: 90%;
+  max-width: 480px;
+  box-shadow: 0 16px 40px rgba(0, 0, 0, 0.2);
+  background-color: #ffffff;
+}
+
+.custom-dialog::backdrop {
+  background: rgba(0, 0, 0, 0.45);
+  backdrop-filter: blur(2px);
+}
+
+.dialog-header {
+  padding: 18px 24px;
+  border-bottom: 1px solid #eeeeee;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.dialog-header h2 {
+  font-size: 18px;
+  font-weight: 700;
+  color: #111;
+  margin: 0;
+}
+
+.dialog-close-btn {
+  background: transparent;
+  border: none;
+  font-size: 26px;
+  line-height: 1;
+  color: #888;
+  cursor: pointer;
+  padding: 4px;
+}
+
+.dialog-close-btn:hover {
+  color: #000;
+}
+
+.dialog-body {
+  padding: 20px 24px;
+}
+
+/* 기존 역 선택 팝업 전용 스타일 (새 패키지로 교체)
+.station-search-box {
+  display: flex;
+  gap: 8px;
+  margin-bottom: 18px;
+}
+
+.station-search-input {
+  flex: 1;
+  padding: 10px 14px;
+  border: 1px solid #cccccc;
+  border-radius: 8px;
+  font-size: 14px;
+}
+
+.station-search-input:focus {
+  outline: none;
+  border-color: var(--korail-teal);
+  box-shadow: 0 0 0 2px rgba(11, 131, 165, 0.2);
+}
+
+.dialog-action-btn {
+  background-color: var(--korail-teal);
+  color: #ffffff;
+  border: none;
+  border-radius: 8px;
+  padding: 0 16px;
+  font-weight: 700;
+  cursor: pointer;
+}
+
+.dialog-subhead {
+  font-size: 13px;
+  font-weight: 700;
+  color: #666;
+  margin-bottom: 10px;
+}
+
+.popular-stations-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 8px;
+}
+
+.station-chip {
+  padding: 10px 8px;
+  background-color: #f4f6f8;
+  border: 1px solid #e1e4e8;
+  border-radius: 8px;
+  font-size: 14px;
+  font-weight: 500;
+  cursor: pointer;
+  transition: all 0.2s ease;
+}
+
+.station-chip:hover {
+  background-color: #e6f3f8;
+  border-color: var(--korail-teal);
+  color: var(--korail-teal);
+}
+
+ 역 선택: 주요역 / 지역별 탭, 지역 버튼, 긴 목록 스크롤 (코레일 역 선택 모달 구조)
+.station-tabs {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  margin-bottom: 16px;
+  border-bottom: 1px solid #e1e4e8;
+}
+
+.station-tab {
+  padding: 10px 0;
+  border: none;
+  border-bottom: 2px solid transparent;
+  background: none;
+  font-size: 14px;
+  font-weight: 600;
+  color: #666;
+  cursor: pointer;
+}
+
+.station-tab.is-active {
+  border-bottom-color: var(--korail-teal);
+  color: var(--korail-teal);
+}
+
+.region-chips {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 6px;
+  margin-bottom: 16px;
+}
+
+.region-chip {
+  padding: 7px 4px;
+  border: 1px solid #e1e4e8;
+  border-radius: 999px;
+  background: #fff;
+  font-size: 13px;
+  cursor: pointer;
+}
+
+.region-chip.is-active {
+  border-color: var(--korail-teal);
+  background: var(--korail-teal);
+  color: #fff;
+  font-weight: 700;
+}
+
+.station-scroll {
+  max-height: 300px;
+  overflow-y: auto;
+  padding-right: 4px;
+}
+*/
+
+/* 날짜/인원 폼 필드 */
+.form-group {
+  margin-bottom: 18px;
+}
+
+.form-label {
+  display: block;
+  font-size: 13.5px;
+  font-weight: 700;
+  color: #333;
+  margin-bottom: 6px;
+}
+
+.form-input {
+  width: 100%;
+  padding: 10px 12px;
+  border: 1px solid #cccccc;
+  border-radius: 8px;
+  font-size: 14px;
+}
+
+.passenger-counter {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+
+.counter-btn {
+  width: 38px;
+  height: 38px;
+  border-radius: 8px;
+  border: 1px solid #ccc;
+  background-color: #f7f7f7;
+  font-size: 20px;
+  font-weight: 700;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.counter-btn:hover {
+  background-color: #e9ecef;
+}
+
+.counter-input {
+  width: 60px;
+  text-align: center;
+  padding: 8px;
+  font-size: 16px;
+  font-weight: 700;
+  border: 1px solid #ccc;
+  border-radius: 8px;
+}
+
+.dialog-footer {
+  margin-top: 24px;
+  display: flex;
+  justify-content: flex-end;
+}
+
+.dialog-confirm-btn {
+  background-color: var(--korail-teal);
+  color: #ffffff;
+  border: none;
+  border-radius: 8px;
+  padding: 12px 24px;
+  font-size: 15px;
+  font-weight: 700;
+  cursor: pointer;
+  width: 100%;
+}
+
+.dialog-confirm-btn:hover {
+  background-color: var(--korail-teal-hover);
+}
+
+/* ==========================================================================
+   05-1. 코레일 날짜/시간 선택 듀얼 캘린더 모달
+   ========================================================================== */
+.korail-calendar-modal {
+  border: none;
+  border-radius: 16px;
+  padding: 0;
+  width: 90%;
+  max-width: 780px;
+  background-color: #ffffff;
+  box-shadow: 0 16px 40px rgba(0, 0, 0, 0.25);
+}
+
+.korail-calendar-modal::backdrop {
+  background: rgba(0, 0, 0, 0.45);
+  backdrop-filter: blur(2px);
+}
+
+.cal-modal-content {
+  padding: 24px 32px 28px;
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+}
+
+/* 상단 헤더: 편도/왕복 탭 + 닫기 버튼 */
+.cal-modal-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.cal-trip-tabs {
+  display: flex;
+  gap: 4px;
+}
+
+.cal-trip-tab {
+  border: none;
+  padding: 8px 24px;
+  font-size: 16px;
+  font-weight: 700;
+  border-radius: 4px;
+  cursor: pointer;
+  transition: all 0.2s ease;
+}
+
+.cal-trip-tab.active {
+  background-color: #18468b;
+  color: #ffffff;
+}
+
+.cal-trip-tab:not(.active) {
+  background-color: #c2c4c8;
+  color: #ffffff;
+}
+
+.cal-trip-tab:not(.active):hover {
+  background-color: #b0b3b8;
+}
+
+.cal-close-btn {
+  background: transparent;
+  border: none;
+  cursor: pointer;
+  padding: 4px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: transform 0.2s ease;
+}
+
+.cal-close-btn:hover {
+  transform: scale(1.1);
+}
+
+
+
+/* 선택 날짜 및 시간 카드 (2컬럼) */
+.cal-time-row {
+  display: flex;
+  gap: 20px;
+  width: 100%;
+}
+
+.cal-time-card {
+  flex: 1;
+  border: 1px solid #d4d4d4;
+  border-radius: 8px;
+  padding: 10px 18px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  background-color: #ffffff;
+  transition: border-color 0.2s ease;
+}
+
+.cal-time-card.disabled {
+  opacity: 0.32;
+  background-color: #fafafa;
+  pointer-events: none;
+}
+
+.cal-date-text-group {
+  display: flex;
+  flex-direction: column;
+  gap: 1px;
+}
+
+.cal-card-year {
+  font-size: 13.5px;
+  font-weight: 700;
+  color: #0077c8;
+  line-height: 1.2;
+}
+
+.cal-card-date {
+  font-size: 19px;
+  font-weight: 700;
+  color: #0077c8;
+  line-height: 1.2;
+}
+
+.cal-hour-group {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+}
+
+.cal-hour-spin {
+  width: 54px;
+  height: 38px;
+  border: 1px solid #c0c0c0;
+  border-radius: 4px;
+  font-size: 17px;
+  font-weight: 700;
+  color: #0077c8;
+  text-align: center;
+  padding: 0 4px;
+}
+
+.cal-hour-spin:focus {
+  outline: none;
+  border-color: #0077c8;
+}
+
+.cal-hour-label {
+  font-size: 15px;
+  font-weight: 700;
+  color: #333333;
+  white-space: nowrap;
+}
+
+/* 2개 월 달력 뷰 */
+.cal-dual-months {
+  display: flex;
+  gap: 20px;
+  width: 100%;
+}
+
+.cal-month-box {
+  flex: 1;
+  min-width: 0;
+}
+
+.cal-month-nav {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 12px;
+  margin-bottom: 10px;
+}
+
+.cal-month-nav button {
+  background: transparent;
+  border: none;
+  font-size: 17px;
+  font-weight: 700;
+  color: #111;
+  cursor: pointer;
+  padding: 2px 8px;
+  border-radius: 4px;
+}
+
+.cal-month-nav button:hover {
+  background-color: #f0f0f0;
+}
+
+.cal-month-heading {
+  font-size: 17px;
+  font-weight: 700;
+  color: #111;
+  margin: 0;
+  letter-spacing: -0.3px;
+}
+
+.cal-table-wrap {
+  border: 1px solid #c2c4c8;
+  border-radius: 4px;
+  overflow: hidden;
+}
+
+.cal-weekdays {
+  display: grid;
+  grid-template-columns: repeat(7, 1fr);
+  background-color: #ffffff;
+  border-bottom: 1px solid #c2c4c8;
+  text-align: center;
+  padding: 6px 0;
+  font-size: 13.5px;
+  font-weight: 700;
+  color: #111111;
+}
+
+.cal-weekday-sun {
+  color: #e52528;
+}
+
+.cal-weekday-sat {
+  color: #0070c0;
+}
+
+.cal-days-grid {
+  display: grid;
+  grid-template-columns: repeat(7, 1fr);
+  background-color: #ffffff;
+}
+
+.cal-day-cell {
+  height: 42px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  font-size: 14.5px;
+  font-weight: 700;
+  color: #111111;
+  cursor: pointer;
+  transition: background 0.15s ease;
+  border-right: 1px solid #f0f0f0;
+  border-bottom: 1px solid #f0f0f0;
+  user-select: none;
+  position: relative;
+  background-color: #ffffff;
+}
+
+.cal-day-cell:nth-child(7n) {
+  border-right: none;
+}
+
+.cal-day-cell.empty {
+  cursor: default;
+  pointer-events: none;
+  background: #ffffff;
+}
+
+.cal-day-cell.sun,
+.cal-day-cell.holiday {
+  color: #e52528;
+}
+
+.cal-day-cell.sat {
+  color: #0070c0;
+}
+
+.cal-day-cell:hover:not(.empty):not(.selected) {
+  background-color: #edf5fc;
+}
+
+/* 선택된 출발일 (파란 네모 박스) */
+.cal-day-cell.selected {
+  background-color: #0c4da2 !important;
+  color: #ffffff !important;
+  border-radius: 3px;
+}
+
+.cal-day-cell.selected .cell-num {
+  font-size: 15px;
+  font-weight: 700;
+  line-height: 1.1;
+  color: #ffffff !important;
+}
+
+.cal-day-cell.selected .cell-badge {
+  font-size: 9px;
+  font-weight: 400;
+  line-height: 1;
+  margin-top: 1px;
+  color: #ffffff !important;
+}
+
+.cal-day-cell.selected-arr {
+  background-color: #0077c8 !important;
+  color: #ffffff !important;
+  border-radius: 3px;
+}
+
+.cal-day-cell.selected-arr .cell-num {
+  font-size: 15px;
+  font-weight: 700;
+  line-height: 1.1;
+  color: #ffffff !important;
+}
+
+.cal-day-cell.selected-arr .cell-badge {
+  font-size: 9px;
+  font-weight: 400;
+  line-height: 1;
+  margin-top: 1px;
+  color: #ffffff !important;
+}
+
+/* 하단 검색하기 버튼 */
+.cal-modal-footer {
+  display: flex;
+  justify-content: center;
+  margin-top: 6px;
+}
+
+.cal-search-confirm-btn {
+  background-color: #18468b;
+  color: #ffffff;
+  border: none;
+  border-radius: 24px;
+  padding: 10px 52px;
+  font-size: 18px;
+  font-weight: 700;
+  cursor: pointer;
+  box-shadow: 0 4px 12px rgba(24, 70, 139, 0.25);
+  transition: background-color 0.2s ease, transform 0.1s ease;
+}
+
+.cal-search-confirm-btn:hover {
+  background-color: #113469;
+}
+
+.cal-search-confirm-btn:active {
+  transform: scale(0.98);
+}
+
+/* ==========================================================================
+   06. 반응형 (태블릿 & 모바일)
+   ========================================================================== */
+@media (max-width: 900px) {
+  .korail-calendar-modal {
+    width: 95%;
+    max-height: 90vh;
+    overflow-y: auto;
+  }
+
+  .cal-modal-content {
+    padding: 16px;
+  }
+
+  .cal-dual-months {
+    flex-direction: column;
+    gap: 16px;
+  }
+
+  .cal-time-row {
+    flex-direction: column;
+    gap: 10px;
+  }
+
+  .booking-content {
+    flex-wrap: wrap;
+    padding: 20px;
+  }
+
+  .simple-form-row {
+    flex-wrap: wrap;
+    gap: 12px;
+  }
+
+  .simple-row-top .field-alias,
+  .simple-row-top .field-dep,
+  .simple-row-top .field-arr,
+  .simple-row-top .field-passenger {
+    flex: 1 1 calc(50% - 12px);
+  }
+
+  .simple-row-bottom .field-train-type,
+  .simple-row-bottom .field-dep-day,
+  .simple-row-bottom .field-dep-time,
+  .simple-row-bottom .field-room,
+  .simple-row-bottom .field-seat,
+  .simple-row-bottom .field-submit {
+    flex: 1 1 calc(33.333% - 12px);
+  }
+
+  .simple-submit-btn {
+    width: 100%;
+  }
+
+  .station {
+    min-width: 100px;
+  }
+
+  .station-name {
+    font-size: 30px;
+  }
+
+  .booking-options {
+    width: 100%;
+    align-items: center;
+    margin-top: 10px;
+    border-top: 1px solid #eeeeee;
+    padding-top: 16px;
+  }
+
+  .search-btn {
+    width: 100%;
+  }
+
+  .quick-menu {
+    flex-wrap: wrap;
+    gap: 16px 8px;
+  }
+
+  .quick-item {
+    flex: none;
+    width: 30%;
+  }
+
+  .sub-banners {
+    flex-direction: column;
+    gap: 16px;
+  }
+
+  .sub-banner {
+    height: 200px;
+  }
+}
+
+@media (max-width: 640px) {
+  .site-header {
+    height: auto;
+    min-height: 58px;
+    padding: 10px 16px;
+    flex-wrap: wrap;
+    gap: 8px;
+  }
+
+  .brand-logo {
+    width: 124px;
+    height: 30px;
+  }
+
+  .utility-nav {
+    width: 100%;
+    justify-content: space-between;
+    flex-wrap: wrap;
+    gap: 4px;
+    font-size: 12px;
+  }
+
+  .booking-section {
+    padding: 24px 16px;
+  }
+
+  .booking-menu {
+    gap: 8px;
+  }
+
+  .booking-tab {
+    min-height: 50px;
+    font-size: 16px;
+  }
+
+  .booking-content {
+    padding: 16px;
+  }
+
+  .station-name {
+    font-size: 26px;
+  }
+
+  .direction-container {
+    padding-top: 16px;
+  }
+
+  .quick-icon {
+    width: 68px;
+    height: 70px;
+  }
+
+  .quick-text {
+    font-size: 12px;
+  }
+
+  .chatbot {
+    width: 72px;
+    height: 72px;
+    right: 16px;
+    bottom: 20px;
+  }
+
+  .chatbot img {
+    width: 44px;
+    height: 44px;
+  }
+
+  .chatbot span {
+    font-size: 12px;
+  }
+}
+
+/* Calendar passenger selection */
+.korail-calendar-modal { max-width: 1120px; max-height: 92vh; overflow-y: auto; }
+.cal-selection-layout { display: grid; grid-template-columns: minmax(0, 1fr) 286px; gap: 22px; }
+.cal-date-panel { min-width: 0; display: flex; flex-direction: column; gap: 16px; }
+.people-panel { border-left: 1px solid #e0e3e7; padding-left: 20px; min-width: 0; }
+.people-panel h3 { font-size: 18px; font-weight: 700; margin: 0 0 12px; }
+.people-row { display: grid; grid-template-columns: minmax(0,1fr) auto; align-items: center; gap: 8px; padding: 7px 0; }
+.people-label { display: flex; align-items: center; gap: 5px; font-size: 14px; white-space: nowrap; }
+.people-controls { display: flex; align-items: center; gap: 7px; }
+.people-controls button { width: 29px; height: 29px; border: 1px solid #dedfe2; border-radius: 50%; background: #fff; color: #555; font-size: 22px; line-height: 1; cursor: pointer; }
+.people-controls button:disabled { color: #d3d6da; background: #f1f2f3; cursor: default; }
+.people-controls output { min-width: 14px; text-align: center; font-size: 15px; font-weight: 700; }
+.people-info { border: 0; border-radius: 50%; width: 19px; height: 19px; padding: 0; color: #fff; background: #c6c8ca; font: bold 13px Georgia,serif; cursor: pointer; }
+.people-info[aria-expanded="true"] { background: #18468b; }
+.people-note { grid-column: 1 / -1; border: 1px solid #c5c5c5; padding: 18px; position: relative; background: #fff; }
+.people-note[hidden] { display: none; }
+.people-note h4 { font-size: 15px; font-weight: 700; margin: 0 24px 12px 0; }
+.people-note p { color: #788797; font-size: 13px; line-height: 1.6; margin: 0; word-break: keep-all; }
+.people-note-close { position: absolute; top: 10px; right: 10px; border: 0; background: none; color: #444; font-size: 25px; cursor: pointer; }
+.people-total { border-top: 1px solid #e0e3e7; margin-top: 12px; padding-top: 12px; font-size: 14px; text-align: right; }
+.people-limit { font-size: 12px; color: #788797; margin-top: 6px; text-align: right; }
+.people-panel button:focus-visible { outline: 2px solid #18468b; outline-offset: 3px; }
+@media (max-width: 1000px) { .cal-selection-layout { grid-template-columns: 1fr; } .people-panel { border-left: 0; border-top: 1px solid #e0e3e7; padding: 16px 0 0; } }
+
+/* 역 선택과 날짜/인원 팝업에 공통으로 사용하는 닫기 버튼 */
+.dialog-close-btn,
+.cal-close-btn {
+  position: relative;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 36px;
+  height: 36px;
+  padding: 0;
+  flex-shrink: 0;
+  border: 0;
+  border-radius: 4px;
+  background: transparent;
+  color: #333;
+  cursor: pointer;
+  line-height: 1;
+  transition: background-color 0.15s ease;
+}
+.dialog-close-btn:hover,
+.cal-close-btn:hover {
+  color: #111;
+  background-color: #f2f4f6;
+  transform: none;
+}
+.dialog-close-btn:focus-visible,
+.cal-close-btn:focus-visible {
+  outline: 2px solid #18468b;
+  outline-offset: 2px;
+}
+.popup-close-icon {
+  position: relative;
+  display: block;
+  width: 24px;
+  height: 24px;
+  pointer-events: none;
+}
+.popup-close-icon::before,
+.popup-close-icon::after {
+  content: "";
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  width: 28px;
+  height: 2px;
+  border-radius: 1px;
+  background-color: currentColor;
+}
+.popup-close-icon::before { transform: translate(-50%, -50%) rotate(45deg); }
+.popup-close-icon::after { transform: translate(-50%, -50%) rotate(-45deg); }
+
+/* 도착일 선택 시 출발일 이전 날짜는 선택할 수 없습니다. */
+.cal-day-cell.unavailable-return,
+.cal-day-cell.unavailable-return:hover {
+  color: #b8bdc5;
+  background-color: #f7f8fa;
+  cursor: not-allowed;
+}
