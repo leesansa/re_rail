@@ -1,0 +1,788 @@
+<!doctype html>
+<html lang="ko">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta
+      name="description"
+      content="코레일_리디자인 Figma 원본을 구현한 승차권 예매 화면 시안입니다."
+    />
+    <title>승차권 예매 | KORAIL</title>
+    <link rel="stylesheet" href="../Reservation.css" />
+    <!-- 추가: 새 역 선택 팝업 스타일 -->
+    <link rel="stylesheet" href="../station-picker/css/station-dialog.css" />
+    <link rel="stylesheet" href="../station-picker/css/map-region.css" />
+    <!-- 추가: 달력 모달 스타일 -->
+    <link rel="stylesheet" href="../calendar/calendar.css" />
+    <link
+      rel="icon"
+      type="image/png"
+      href="../../assets/아이콘/코레일_파비콘.png"
+    />
+  </head>
+  <body>
+    <!-- 01. 헤더-->
+    <header class="site-header">
+      <a href="../../index/main.html">
+        <img
+          class="brand-logo"
+          src="../../assets/korail-logo.svg"
+          alt="KORAIL"
+          width="152"
+          height="37"
+        />
+      </a>
+      <nav class="utility-nav" aria-label="회원 메뉴">
+        <!-- 임시 링크: 로그인 페이지 제작 전까지 클릭해도 이동하지 않음 -->
+        <a class="utility-item utility-placeholder-link" href="../login.html">
+          <img src="../../assets/login.png" alt="" width="27" height="27" />
+          <span>로그인</span>
+        </a>
+        <span class="utility-divider" aria-hidden="true">/</span>
+        <!-- 임시 링크: 장바구니 페이지 제작 전까지 클릭해도 이동하지 않음 -->
+        <a class="utility-item utility-placeholder-link" href="../cart.html">
+          <img src="../../assets/cart.png" alt="" width="27" height="27" />
+          <span>장바구니</span>
+        </a>
+        <span class="utility-divider" aria-hidden="true">/</span>
+        <!-- 임시 링크: 마이페이지 제작 전까지 클릭해도 이동하지 않음 -->
+        <a class="utility-item utility-placeholder-link" href="../mypage.html">
+          <img src="../../assets/mypage.png" alt="" width="31" height="31" />
+          <span>마이페이지</span>
+        </a>
+        <span class="utility-divider" aria-hidden="true">/</span>
+        <!-- 언어 선택 메뉴: 선택한 언어를 버튼에 표시 -->
+        <div class="utility-language-control">
+          <button
+            class="utility-item utility-language"
+            type="button"
+            aria-label="언어 선택, 현재 한국어"
+            aria-haspopup="true"
+            aria-expanded="false"
+            aria-controls="language-menu"
+          >
+            <img src="../../assets/language.png" alt="" width="37" height="37" />
+            <span>Langueage</span>
+          </button>
+          <div
+            id="language-menu"
+            class="utility-language-menu"
+            role="group"
+            aria-label="언어 목록"
+            hidden
+          >
+            <button type="button" aria-pressed="true">한국어</button>
+            <button type="button" aria-pressed="false">English</button>
+            <button type="button" aria-pressed="false">中文</button>
+            <button type="button" aria-pressed="false">日本語</button>
+          </div>
+        </div>
+      </nav>
+    </header>
+
+    <main>
+      <!-- 02. 페이지 제목 -->
+      <section class="page-heading" aria-labelledby="page-title">
+        <h1 id="page-title">승차권 예매</h1>
+      </section>
+
+      <div class="reservation-content">
+        <!-- 03. 날짜 및 시간 -->
+        <section class="date-navigation" aria-label="선택한 출발 날짜와 시간">
+          <!-- 이전 날짜 화살표 -->
+          <button
+            class="date-button previous-date"
+            type="button"
+            aria-label="이전 날짜"
+          >
+            <span class="previous-icon"
+              ><img src="../../assets/아이콘/아이콘_예매상새2.svg" alt=""
+            /></span>
+          </button>
+          <!-- 날짜 띠: Figma의 회색 전날 → 검은 선택 날짜 → 회색 다음날 순서 -->
+          <div class="date-strip">
+            <!-- 전날 미리보기: 날짜와 시간은 선택 날짜에 맞춰 함께 갱신 -->
+            <time
+              class="date-slot date-preview previous-date-preview"
+              datetime="2026-10-20T00:00:00+09:00"
+              aria-hidden="true"
+              ><span class="date-preview-day">10-20-(화)</span
+              ><span class="date-preview-hour"> 00:00</span></time
+            >
+            <!-- 선택 날짜: 달력 팝업과 기존 스크립트가 참조하는 time 요소 유지 -->
+            <time
+              class="date-slot selected-date"
+              datetime="2026-10-21T00:00:00+09:00"
+              aria-live="polite"
+              aria-atomic="true"
+              >10-21-(수) 00:00</time
+            >
+            <!-- 다음날 미리보기: 작은 화면에서는 시간만 숨겨 날짜 세 개를 유지 -->
+            <time
+              class="date-slot date-preview next-date-preview"
+              datetime="2026-10-22T00:00:00+09:00"
+              aria-hidden="true"
+              ><span class="date-preview-day">10-22-(목)</span
+              ><span class="date-preview-hour"> 00:00</span></time
+            >
+          </div>
+          <!-- 달력 아이콘 -->
+          <button
+            class="date-button calendar-button"
+            type="button"
+            aria-label="달력"
+          >
+            <span class="calendar-icon"
+              ><img src="../../assets/아이콘/아이콘_코레일13.svg" alt=""
+            /></span>
+          </button>
+          <!-- 다음 날짜 화살표 -->
+          <button
+            class="date-button next-date"
+            type="button"
+            aria-label="다음 날짜"
+          >
+            <span class="next-icon"
+              ><img src="../../assets/아이콘/아이콘_예매상새1.svg" alt=""
+            /></span>
+          </button>
+        </section>
+
+        <!-- 04. 여정 선택-->
+        <section class="route-selection" aria-label="선택한 여정">
+          <!-- 출발역 -->
+          <button
+            class="station-field departure-field"
+            type="button"
+            aria-label="출발역 서울"
+          >
+            <img
+              class="departure-icon"
+              src="../../assets/아이콘/아이콘_코레일14.svg"
+              alt=""
+            />
+            <span>서울</span>
+          </button>
+          <!-- 출발역과 도착역 교환 -->
+          <button
+            class="swap-button"
+            type="button"
+            aria-label="출발역과 도착역 교환"
+          >
+            <img src="../../assets/아이콘/아이콘_코레일15.svg" alt="" />
+          </button>
+          <!-- 도착역 -->
+          <button
+            class="station-field arrival-field"
+            type="button"
+            aria-label="도착역 부산"
+          >
+            <img class="arrival-icon" src="../../assets/아이콘/아이콘_코레일16.svg" alt="" />
+            <span>부산</span>
+          </button>
+          <!-- 탑승 인원: 버튼을 누르면 숫자를 직접 입력하는 팝업을 표시 -->
+          <button
+            class="passenger-field"
+            type="button"
+            aria-label="탑승 인원 총 1명"
+          >
+            <img src="../../assets/passenger.png" alt="" width="18" height="22" />
+            <span>총 1명</span>
+          </button>
+        </section>
+
+        <!-- 05. 조회 조건: 좌석 등급, 직통 여부, 열차 종류 -->
+        <section class="filter-bar" aria-label="열차 조회 조건">
+          <!-- 좌석 등급 드롭다운: 일반석 / 우등실 / 특실 -->
+          <div class="filter-control">
+            <button
+              class="filter-chip"
+              type="button"
+              aria-label="좌석 등급 일반석"
+              aria-haspopup="true"
+              aria-expanded="false"
+              aria-controls="seat-filter-menu"
+            >
+              <span>일반석</span
+              ><img
+                class="filter-chevron"
+                src="../../assets/filter-chevron.svg"
+                alt=""
+              />
+            </button>
+            <div
+              id="seat-filter-menu"
+              class="filter-menu"
+              role="group"
+              aria-label="좌석 등급 선택"
+              hidden
+            >
+              <button type="button" aria-pressed="true">일반석</button>
+              <button type="button" aria-pressed="false">우등실</button>
+              <button type="button" aria-pressed="false">특실</button>
+            </div>
+          </div>
+          <!-- 직통 여부 드롭다운: 직통 / 경유 / 환승 -->
+          <div class="filter-control">
+            <button
+              class="filter-chip"
+              type="button"
+              aria-label="직통 여부 직통"
+              aria-haspopup="true"
+              aria-expanded="false"
+              aria-controls="route-filter-menu"
+            >
+              <span>직통</span
+              ><img
+                class="filter-chevron"
+                src="../../assets/filter-chevron.svg"
+                alt=""
+              />
+            </button>
+            <div
+              id="route-filter-menu"
+              class="filter-menu"
+              role="group"
+              aria-label="운행 방식 선택"
+              hidden
+            >
+              <button type="button" aria-pressed="true">직통</button>
+              <button type="button" aria-pressed="false">경유</button>
+              <button type="button" aria-pressed="false">환승</button>
+            </div>
+          </div>
+          <!-- 열차 종류 드롭다운: 전체는 글자, 나머지는 17~20번 기본 로고 이미지 -->
+          <div class="filter-control filter-control-train">
+            <button
+              class="filter-chip filter-chip-short"
+              type="button"
+              aria-label="열차 종류 전체"
+              aria-haspopup="true"
+              aria-expanded="false"
+              aria-controls="train-filter-menu"
+            >
+              <span>전체</span>
+              <img
+                class="filter-selected-icon"
+                src="../../assets/아이콘/아이콘_코레일21.png"
+                alt=""
+                hidden
+              />
+              <img
+                class="filter-chevron"
+                src="../../assets/filter-chevron.svg"
+                alt=""
+              />
+            </button>
+            <!-- 선택 시 같은 열차의 21~24번 컬러 로고로 교체 -->
+            <div
+              id="train-filter-menu"
+              class="filter-menu filter-menu-train"
+              role="group"
+              aria-label="열차 종류 선택"
+              hidden
+            >
+              <button type="button" data-value="전체" aria-pressed="true">
+                전체
+              </button>
+              <button
+                type="button"
+                data-value="KTX"
+                data-icon="../../assets/아이콘/아이콘_코레일17.png"
+                data-selected-icon="../../assets/아이콘/아이콘_코레일21.png"
+                aria-label="KTX"
+                aria-pressed="false"
+              >
+                <img src="../../assets/아이콘/아이콘_코레일17.png" alt="" />
+              </button>
+              <button
+                type="button"
+                data-value="ITX 새마을"
+                data-icon="../../assets/아이콘/아이콘_코레일18.png"
+                data-selected-icon="../../assets/아이콘/아이콘_코레일22.png"
+                aria-label="ITX 새마을"
+                aria-pressed="false"
+              >
+                <img src="../../assets/아이콘/아이콘_코레일18.png" alt="" />
+              </button>
+              <button
+                type="button"
+                data-value="무궁화"
+                data-icon="../../assets/아이콘/아이콘_코레일19.png"
+                data-selected-icon="../../assets/아이콘/아이콘_코레일24.png"
+                aria-label="무궁화"
+                aria-pressed="false"
+              >
+                <img src="../../assets/아이콘/아이콘_코레일19.png" alt="" />
+              </button>
+              <button
+                type="button"
+                data-value="KTX 산천"
+                data-icon="../../assets/아이콘/아이콘_코레일20.png"
+                data-selected-icon="../../assets/아이콘/아이콘_코레일23.png"
+                aria-label="KTX 산천"
+                aria-pressed="false"
+              >
+                <img src="../../assets/아이콘/아이콘_코레일20.png" alt="" />
+              </button>
+            </div>
+          </div>
+        </section>
+
+        <!-- 06. 열차 목록 -->
+        <section
+          class="train-results"
+          aria-label="서울에서 부산으로 가는 열차 목록"
+        >
+          <!-- 열차 카드는 train-data.js 배열에서 생성 -->
+          <ol class="train-list"></ol>
+          <p class="train-empty" role="status" hidden>
+            조건에 맞는 열차가 없습니다.
+          </p>
+          <p class="train-loading" role="status" aria-live="polite" hidden>
+            열차 정보를 불러오는 중...
+          </p>
+          <div class="train-load-trigger" aria-hidden="true"></div>
+        </section>
+      </div>
+    </main>
+    <!-- 추가: 독립 달력 모달을 예약 페이지에 적용 -->
+    <dialog
+      id="korail-calendar-dialog"
+      class="korail-calendar-modal"
+      aria-labelledby="cal-modal-title"
+    >
+      <div class="cal-modal-content">
+        <h2 id="cal-modal-title" class="sr-only">날짜, 시간 및 인원 선택</h2>
+        <div class="cal-modal-header">
+          <div class="cal-trip-tabs" role="tablist" aria-label="여정 구분">
+            <button
+              type="button"
+              class="cal-trip-tab active"
+              data-cal-trip="oneway"
+              role="tab"
+              aria-selected="true"
+            >
+              편도
+            </button>
+            <button
+              type="button"
+              class="cal-trip-tab"
+              data-cal-trip="round"
+              role="tab"
+              aria-selected="false"
+            >
+              왕복
+            </button>
+          </div>
+          <button
+            type="button"
+            class="cal-close-btn"
+            id="cal-close-btn"
+            aria-label="달력 닫기"
+          >
+            <span class="popup-close-icon" aria-hidden="true"></span>
+          </button>
+        </div>
+
+        <div class="cal-selection-layout">
+          <div class="cal-date-panel">
+            <div class="cal-time-row">
+              <div class="cal-time-card active" id="cal-dep-card">
+                <div class="cal-date-text-group">
+                  <span class="cal-card-year" id="cal-dep-year">2026년</span>
+                  <strong class="cal-card-date" id="cal-dep-date"
+                    >10월 21일(수)</strong
+                  >
+                </div>
+                <div class="cal-hour-group">
+                  <input
+                    type="number"
+                    id="cal-dep-hour"
+                    class="cal-hour-spin"
+                    min="0"
+                    max="23"
+                    value="18"
+                  />
+                  <span class="cal-hour-label">시 이후 출발</span>
+                </div>
+              </div>
+
+              <div class="cal-time-card disabled" id="cal-arr-card">
+                <div class="cal-date-text-group">
+                  <span class="cal-card-year" id="cal-arr-year">2026년</span>
+                  <strong class="cal-card-date" id="cal-arr-date"
+                    >10월 21일(수)</strong
+                  >
+                </div>
+                <div class="cal-hour-group">
+                  <input
+                    type="number"
+                    id="cal-arr-hour"
+                    class="cal-hour-spin"
+                    min="0"
+                    max="23"
+                    value="18"
+                    disabled
+                  />
+                  <span class="cal-hour-label">시 이후 출발</span>
+                </div>
+              </div>
+            </div>
+
+            <div class="cal-dual-months">
+              <div class="cal-month-box" id="cal-box-left">
+                <div class="cal-month-nav">
+                  <button
+                    type="button"
+                    class="cal-month-prev-btn"
+                    id="cal-prev-btn"
+                    aria-label="이전 달"
+                  >
+                    &lt;
+                  </button>
+                  <h3 class="cal-month-heading" id="cal-heading-left">
+                    2026. 10.
+                  </h3>
+                  <button
+                    type="button"
+                    class="cal-month-next-btn"
+                    id="cal-next-btn-1"
+                    aria-label="다음 달"
+                  >
+                    &gt;
+                  </button>
+                </div>
+                <div class="cal-table-wrap">
+                  <div class="cal-weekdays">
+                    <span class="cal-weekday-sun">일</span>
+                    <span>월</span>
+                    <span>화</span>
+                    <span>수</span>
+                    <span>목</span>
+                    <span>금</span>
+                    <span class="cal-weekday-sat">토</span>
+                  </div>
+                  <div class="cal-days-grid" id="cal-days-left"></div>
+                </div>
+              </div>
+
+              <div class="cal-month-box" id="cal-box-right">
+                <div class="cal-month-nav">
+                  <button
+                    type="button"
+                    class="cal-prev-btn-2"
+                    id="cal-prev-btn-2"
+                    aria-label="이전 달"
+                  >
+                    &lt;
+                  </button>
+                  <h3 class="cal-month-heading" id="cal-heading-right">
+                    2026. 11.
+                  </h3>
+                  <button
+                    type="button"
+                    class="cal-month-next-btn"
+                    id="cal-next-btn"
+                    aria-label="다음 달"
+                  >
+                    &gt;
+                  </button>
+                </div>
+                <div class="cal-table-wrap">
+                  <div class="cal-weekdays">
+                    <span class="cal-weekday-sun">일</span>
+                    <span>월</span>
+                    <span>화</span>
+                    <span>수</span>
+                    <span>목</span>
+                    <span>금</span>
+                    <span class="cal-weekday-sat">토</span>
+                  </div>
+                  <div class="cal-days-grid" id="cal-days-right"></div>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <aside class="people-panel" aria-labelledby="people-title">
+            <h3 id="people-title">인원선택</h3>
+            <div class="people-row" data-person="0">
+              <div class="people-label">어른(13세 이상)</div>
+              <div class="people-controls">
+                <button
+                  type="button"
+                  data-step="-1"
+                  aria-label="어른(13세 이상) 1명 감소"
+                >
+                  −
+                </button>
+                <output aria-label="어른(13세 이상) 인원">1</output>
+                <button
+                  type="button"
+                  data-step="1"
+                  aria-label="어른(13세 이상) 1명 증가"
+                >
+                  +
+                </button>
+              </div>
+            </div>
+            <div class="people-row" data-person="1">
+              <div class="people-label">어린이(6 ~ 12세)</div>
+              <div class="people-controls">
+                <button
+                  type="button"
+                  data-step="-1"
+                  aria-label="어린이(6 ~ 12세) 1명 감소"
+                >
+                  −
+                </button>
+                <output aria-label="어린이(6 ~ 12세) 인원">0</output>
+                <button
+                  type="button"
+                  data-step="1"
+                  aria-label="어린이(6 ~ 12세) 1명 증가"
+                >
+                  +
+                </button>
+              </div>
+            </div>
+            <div class="people-row" data-person="2">
+              <div class="people-label">
+                유아(6세 미만)<button
+                  type="button"
+                  class="people-info"
+                  aria-label="유아(6세 미만) 상세 안내"
+                  aria-expanded="false"
+                  aria-controls="people-note-2"
+                >
+                  i
+                </button>
+              </div>
+              <div class="people-controls">
+                <button
+                  type="button"
+                  data-step="-1"
+                  aria-label="유아(6세 미만) 1명 감소"
+                >
+                  −
+                </button>
+                <output aria-label="유아(6세 미만) 인원">0</output>
+                <button
+                  type="button"
+                  data-step="1"
+                  aria-label="유아(6세 미만) 1명 증가"
+                >
+                  +
+                </button>
+              </div>
+              <div class="people-note" id="people-note-2" hidden>
+                <button
+                  type="button"
+                  class="people-note-close"
+                  aria-label="상세 안내 닫기"
+                >
+                  ×
+                </button>
+                <h4>유아(6세 미만)</h4>
+                <p>
+                  6세 미만의 유아는 어른 1명당 유아 1명까지 별도의 좌석 지정없이
+                  보호자가 동반하여 승차할 수 있습니다.(다만, 좌석을 지정하거나
+                  어른 1명당 유아 1명을 초과하여 이용하는 경우, 유아 승차권을
+                  별도로 구매하셔야 합니다.)
+                </p>
+              </div>
+            </div>
+            <div class="people-row" data-person="3">
+              <div class="people-label">경로(65세 이상)</div>
+              <div class="people-controls">
+                <button
+                  type="button"
+                  data-step="-1"
+                  aria-label="경로(65세 이상) 1명 감소"
+                >
+                  −
+                </button>
+                <output aria-label="경로(65세 이상) 인원">0</output>
+                <button
+                  type="button"
+                  data-step="1"
+                  aria-label="경로(65세 이상) 1명 증가"
+                >
+                  +
+                </button>
+              </div>
+            </div>
+            <div class="people-row" data-person="4">
+              <div class="people-label">
+                중증 장애인<button
+                  type="button"
+                  class="people-info"
+                  aria-label="중증 장애인 상세 안내"
+                  aria-expanded="false"
+                  aria-controls="people-note-4"
+                >
+                  i
+                </button>
+              </div>
+              <div class="people-controls">
+                <button
+                  type="button"
+                  data-step="-1"
+                  aria-label="중증 장애인 1명 감소"
+                >
+                  −
+                </button>
+                <output aria-label="중증 장애인 인원">0</output>
+                <button
+                  type="button"
+                  data-step="1"
+                  aria-label="중증 장애인 1명 증가"
+                >
+                  +
+                </button>
+              </div>
+              <div class="people-note" id="people-note-4" hidden>
+                <button
+                  type="button"
+                  class="people-note-close"
+                  aria-label="상세 안내 닫기"
+                >
+                  ×
+                </button>
+                <h4>중증 장애인</h4>
+                <p>
+                  장애 1~3급(장애인 1명 당 어른 1명 선택 예매 시 보호자 할인
+                  가능)
+                </p>
+              </div>
+            </div>
+            <div class="people-row" data-person="5">
+              <div class="people-label">
+                경증 장애인<button
+                  type="button"
+                  class="people-info"
+                  aria-label="경증 장애인 상세 안내"
+                  aria-expanded="false"
+                  aria-controls="people-note-5"
+                >
+                  i
+                </button>
+              </div>
+              <div class="people-controls">
+                <button
+                  type="button"
+                  data-step="-1"
+                  aria-label="경증 장애인 1명 감소"
+                >
+                  −
+                </button>
+                <output aria-label="경증 장애인 인원">0</output>
+                <button
+                  type="button"
+                  data-step="1"
+                  aria-label="경증 장애인 1명 증가"
+                >
+                  +
+                </button>
+              </div>
+              <div class="people-note" id="people-note-5" hidden>
+                <button
+                  type="button"
+                  class="people-note-close"
+                  aria-label="상세 안내 닫기"
+                >
+                  ×
+                </button>
+                <h4>경증 장애인</h4>
+                <p>장애의 정도가 심하지 않은 장애인(장애 4~6급)</p>
+              </div>
+            </div>
+            <div class="people-row" data-person="6">
+              <div class="people-label">국가유공자</div>
+              <div class="people-controls">
+                <button
+                  type="button"
+                  data-step="-1"
+                  aria-label="국가유공자 1명 감소"
+                >
+                  −
+                </button>
+                <output aria-label="국가유공자 인원">0</output>
+                <button
+                  type="button"
+                  data-step="1"
+                  aria-label="국가유공자 1명 증가"
+                >
+                  +
+                </button>
+              </div>
+            </div>
+            <p class="people-total" aria-live="polite">
+              총 <strong id="people-total">1</strong>명
+            </p>
+            <p class="people-limit">총 1~9명까지 선택할 수 있습니다.</p>
+          </aside>
+        </div>
+
+        <div class="cal-modal-footer">
+          <button
+            type="button"
+            class="cal-search-confirm-btn"
+            id="cal-search-confirm-btn"
+          >
+            검색하기
+          </button>
+        </div>
+      </div>
+    </dialog>
+    <!-- 수정: 기존 iframe 역 선택 팝업을 새 station-picker 팝업으로 교체했습니다. -->
+    <!-- 수정: KorailStationPicker를 출발역·도착역 공통 팝업으로 연결합니다. -->
+    <!-- 수정: 별도 팝업 마크업 파일이 이 위치에 dialog를 생성합니다. -->
+    <div id="station-picker-mount"></div>
+    <!-- 탑승 인원 입력 팝업: 적용 버튼으로 입력한 숫자를 여정에 반영 -->
+    <dialog
+      id="passenger-dialog"
+      class="calendar-dialog"
+      aria-labelledby="passenger-dialog-title"
+    >
+      <div class="calendar-dialog-header">
+        <h2 id="passenger-dialog-title">탑승 인원 선택</h2>
+        <form method="dialog">
+          <button
+            type="submit"
+            class="calendar-dialog-close"
+            aria-label="탑승 인원 팝업 닫기"
+          >
+            ×
+          </button>
+        </form>
+      </div>
+      <form id="passenger-form" class="passenger-form">
+        <label for="passenger-count">탑승 인원</label>
+        <input
+          id="passenger-count"
+          name="passengers"
+          type="number"
+          min="1"
+          step="1"
+          value="1"
+          required
+        />
+        <button type="submit">적용</button>
+      </form>
+    </dialog>
+    <!-- 열차 데이터 배열을 먼저 로드한 뒤 카드 렌더링·필터 스크립트를 실행 -->
+    <script src="../Reservation.js/train-data.js" defer></script>
+    <script src="../Reservation.js/train-results.js" defer></script>
+    <!-- 추가: 새 역 선택 팝업 데이터와 기능 -->
+    <!-- 수정: 마크업 생성 → 역 데이터 → 지도 → 출발역·도착역 연결 순으로 초기화합니다. -->
+    <script src="../Reservation.js/station-picker/js/station-dialog-template.js" defer></script>
+    <script src="../Reservation.js/station-picker/js/stations-data.js" defer></script>
+    <script src="../Reservation.js/station-picker/js/map-region-mask-data.js" defer></script>
+    <script src="../Reservation.js/station-picker/js/map-region.js" defer></script>
+    <script src="../Reservation.js/station-picker/js/station-dialog.js" defer></script>
+    <!-- 추가: 달력 모달 동작 -->
+    <script src="../Reservation.js/calendar/calendar.js" defer></script>
+  </body>
+</html>

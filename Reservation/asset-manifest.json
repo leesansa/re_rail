@@ -1,75 +1,75 @@
 [
   {
-    "file": "assets/passenger.png",
+    "file": "../assets/passenger.png",
     "source": "Figma image 6861c41a0606b19966f36a8466fd6f5eb8f93068",
     "size": [98, 117]
   },
   {
-    "file": "assets/mypage.png",
+    "file": "../assets/mypage.png",
     "source": "Figma image 526ae293e49674630ef162532919d66640e90232",
     "size": [512, 512]
   },
   {
-    "file": "assets/ktx.png",
+    "file": "../assets/아이콘/아이콘_코레일21.png",
     "source": "Figma image 1300c4b14d014878c3520b2478cc8c17c64fc25e",
     "size": [66, 21]
   },
   {
-    "file": "assets/cart.png",
+    "file": "../assets/cart.png",
     "source": "Figma image 613a09538c7462ad8c9860e259bd7ecea6fe79e5",
     "size": [512, 512]
   },
   {
-    "file": "assets/language.png",
+    "file": "../assets/language.png",
     "source": "Figma image 4a6643318098061ad8300b1656ff25e727bad4d3",
     "size": [512, 512]
   },
   {
-    "file": "assets/train-card.png",
+    "file": "../assets/train-card.png",
     "source": "Figma image 2fa808baab49ab0aef1808ec152d99090832c84c",
     "size": [1055, 130]
   },
   {
-    "file": "assets/ktx-sancheon.png",
+    "file": "../assets/아이콘/아이콘_코레일23.png",
     "source": "Figma image cb8383aec047dee137b1518c5512bd69fdbe46e2",
     "size": [92, 21]
   },
   {
-    "file": "assets/login.png",
+    "file": "../assets/login.png",
     "source": "Figma image ba05031c30a446cc129b3699e9595724cd7b1693",
     "size": [512, 512]
   },
   {
-    "file": "assets/itx-saemaeul.png",
+    "file": "../assets/아이콘/아이콘_코레일22.png",
     "source": "Figma image 33d000b8048a1d5eeb7fcc181884aebfd6ff0179",
     "size": [85, 21]
   },
   {
-    "file": "assets/아이콘_코레일01.svg",
+    "file": "../assets/아이콘/아이콘_코레일01.svg",
     "source": "original assets/아이콘/아이콘_코레일01.svg"
   },
   {
-    "file": "assets/아이콘_코레일13.svg",
+    "file": "../assets/아이콘/아이콘_코레일13.svg",
     "source": "original assets/아이콘/아이콘_코레일13.svg"
   },
   {
-    "file": "assets/아이콘_코레일14.svg",
+    "file": "../assets/아이콘/아이콘_코레일14.svg",
     "source": "original assets/아이콘/아이콘_코레일14.svg"
   },
   {
-    "file": "assets/아이콘_코레일15.svg",
+    "file": "../assets/아이콘/아이콘_코레일15.svg",
     "source": "original assets/아이콘/아이콘_코레일15.svg"
   },
   {
-    "file": "assets/아이콘_코레일16.svg",
+    "file": "../assets/아이콘/아이콘_코레일16.svg",
     "source": "original assets/아이콘/아이콘_코레일16.svg"
   },
   {
-    "file": "assets/아이콘_예매상새1.svg",
+    "file": "../assets/아이콘/아이콘_예매상새1.svg",
     "source": "original assets/아이콘/아이콘_예매상새1.svg"
   },
   {
-    "file": "assets/아이콘_예매상새2.svg",
+    "file": "../assets/아이콘/아이콘_예매상새2.svg",
     "source": "original assets/아이콘/아이콘_예매상새2.svg"
   }
 ]

@@ -1,10 +1,12 @@
 # 지도 지역 선택 화면
 
-`map-region.html`을 브라우저에서 열면 `코레일_리디자인.fig`의 `지도_지역선택_1` 화면을 볼 수 있습니다. 설치나 빌드가 필요하지 않습니다. 이 `region` 폴더와 `../assets/region/map/` 에셋 폴더를 함께 유지해 주세요.
+`../Reservation.html/region/map-region.html`을 브라우저에서 열면 `코레일_리디자인.fig`의 `지도_지역선택_1` 화면을 볼 수 있습니다. 설치나 빌드가 필요하지 않습니다. 이 `region` 폴더와 프로젝트 루트의 `../../assets/` 폴더를 함께 유지해 주세요.
 
-- `map-region.html`: 화면 구조와 요소별 주석
+- `../Reservation.html/region/map-region.html`: 화면 구조와 요소별 주석
 - `map-region.css`: 공통 설정 뒤에 헤더 → 검색창 → 조회 방식 → 지도 → 작은 화면 대응 순서로 정리한 외부 CSS
-- `../assets/region/map/`: Figma에서 추출한 지역 PNG 16개, 원본 검색 SVG, 원본 닫기 벡터를 내보낸 SVG, Korail M 글꼴
+- `../Reservation.js/region/map-region.js`와 `../Reservation.js/region/map-region-mask-data.js`: 지도 동작과 투명 영역 판별 데이터
+- `../../assets/map/`: Figma에서 추출한 지역 PNG 16개와 원본 닫기 벡터를 내보낸 SVG
+- `../../assets/아이콘/아이콘_예매상새3.svg`, `../../assets/Korail-M.ttf`: 원본 검색 SVG와 Korail M 글꼴
 - `map-asset-manifest.json`: 원본 파일·노드·좌표·표시 크기·해시 기록
 
 지도 PNG는 프로젝트 `../../assets/코레일_리디자인.fig`에 포함된 원본 바이트를 그대로 추출했습니다. 검색 아이콘의 원본은 `../../assets/아이콘/아이콘_예매상새3.svg`입니다. 이미지나 지역 이름을 새로 생성하지 않았습니다.

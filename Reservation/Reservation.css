@@ -3,7 +3,7 @@
 /* 00. 공통 설정: 원본 Figma에 사용된 Korail 서체와 기본 색상 */
 @font-face {
   font-family: "Korail";
-  src: url("assets/Korail-L.ttf") format("truetype");
+  src: url("../assets/Korail-L.ttf") format("truetype");
   font-weight: 300;
   font-style: normal;
   font-display: swap;
@@ -11,7 +11,7 @@
 
 @font-face {
   font-family: "Korail";
-  src: url("assets/Korail-M.ttf") format("truetype");
+  src: url("../assets/Korail-M.ttf") format("truetype");
   font-weight: 500;
   font-style: normal;
   font-display: swap;
@@ -19,7 +19,7 @@
 
 @font-face {
   font-family: "Korail";
-  src: url("assets/Korail-B.ttf") format("truetype");
+  src: url("../assets/Korail-B.ttf") format("truetype");
   font-weight: 700;
   font-style: normal;
   font-display: swap;

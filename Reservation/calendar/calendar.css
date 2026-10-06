@@ -4,7 +4,7 @@
 .korail-calendar-modal input { font-family: inherit; }
 .korail-calendar-modal .sr-only { position: absolute; width: 1px; height: 1px; padding: 0; margin: -1px; overflow: hidden; clip: rect(0, 0, 0, 0); white-space: nowrap; border: 0; }
 
-/* index/main.css에서 복제한 달력 스타일 */
+/* index/css/main.css에서 복제한 달력 스타일 */
 .korail-calendar-modal {
   border: none;
   border-radius: 16px;
