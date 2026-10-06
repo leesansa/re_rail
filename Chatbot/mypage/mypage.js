@@ -272,7 +272,7 @@
 
   const from = new URLSearchParams(window.location.search).get("from");
   if (from === "chatbot") {
-    backBtn.href = "../index.html";
+    backBtn.href = "../../index.html";
     backBtn.setAttribute("aria-label", "챗봇으로 돌아가기");
     backBtn.title = "챗봇으로 돌아가기";
   }
